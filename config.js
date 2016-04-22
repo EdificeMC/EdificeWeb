@@ -36,6 +36,7 @@ System.config({
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "bootstrap": "github:twbs/bootstrap@3.3.6",
+    "clipboard": "npm:clipboard@1.5.10",
     "core-js": "npm:core-js@1.2.6",
     "fetch": "github:github/fetch@0.10.1",
     "font-awesome": "npm:font-awesome@4.5.0",
@@ -196,6 +197,14 @@ System.config({
     "npm:babel-runtime@5.8.38": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:clipboard@1.5.10": {
+      "good-listener": "npm:good-listener@1.1.7",
+      "select": "npm:select@1.0.6",
+      "tiny-emitter": "npm:tiny-emitter@1.0.2"
+    },
+    "npm:closest@0.0.1": {
+      "matches-selector": "npm:matches-selector@0.0.1"
+    },
     "npm:core-js@1.2.6": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
@@ -208,8 +217,14 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
+    "npm:delegate@3.0.1": {
+      "closest": "npm:closest@0.0.1"
+    },
     "npm:font-awesome@4.5.0": {
       "css": "github:systemjs/plugin-css@0.1.20"
+    },
+    "npm:good-listener@1.1.7": {
+      "delegate": "npm:delegate@3.0.1"
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"

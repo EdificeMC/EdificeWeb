@@ -1,6 +1,8 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
+import $ from 'jquery';
+import Clipboard from 'clipboard';
 
 export class Home {
 
@@ -16,10 +18,12 @@ export class Home {
             this.structures = JSON.parse(structureRes.response);
             for (let structure of this.structures) {
                 this.http.get('/playercache/' + structure.creatorUUID).then((playerProfileRes) => {
-                    console.log(playerProfileRes);
+                    structure.creatorName = JSON.parse(playerProfileRes.response).name;
                 })
             }
         });
+        // Initialize the clipboard
+        new Clipboard('#buildStructureBtn');
     }
 
 }
