@@ -16,7 +16,6 @@ export class Create {
     }
 
     attached() {
-        console.log(this.http)
         return this.http.get('/structures/' + this.params.id).then((response) => {
             return JSON.parse(response.response);
         }).then((structure) => {
@@ -82,8 +81,8 @@ export class Create {
             for(let httpResponse of results) {
                 let response = JSON.parse(httpResponse.response);
                 structureImages.push({
-                    url: response.data.link,
-                    deletehash: response.data.deletehash
+                    url: response.link,
+                    deletehash: response.deletehash
                 });
             }
             return structureImages;
