@@ -12,7 +12,7 @@ export class App {
     activate() {
         this.http.configure(x => {
             x.withHeader('Accept', 'application/json');
-            x.withBaseUrl('http://localhost:3000/');
+            x.withBaseUrl('http://localhost:3000/api/');
         });
     }
     configureRouter(config, router) {
@@ -20,7 +20,13 @@ export class App {
         config.map([{
             route: ['', 'home'],
             name: 'home',
-            moduleId: 'home/home'
+            moduleId: 'home/home',
+            nav: true
+        }, {
+            route: 'create/:id',
+            name: 'create',
+            moduleId: 'create/create',
+            title: 'Create Structure'
         }]);
         this.router = router;
     }

@@ -1,0 +1,22 @@
+<template>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form>
+                <fieldset class="form-group">
+                    <label>Structure name</label>
+                    <input type="text" class="form-control" placeholder="Beachside Mansion" value.bind="structureName">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label>Creator</label>
+                    <p class="form-control-static">${creatorName}</p>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label>Upload Photos</label>
+                    <input type="file" class="form-control-file" accept="image/*" multiple files.bind="imageList">
+                    <small class="text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                </fieldset>
+                <button type="submit" class="btn btn-primary" click.delegate="submitStructure()">Submit</button>
+            </form>
+        </div>
+    </div>
+</template>
