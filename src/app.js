@@ -10,9 +10,15 @@ export class App {
     }
 
     activate() {
+        // If running on localhost, point all API requests to port 3000
+        // If running in prod, points to the IP address of the server
+        let urlBase = window.location.hostname;
+        if(window.location.hostname === 'localhost') {
+            urlBase = 'localhost:3000';
+        }
         this.http.configure(x => {
             x.withHeader('Accept', 'application/json');
-            x.withBaseUrl('http://localhost:3000/api/');
+            x.withBaseUrl('http://' + urlBase + '/api/');
         });
     }
     configureRouter(config, router) {
