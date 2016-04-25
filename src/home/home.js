@@ -1,7 +1,6 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
-import $ from 'jquery';
 import Clipboard from 'clipboard';
 
 export class Home {
