@@ -16,6 +16,7 @@ export class Create {
     }
 
     attached() {
+        this.message = {};
         return this.http.get('/structures/' + this.params.id).then((response) => {
             return JSON.parse(response.response);
         }).then((structure) => {
@@ -31,10 +32,14 @@ export class Create {
 
     submitStructure() {
         if (!this.imageList) {
-            //TODO give some warning about uploading at least 1 photo
-            console.warn('no images to upload');
+            this.message.status = 'warning';
+            this.message.text = 'You must select at least one photo';
             return;
         }
+
+        // Spinning loading animation...
+        this.message.status = 'loading';
+        this.message.text = '';
 
         let images = [];
         for (var i = 0; i < this.imageList.length; i++) {
@@ -42,7 +47,7 @@ export class Create {
         }
 
         let imageUploadProm = (imageFile) => {
-            return new Promise(function(resolve, reject) {
+            return new Promise((resolve, reject) => {
                 try {
                     let img = new Image();
                     img.onload = function onload() {
@@ -65,11 +70,11 @@ export class Create {
                 return this.http.post('/imgur', {
                     image: imgBase64.substring(imgDataPrefix.length), // Strip away prefixed information for the Imgur API
                     type: 'base64'
-                })
-                .catch(function (err) {
-                    console.error('Failed to upload image', err);
-                    return Promise.reject(err);
                 });
+            }).catch((err) => {
+                this.message.status = 'danger';
+                this.message.text = err.statusText;
+                return Promise.reject(err);
             })
         };
 
@@ -91,6 +96,8 @@ export class Create {
                 name: this.structureName,
                 images: structureImages
             })
+        }).then((response) => {
+            this.status = 'success';
         });
 
     }

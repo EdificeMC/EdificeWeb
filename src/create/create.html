@@ -13,9 +13,16 @@
                 <fieldset class="form-group">
                     <label>Upload Photos</label>
                     <input type="file" class="form-control-file" accept="image/*" multiple files.bind="imageList">
-                    <small class="text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                    <small class="text-muted">Your images will be uploaded anonymously to Imgur.</small>
                 </fieldset>
                 <button type="submit" class="btn btn-primary" click.delegate="submitStructure()">Submit</button>
+                <i show.bind="message.status === 'loading'" class="fa fa-lg fa-refresh fa-spin"></i>
+                <i show.bind="message.status === 'success'" class="fa fa-lg fa-check"></i>
+                <i show.bind="message.status === 'danger'" class="fa fa-lg fa-exclamation-triangle"></i>
+                <hr>
+                <div show.bind="message.text && message.text !== ''" class="alert alert-${message.status}">
+                  ${message.text}
+                </div>
             </form>
         </div>
     </div>
