@@ -1,14 +1,16 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
+import { Router } from 'aurelia-router';
 
 export class Create {
 
     imageList;
 
-    static inject = [HttpClient];
-    constructor(http) {
+    static inject = [HttpClient, Router];
+    constructor(http, router) {
         this.http = http;
+        this.router = router;
     }
 
     activate(params) {
@@ -20,6 +22,12 @@ export class Create {
         return this.http.get('/structures/' + this.params.id).then((response) => {
             return JSON.parse(response.response);
         }).then((structure) => {
+            // Check if the structure is already finalized, and if so, redirect to home
+            if(structure.finalized) {
+                // TODO navigate to the structure's page
+                this.router.navigate('/');
+            }
+
             this.structureName = structure.name;
             return this.http.get('/playercache/' + structure.creatorUUID)
                 .then((response) => {
