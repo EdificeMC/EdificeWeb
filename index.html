@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Edifice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
+</head>
 
-  <body aurelia-app>
+<body aurelia-app>
+    <!-- Loading Spiner styling -->
+    <style media="screen">
+        .splash {
+            text-align: center;
+            margin: 10% 0 0 0;
+            box-sizing: border-box;
+        }
+
+        .splash .message {
+            font-size: 42px;
+            line-height: 42px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .splash .fa-cube {
+            text-align: center;
+            display: inline-block;
+            font-size: 72px;
+            margin-top: 50px;
+        }
+    </style>
+
+    <div class="splash">
+        <div class="message">Loading Edifice ...</div>
+        <i class="fa fa-cube fa-spin"></i>
+    </div>
+
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
+    <!-- TODO fix jquery import -->
+    <script src="jquery.min.js"></script>
     <script>
-      System.import('aurelia-bootstrapper');
+        System.import('aurelia-bootstrapper');
     </script>
-  </body>
+</body>
+
 </html>
