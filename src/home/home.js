@@ -6,6 +6,8 @@ import Clipboard from 'clipboard';
 
 export class Home {
 
+    createStructureCmdPrefix = '/edifice create ';
+    copiedStructureId = '';
     structures = [];
 
     static inject = [HttpClient];
@@ -23,7 +25,9 @@ export class Home {
             }
         });
         // Initialize the clipboard
-        new Clipboard('#buildStructureBtn');
+        new Clipboard('#buildStructureBtn').on('success', (e) => {
+            this.copiedStructureId = e.text.substring(this.createStructureCmdPrefix.length, e.text.length);
+        });
     }
 
 }

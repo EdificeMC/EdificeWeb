@@ -7,9 +7,11 @@
                 <div class="caption">
                     <h3>${structure.name}</h3>
                     <p>${structure.creatorName}</p>
-                    <button class="btn btn-primary" bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice." id="buildStructureBtn" data-clipboard-text="${'/edifice create ' + structure._id}">
+                    <button id="buildStructureBtn" class="btn btn-primary ${structure._id == copiedStructureId ? 'disabled' : 'active'}"
+                        bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice."
+                        data-clipboard-text="${'/edifice create ' + structure._id}">
                         <i class="glyphicon glyphicon-copy"></i>
-                        Build this structure
+                        ${structure._id == copiedStructureId ? 'Copied!' : 'Build this structure'}
                     </button>
                 </div>
             </div>
