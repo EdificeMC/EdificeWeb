@@ -89,7 +89,7 @@ export class Create {
         // Replace each image with a Promise of it being converted and uploaded
         images = images.map(imageUploadProm);
 
-        Promise.all(images).then(function (results) {
+        Promise.all(images).then((results) => {
             let structureImages = [];
             for(let httpResponse of results) {
                 let response = JSON.parse(httpResponse.response);
@@ -102,7 +102,7 @@ export class Create {
                 images: structureImages
             })
         }).then((response) => {
-            this.status = 'success';
+            this.message.status = 'success';
         });
 
     }
