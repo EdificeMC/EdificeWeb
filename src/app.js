@@ -29,6 +29,10 @@ export class App {
             moduleId: 'home/home',
             nav: true
         }, {
+            route: 'structures/:id',
+            name: 'structure-view',
+            moduleId: 'structure-view/structure-view'
+        }, {
             route: 'create/:id',
             name: 'create',
             moduleId: 'create/create',

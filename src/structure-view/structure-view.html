@@ -1,0 +1,11 @@
+<template>
+    <div class="row">
+        ${structure}
+        <div id="image-carousel">
+            <div repeat.for="image of structure.images">
+                <h1>${image.url}</h1>
+                <img src="${image.url}" alt="" />
+            </div>
+        </div>
+    </div>
+</template>

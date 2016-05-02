@@ -38,6 +38,7 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "font-awesome": "npm:font-awesome@4.6.1",
     "jquery": "npm:jquery@2.2.3",
+    "slick-carousel": "npm:slick-carousel@1.5.9",
     "text": "github:systemjs/plugin-text@0.0.4",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -219,6 +220,9 @@ System.config({
     "npm:process@0.11.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"
     },
+    "npm:slick-carousel@1.5.9": {
+      "jquery": "npm:jquery@2.2.3"
+    },
     "npm:util@0.10.3": {
       "inherits": "npm:inherits@2.0.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -337,6 +341,8 @@ System.config({
       "npm:matches-selector@0.0.1/index.js",
       "npm:select@1.0.6.js",
       "npm:select@1.0.6/src/select.js",
+      "npm:slick-carousel@1.5.9.js",
+      "npm:slick-carousel@1.5.9/slick/slick.js",
       "npm:tiny-emitter@1.0.2.js",
       "npm:tiny-emitter@1.0.2/index.js"
     ]
