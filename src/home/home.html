@@ -1,20 +1,45 @@
 <template>
     <require from="../CustomAttributes/bootstrap-tooltip"></require>
-    <div class="row">
-        <div class="col-sm-6 col-md-4 col-lg-3" repeat.for="structure of structures">
-            <div class="thumbnail">
-                <img src="${structure.images[0].url}" class="img-rounded">
-                <div class="caption">
-                    <a route-href="route: structure-view; params.bind: { id: structure._id }"><h3>${structure.name}</h3></a>
-                    <p>${structure.creatorName}</p>
-                    <button id="buildStructureBtn" class="btn btn-primary ${structure._id == copiedStructureId ? 'disabled' : 'active'}"
-                        bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice."
-                        data-clipboard-text="${createStructureCmdPrefix + structure._id}">
-                        <i class="glyphicon glyphicon-copy"></i>
-                        ${structure._id == copiedStructureId ? 'Copied!' : 'Build this structure'}
-                    </button>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Edifice</h1>
+            <p>
+                Edifice is a service for sharing your Minecraft structures with the community. It allows you to browse popular structures and easily build them in your survival Minecraft server. It's kind of like Pastebin for Minecraft!
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Easy Installation</h2>
+                <p>Simply download the <a href="https://github.com/RobertHerhold/Edifice/releases">latest version of Edifice for Sponge</a>, and drop the file into the mods folder of your server.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Survival-Friendly</h2>
+                <p>This plugin won't allow players to build structures for free. They must gather the appropriate resources as usual, but construction is taken care of.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Open Source</h2>
+                <p>All of the code for the <a href="https://github.com/RobertHerhold/Edifice">plugin</a>, <a href="https://github.com/RobertHerhold/EdificeREST">API</a>, and <a href="https://github.com/RobertHerhold/EdificeWeb">website</a> is available on GitHub.</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4" repeat.for="structure of structures">
+                <div class="thumbnail">
+                    <img src="${structure.images[0].url}" class="img-rounded">
+                    <div class="caption">
+                        <a route-href="route: structure-view; params.bind: { id: structure._id }"><h3>${structure.name}</h3></a>
+                        <p>${structure.creatorName}</p>
+                        <button id="buildStructureBtn" class="btn btn-primary ${structure._id == copiedStructureId ? 'disabled' : 'active'}" bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice." data-clipboard-text="${createStructureCmdPrefix + structure._id}">
+                            <i class="glyphicon glyphicon-copy"></i> ${structure._id == copiedStructureId ? 'Copied!' : 'Build this structure'}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
