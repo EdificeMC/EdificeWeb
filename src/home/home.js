@@ -14,15 +14,18 @@ export class Home {
         this.http = http;
     }
 
-    attached() {
-        this.http.get('/structures').then((structureRes) => {
+    activate() {
+        return this.http.get('/structures').then((structureRes) => {
             this.structures = JSON.parse(structureRes.response);
             for (let structure of this.structures) {
                 this.http.get('/playercache/' + structure.creatorUUID).then((playerProfileRes) => {
                     structure.creatorName = JSON.parse(playerProfileRes.response).name;
-                })
+                });
             }
         });
+    }
+
+    attached() {
         // Initialize the clipboard
         new Clipboard('#buildStructureBtn').on('success', (e) => {
             this.copiedStructureId = e.text.substring(this.createStructureCmdPrefix.length, e.text.length);

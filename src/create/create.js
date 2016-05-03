@@ -5,6 +5,7 @@ import { Router } from 'aurelia-router';
 
 export class Create {
 
+    message = {};
     imageList;
 
     static inject = [HttpClient, Router];
@@ -15,10 +16,6 @@ export class Create {
 
     activate(params) {
         this.params = params;
-    }
-
-    attached() {
-        this.message = {};
         return this.http.get('/structures/' + this.params.id).then((response) => {
             return JSON.parse(response.response);
         }).then((structure) => {
@@ -27,7 +24,6 @@ export class Create {
                 // TODO navigate to the structure's page
                 this.router.navigate('/');
             }
-
             this.structureName = structure.name;
             return this.http.get('/playercache/' + structure.creatorUUID)
                 .then((response) => {

@@ -9,7 +9,7 @@
                     <p>${structure.creatorName}</p>
                     <button id="buildStructureBtn" class="btn btn-primary ${structure._id == copiedStructureId ? 'disabled' : 'active'}"
                         bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice."
-                        data-clipboard-text="${'/edifice create ' + structure._id}">
+                        data-clipboard-text="${createStructureCmdPrefix + structure._id}">
                         <i class="glyphicon glyphicon-copy"></i>
                         ${structure._id == copiedStructureId ? 'Copied!' : 'Build this structure'}
                     </button>
