@@ -2,11 +2,9 @@
 
 ## Installing
 * Requires [Node.js](https://nodejs.org/en/)
-* `sudo npm install -g jspm`
-* `sudo npm install -g gulp`
+* `npm install -g webpack`
 * `npm install`
-* `jspm install`
-
 
 ## Running
-* `gulp`
+* `npm run dev`
+* navigate to [http://localhost:4000](http://localhost:4000)
