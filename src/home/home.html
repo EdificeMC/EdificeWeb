@@ -5,7 +5,7 @@
             <div class="thumbnail">
                 <img src="${structure.images[0].url}" class="img-rounded">
                 <div class="caption">
-                    <h3>${structure.name}</h3>
+                    <a route-href="route: structure-view; params.bind: { id: structure._id }"><h3>${structure.name}</h3></a>
                     <p>${structure.creatorName}</p>
                     <button id="buildStructureBtn" class="btn btn-primary ${structure._id == copiedStructureId ? 'disabled' : 'active'}"
                         bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice."
