@@ -2,14 +2,16 @@
     <require from="../CustomAttributes/bootstrap-tooltip"></require>
     <div class="row">
         <div class="col-md-4">
-            <h3>${structure.name}</h3>
-            <p>${structure.creatorName}</p>
-            <button id="buildStructureBtn" class="btn btn-primary ${copiedStructureCmd ? 'disabled' : 'active'}"
-                bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice."
-                data-clipboard-text="${createStructureCmdPrefix + structure._id}">
-                <i class="glyphicon glyphicon-copy"></i>
-                ${copiedStructureCmd ? 'Copied!' : 'Build this structure'}
-            </button>
+            <div class="pull-right">
+                <h3>${structure.name}</h3>
+                <p>${structure.creatorName}</p>
+                <button id="buildStructureBtn" class="btn btn-primary ${copiedStructureCmd ? 'disabled' : 'active'}"
+                    bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice."
+                    data-clipboard-text="${createStructureCmdPrefix + structure._id}">
+                    <i class="glyphicon glyphicon-copy"></i>
+                    ${copiedStructureCmd ? 'Copied!' : 'Build this structure'}
+                </button>
+            </div>
         </div>
         <div class="col-md-4">
             <div id="image-carousel">
