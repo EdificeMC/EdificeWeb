@@ -89,7 +89,10 @@ export class Create {
             let structureImages = [];
             for(let httpResponse of results) {
                 let response = JSON.parse(httpResponse.response);
-                structureImages.push(response.link);
+                structureImages.push({
+                    url: response.data.link,
+                    deletehash: response.data.deletehash
+                });
             }
             return structureImages;
         }).then((structureImages) => {
