@@ -90,8 +90,8 @@ export class Create {
             for(let httpResponse of results) {
                 let response = JSON.parse(httpResponse.response);
                 structureImages.push({
-                    url: response.data.link,
-                    deletehash: response.data.deletehash
+                    url: response.link,
+                    deletehash: response.deletehash
                 });
             }
             return structureImages;
