@@ -21,15 +21,13 @@ export class StructureView {
 
     activate(params) {
         this.params = params;
-        return this.http.get('/structures/' + this.params.id).then((response) => {
-            let structure = JSON.parse(response.response);
-            this.structure = structure;
-            return structure.creatorUUID;
-        }).then((creatorUUID) => {
-            this.http.get('/playercache/' + creatorUUID).then((playerProfileRes) => {
-                this.structure.creatorName = JSON.parse(playerProfileRes.response).name;
-            })
-        });
+        return this.http.get('/structures/' + this.params.id)
+            .then((response) => {
+                this.structure = response.content;
+                return this.http.get('/playercache/' + this.structure.creatorUUID);
+            }).then((playerProfileRes) => {
+                this.structure.creatorName = playerProfileRes.content.name;
+            });
     }
 
     attached() {

@@ -16,22 +16,20 @@ export class Create {
 
     activate(params) {
         this.params = params;
-        return this.http.get('/structures/' + this.params.id).then((response) => {
-            return JSON.parse(response.response);
-        }).then((structure) => {
-            // Check if the structure is already finalized, and if so, redirect to home
-            if(structure.finalized) {
-                // TODO navigate to the structure's page
-                this.router.navigate('/');
-            }
-            this.structureName = structure.name;
-            return this.http.get('/playercache/' + structure.creatorUUID)
-                .then((response) => {
-                    return JSON.parse(response.response);
-                }).then((playerProfile) => {
-                    this.creatorName = playerProfile.name;
-                });
-        });
+        return this.http.get('/structures/' + this.params.id)
+            .then(response => response.content)
+            .then((structure) => {
+                // Check if the structure is already finalized, and if so, redirect to home
+                if (structure.finalized) {
+                    // TODO navigate to the structure's page
+                    this.router.navigate('/');
+                }
+                this.structureName = structure.name;
+                return this.http.get('/playercache/' + structure.creatorUUID);
+            }).then(response => response.content)
+            .then((playerProfile) => {
+                this.creatorName = playerProfile.name;
+            });
     }
 
     submitStructure() {
@@ -87,16 +85,15 @@ export class Create {
 
         Promise.all(images).then((results) => {
             let structureImages = [];
-            for(let httpResponse of results) {
-                let response = JSON.parse(httpResponse.response);
+            for (let response of results) {
                 structureImages.push({
-                    url: response.link,
-                    deletehash: response.deletehash
+                    url: response.content.link,
+                    deletehash: response.content.deletehash
                 });
             }
             return structureImages;
         }).then((structureImages) => {
-            this.http.put('/structures/' + this.params.id, {
+            return this.http.put('/structures/' + this.params.id, {
                 name: this.structureName,
                 images: structureImages
             })

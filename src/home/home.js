@@ -15,14 +15,17 @@ export class Home {
     }
 
     activate() {
-        return this.http.get('/structures').then((structureRes) => {
-            this.structures = JSON.parse(structureRes.response);
-            for (let structure of this.structures) {
-                this.http.get('/playercache/' + structure.creatorUUID).then((playerProfileRes) => {
-                    structure.creatorName = JSON.parse(playerProfileRes.response).name;
-                });
-            }
-        });
+        return this.http.get('/structures')
+            .then((structureRes) => {
+                this.structures = structureRes.content;
+                let playerCacheProms = [];
+                for (let structure of this.structures) {
+                    playerCacheProms.push(this.http.get('/playercache/' + structure.creatorUUID).then((playerProfileRes) => {
+                        structure.creatorName = playerProfileRes.content.name;
+                    }));
+                }
+                return Promise.all(playerCacheProms);
+            });
     }
 
     attached() {
