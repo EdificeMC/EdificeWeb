@@ -30,6 +30,10 @@ export class App {
             moduleId: 'home/home',
             nav: true
         }, {
+            route: ['login'],
+            name: 'login',
+            moduleId: 'login/login'
+        }, {
             route: 'structures/:id',
             name: 'structure-view',
             moduleId: 'structure-view/structure-view'
