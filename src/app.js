@@ -2,6 +2,7 @@
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
 import { HttpClient } from 'aurelia-http-client';
 
 export class App {

@@ -14,14 +14,10 @@ export class HeaderCustomElement {
     }
 
     attached() {
-        this.showLogin = !this.isAuthenticated && this.router.currentInstruction.config.route !== 'login';
+        this.showLogin = !this.auth.isAuthenticated && this.router.currentInstruction.config.route !== 'login';
         this.eventAggregator.subscribe('router:navigation:success', event => {
-            this.showLogin = !this.isAuthenticated && event.instruction.config.route !== 'login';
+            this.showLogin = !this.auth.isAuthenticated && event.instruction.config.route !== 'login';
         });
-    }
-
-    get isAuthenticated() {
-        return this.auth.isAuthenticated;
     }
 
 }

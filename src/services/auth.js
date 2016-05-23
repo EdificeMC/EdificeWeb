@@ -17,11 +17,15 @@ export class AuthService {
             },
             username: email,
             password
-        }
-        this.http.post('https://authserver.mojang.com/authenticate', body)
-            .then(res => {
-                console.log(res);
-            })
+        };
+
+        return this.http.post('/auth', body)
+            .then(res => res.content)
+            .then(data => {
+                this.accessToken = data.accessToken;
+                this.profile = data.selectedProfile;
+                return this.profile;
+            });
     }
 
     get isAuthenticated() {
