@@ -23,4 +23,8 @@ export class AuthService {
                 console.log(res);
             })
     }
+
+    get isAuthenticated() {
+        return !!this.accessToken;
+    }
 }
