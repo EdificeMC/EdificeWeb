@@ -1,13 +1,16 @@
 'use strict';
 
+import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { AuthService } from 'aurelia-auth';
 import { Router } from 'aurelia-router';
+import PNGReader from 'png.js';
 
 export class HeaderCustomElement {
 
-    static inject = [AuthService, EventAggregator, Router];
-    constructor(auth, eventAggregator, router) {
+    static inject = [HttpClient, AuthService, EventAggregator, Router];
+    constructor(http, auth, eventAggregator, router) {
+        this.http = http;
         this.auth = auth;
         this.eventAggregator = eventAggregator;
         this.router = router;
@@ -22,6 +25,21 @@ export class HeaderCustomElement {
         });
         // Make showLogin false when logged in
         this.eventAggregator.subscribe('auth:login', event => {
+            // Get player face/skin from Crafatar
+            this.http.get('https://crafatar.com/avatars/' + event.selectedProfile.id)
+                .then(res => {
+                    console.log(res);
+                    return new Promise((resolve, reject) => {
+                        new PNGReader(res.response).parse(function(err, png) {
+                            if(err) {
+                                return reject(err);
+                            }
+                            return resolve(png);
+                        })
+                    });
+                }).then(png => {
+                    console.log(png);
+                })
             this.showLogin = false;
         });
     }
@@ -33,6 +51,7 @@ export class HeaderCustomElement {
 
     logout() {
         this.auth.logout();
+        this.playerProfile = null;
         this.showLogin = this._shouldShowLogin();
     }
 

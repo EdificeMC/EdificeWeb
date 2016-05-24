@@ -48,6 +48,7 @@
     "font-awesome": "^4.5.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.3",
+    "png.js": "^0.2.1",
     "slick-carousel": "^1.5.9"
   },
   "devDependencies": {
