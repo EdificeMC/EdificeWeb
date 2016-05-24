@@ -14,10 +14,32 @@ export class HeaderCustomElement {
     }
 
     attached() {
-        this.showLogin = !this.auth.isAuthenticated() && this.router.currentInstruction.config.route !== 'login';
+        // showLogin value for initial load
+        this.showLogin = this._shouldShowLogin();
+        // Recompute showLogin when changing pages (don't show it on the login page)
         this.eventAggregator.subscribe('router:navigation:success', event => {
-            this.showLogin = !this.auth.isAuthenticated() && event.instruction.config.route !== 'login';
+            this.showLogin = this._shouldShowLogin();
+        });
+        // Make showLogin false when logged in
+        this.eventAggregator.subscribe('auth:login', event => {
+            this.showLogin = false;
         });
     }
-    
+
+    // Show the login button if the user is not already logged in and is not currently on the login page
+    _shouldShowLogin() {
+        return !this.auth.isAuthenticated() && this.router.currentInstruction.config.route !== 'login';
+    }
+
+    logout() {
+        this.auth.logout();
+        this.showLogin = this._shouldShowLogin();
+    }
+
+    // I am providing this getter rather than forcing the direct use of auth.isAuthenticated() because Aurelia doesn't seem to listen to
+    // changes to auth.isAuthenticated() for whatever reason
+    get isAuthenticated() {
+        return this.auth.isAuthenticated();
+    }
+
 }
