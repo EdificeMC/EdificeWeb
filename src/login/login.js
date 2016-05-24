@@ -1,6 +1,6 @@
 'use strict';
 
-import { AuthService } from '../services/auth';
+import { AuthService } from 'aurelia-auth';
 import { Router } from 'aurelia-router';
 
 export class Login {
@@ -13,7 +13,7 @@ export class Login {
 
     login() {
         this.auth.login(this.email, this.password)
-            .then(profile => {
+            .then(res => {
                 // TODO make an alert w/ "Welcome, ______"
                 this.router.navigate('/');
             });

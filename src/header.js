@@ -1,7 +1,7 @@
 'use strict';
 
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { AuthService } from './services/auth';
+import { AuthService } from 'aurelia-auth';
 import { Router } from 'aurelia-router';
 
 export class HeaderCustomElement {
@@ -14,10 +14,10 @@ export class HeaderCustomElement {
     }
 
     attached() {
-        this.showLogin = !this.auth.isAuthenticated && this.router.currentInstruction.config.route !== 'login';
+        this.showLogin = !this.auth.isAuthenticated() && this.router.currentInstruction.config.route !== 'login';
         this.eventAggregator.subscribe('router:navigation:success', event => {
-            this.showLogin = !this.auth.isAuthenticated && event.instruction.config.route !== 'login';
+            this.showLogin = !this.auth.isAuthenticated() && event.instruction.config.route !== 'login';
         });
     }
-
+    
 }
