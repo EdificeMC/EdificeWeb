@@ -19,7 +19,7 @@ export class Login {
                 // TODO make an alert w/ "Welcome, ______"
                 this.router.navigate('/');
                 // Publishing the event HAS to be after changing the page since the event listener depends on the current route
-                this.eventAggregator.publish('auth:login', res);
+                // this.eventAggregator.publish('auth:login', res);
             });
     }
 

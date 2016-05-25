@@ -13,7 +13,8 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li show.bind="showLogin"><a route-href="route: login">Login</a></li>
-                <li show.bind="isAuthenticated"><a click.delegate="logout()" style="cursor: pointer"><i class="fa fa-2x fa-sign-out"></i></a></li>
+                <li show.bind="isAuthenticated"><a click.delegate="auth.logout()" style="cursor: pointer"><i class="fa fa-2x fa-sign-out"></i></a></li>
+                <li show.bind="isAuthenticated"><img src="${profile.headImageURL}" alt="" /></li>
             </ul>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

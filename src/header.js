@@ -4,7 +4,6 @@ import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { AuthService } from 'aurelia-auth';
 import { Router } from 'aurelia-router';
-import PNGReader from 'png.js';
 
 export class HeaderCustomElement {
 
@@ -17,6 +16,8 @@ export class HeaderCustomElement {
     }
 
     attached() {
+        // Restore the profile from storage
+        this.profile = window.localStorage.profile ? JSON.parse(window.localStorage.profile) : null;
         // showLogin value for initial load
         this.showLogin = this._shouldShowLogin();
         // Recompute showLogin when changing pages (don't show it on the login page)
@@ -25,34 +26,24 @@ export class HeaderCustomElement {
         });
         // Make showLogin false when logged in
         this.eventAggregator.subscribe('auth:login', event => {
-            // Get player face/skin from Crafatar
-            this.http.get('https://crafatar.com/avatars/' + event.selectedProfile.id)
-                .then(res => {
-                    console.log(res);
-                    return new Promise((resolve, reject) => {
-                        new PNGReader(res.response).parse(function(err, png) {
-                            if(err) {
-                                return reject(err);
-                            }
-                            return resolve(png);
-                        })
-                    });
-                }).then(png => {
-                    console.log(png);
-                })
+            console.log("auth login event!");
+            console.log(event);
+            this.profile = event.selectedProfile;
+            this.profile.headImageURL = 'https://crafatar.com/avatars/' + this.profile.id;
+            window.localStorage.setItem('profile', JSON.stringify(event.selectedProfile));
             this.showLogin = false;
+        });
+        
+        this.eventAggregator.subscribe('auth:logout', () => {
+            console.log("logout event");
+            this.profile = null;
+            this.showLogin = this._shouldShowLogin();
         });
     }
 
     // Show the login button if the user is not already logged in and is not currently on the login page
     _shouldShowLogin() {
         return !this.auth.isAuthenticated() && this.router.currentInstruction.config.route !== 'login';
-    }
-
-    logout() {
-        this.auth.logout();
-        this.playerProfile = null;
-        this.showLogin = this._shouldShowLogin();
     }
 
     // I am providing this getter rather than forcing the direct use of auth.isAuthenticated() because Aurelia doesn't seem to listen to
