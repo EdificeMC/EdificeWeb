@@ -9,8 +9,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Edifice</a>
+                <a class="navbar-brand" route-href="route: home">Edifice</a>
             </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li show.bind="showLogin"><a route-href="route: login">Login</a></li>
+                <li class="dropdown" show.bind="auth.isAuthenticated">
+                    <a href class="dropdown-toggle profile-image" data-toggle="dropdown">
+                        <img class="img-circle" src="${auth.profile.headImageURL}"/>
+                    </a>
+					<ul class="dropdown-menu">
+						<!-- <li class="divider"></li> -->
+						<li><a click.delegate="auth.logout()" style="cursor: pointer"><i class="fa fa-sign-out"></i> Log out</a></li>
+					</ul>
+                </li>
+            </ul>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">

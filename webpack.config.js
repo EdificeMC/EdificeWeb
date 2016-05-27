@@ -22,7 +22,11 @@ module.exports = {
         filename: 'bundle.js'
     },
     plugins: [
-        new AureliaWebpackPlugin(),
+        new AureliaWebpackPlugin({
+            includeSubModules: [{
+                moduleId: "aurelia-auth"
+            }]
+        }),
         new ProvidePlugin({
             Promise: 'bluebird',
             jQuery: 'jquery',
@@ -42,6 +46,9 @@ module.exports = {
         }, {
             test: /\.css?$/,
             loader: 'style!css'
+        }, {
+            test: /\.scss$/,
+            loaders: ["style", "css", "sass"]
         }, {
             test: /\.html$/,
             loader: 'html'

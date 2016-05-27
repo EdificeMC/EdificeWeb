@@ -1,7 +1,9 @@
 'use strict';
 
+import './styles.scss';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/scss/font-awesome.scss';
 import { HttpClient } from 'aurelia-http-client';
 
 export class App {
@@ -29,6 +31,10 @@ export class App {
             name: 'home',
             moduleId: 'home/home',
             nav: true
+        }, {
+            route: ['login'],
+            name: 'login',
+            moduleId: 'login/login'
         }, {
             route: 'structures/:id',
             name: 'structure-view',

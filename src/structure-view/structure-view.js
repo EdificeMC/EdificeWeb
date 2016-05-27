@@ -5,7 +5,6 @@ import Clipboard from 'clipboard';
 import 'slick-carousel';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import './structure-view.css';
 import $ from 'jquery';
 
 export class StructureView {
