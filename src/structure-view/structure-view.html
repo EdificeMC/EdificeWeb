@@ -4,7 +4,7 @@
         <div class="col-md-4">
             <div class="pull-right structure-info">
                 <h3>${structure.name}</h3>
-                <p>${structure.creatorName}</p>
+                <a route-href="route: profile; params.bind: { playerID: structure.creatorUUID }"><h5>${structure.creatorName}</h5></a>
                 <button id="buildStructureBtn" class="btn btn-primary ${copiedStructureCmd ? 'disabled' : 'active'}"
                     bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice."
                     data-clipboard-text="${createStructureCmdPrefix + structure._id}">
