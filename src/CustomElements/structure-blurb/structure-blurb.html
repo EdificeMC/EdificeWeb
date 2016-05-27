@@ -1,0 +1,13 @@
+<template>
+    <require from="../../CustomAttributes/bootstrap-tooltip"></require>
+    <div class="thumbnail">
+        <img src="${structure.images[0].url}" class="img-rounded">
+        <div class="caption">
+            <a route-href="route: structure-view; params.bind: { id: structure._id }"><h3>${structure.name}</h3></a>
+            <a route-href="route: profile; params.bind: { playerID: structure.creatorUUID }"><h5>${structure.creatorName}</h5></a>
+            <button id="buildStructureBtn" class="btn btn-primary ${structure._id == copiedStructureId ? 'disabled' : 'active'}" bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice." data-clipboard-text="${createStructureCmdPrefix + structure._id}">
+                <i class="glyphicon glyphicon-copy"></i> ${structure._id == copiedStructureId ? 'Copied!' : 'Build this structure'}
+            </button>
+        </div>
+    </div>
+</template>

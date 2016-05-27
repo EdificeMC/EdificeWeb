@@ -1,9 +1,16 @@
 <template>
+    <require from="../CustomElements/structure-blurb/structure-blurb"></require>
     <div class="row">
-        <div class="col-md-4 col-md-offset-2">
+        <div class="col-md-2 col-md-offset-1">
             <div class="player-details">
                 <img src="https://visage.surgeplay.com/full/320/${playerProfile.id}" alt="" />
                 <h2>${playerProfile.name}</h2>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3>Popular Structures</h3>
+            <div class="col-md-4" repeat.for="structure of structures">
+                <structure-blurb structure.bind="structure"></structure-blurb>
             </div>
         </div>
     </div>
