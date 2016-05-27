@@ -21,7 +21,7 @@ export class AuthService {
             .then(res => {
                 this._profile = res.selectedProfile;
                 this._profile.headImageURL = 'https://crafatar.com/avatars/' + this._profile.id + '?size=32';
-                window.localStorage.setItem('profile', JSON.stringify(this._selectedProfile));
+                window.localStorage.setItem('profile', JSON.stringify(this._profile));
                 this._accessToken = res.accessToken;
                 window.localStorage.setItem('accessToken', this._accessToken);
                 this._clientToken = res.clientToken;
