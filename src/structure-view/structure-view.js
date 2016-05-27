@@ -13,9 +13,8 @@ export class StructureView {
     createStructureCmdPrefix = '/edifice create ';
 
     static inject = [HttpClient];
-    constructor(http, router) {
+    constructor(http) {
         this.http = http;
-        this.router = router;
     }
 
     activate(params) {

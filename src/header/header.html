@@ -18,8 +18,9 @@
                         <img class="img-circle" src="${auth.profile.headImageURL}"/>
                     </a>
 					<ul class="dropdown-menu">
-						<!-- <li class="divider"></li> -->
-						<li><a click.delegate="auth.logout()" style="cursor: pointer"><i class="fa fa-sign-out"></i> Log out</a></li>
+                        <li><a route-href="route: profile; params.bind: { playerID: auth.profile.id }" style="cursor: pointer"><i class="fa fa-user"></i> Profile</a></li>
+						<li class="divider"></li>
+						<li><a click.delegate="auth.logout()" style="cursor: pointer"><i class="fa fa-sign-out"></i> Log Out</a></li>
 					</ul>
                 </li>
             </ul>

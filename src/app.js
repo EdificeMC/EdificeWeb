@@ -32,9 +32,13 @@ export class App {
             moduleId: 'home/home',
             nav: true
         }, {
-            route: ['login'],
+            route: 'login',
             name: 'login',
             moduleId: 'login/login'
+        }, {
+            route: ':playerID',
+            name: 'profile',
+            moduleId: 'profile/profile'
         }, {
             route: 'structures/:id',
             name: 'structure-view',
