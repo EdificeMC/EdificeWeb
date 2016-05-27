@@ -21,9 +21,10 @@ export class Profile {
             .then(response => response.content)
             .then(structures => {
                 this.structures = structures;
-            })
+            });
+        // I am deliberately not getting the names of the creators these structures since this is the profile page
             
-        return Promise.all([profileProm]);
+        return Promise.all([profileProm, structuresProm]);
     }
     
 }
