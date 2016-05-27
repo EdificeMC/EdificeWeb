@@ -36,7 +36,7 @@ export class App {
             name: 'login',
             moduleId: 'login/login'
         }, {
-            route: ':playerID',
+            route: 'profile/:playerID',
             name: 'profile',
             moduleId: 'profile/profile'
         }, {
