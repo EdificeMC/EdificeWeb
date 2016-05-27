@@ -13,8 +13,15 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li show.bind="showLogin"><a route-href="route: login">Login</a></li>
-                <li show.bind="isAuthenticated"><a click.delegate="auth.logout()" style="cursor: pointer"><i class="fa fa-2x fa-sign-out"></i></a></li>
-                <li show.bind="isAuthenticated"><img src="${profile.headImageURL}" alt="" /></li>
+                <li class="dropdown" show.bind="isAuthenticated">
+                    <a href class="dropdown-toggle profile-image" data-toggle="dropdown">
+                        <img class="img-circle" src="${profile.headImageURL}"/>
+                    </a>
+					<ul class="dropdown-menu">
+						<!-- <li class="divider"></li> -->
+						<li><a click.delegate="auth.logout()" style="cursor: pointer"><i class="fa fa-sign-out"></i> Log out</a></li>
+					</ul>
+                </li>
             </ul>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -29,7 +29,7 @@ export class HeaderCustomElement {
             console.log("auth login event!");
             console.log(event);
             this.profile = event.selectedProfile;
-            this.profile.headImageURL = 'https://crafatar.com/avatars/' + this.profile.id;
+            this.profile.headImageURL = 'https://crafatar.com/avatars/' + this.profile.id + '?size=32';
             window.localStorage.setItem('profile', JSON.stringify(event.selectedProfile));
             this.showLogin = false;
         });

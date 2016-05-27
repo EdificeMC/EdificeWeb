@@ -1,8 +1,9 @@
 'use strict';
 
+import './styles.scss';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'font-awesome/css/font-awesome.css';
+import 'font-awesome/scss/font-awesome.scss';
 import { HttpClient } from 'aurelia-http-client';
 
 export class App {
