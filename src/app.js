@@ -44,7 +44,7 @@ export class App {
             name: 'structure-view',
             moduleId: 'structure-view/structure-view'
         }, {
-            route: 'structure/:id/stars',
+            route: 'structure/:id/stargazers',
             name: 'structure-stars',
             moduleId: 'structure-stars/structure-stars'
         }, {
