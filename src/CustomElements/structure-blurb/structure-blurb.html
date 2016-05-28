@@ -4,7 +4,7 @@
         <img src="${structure.images[0].url}" class="img-rounded">
         <div class="caption">
             <div class="btn-group pull-right">
-                <button click.delegate="star()" class="btn btn-default star-btn ${structureIsStarred ? 'active' : ''}"><i class="fa fa-star"></i></button>
+                <button click.delegate="star()" class="btn btn-default star-btn ${structureIsStarred && auth.isAuthenticated ? 'active' : ''}"><i class="fa fa-star"></i></button>
                 <a show.bind="structure.stargazers.length === 0" class="btn btn-default star-btn">${structure.stargazers.length}</a>
                 <a show.bind="structure.stargazers.length !== 0" route-href="route: structure-stars; params.bind: { id: structure._id }" class="btn btn-default star-btn">${structure.stargazers.length}</a>
             </div>
