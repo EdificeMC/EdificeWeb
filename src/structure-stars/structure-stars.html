@@ -4,7 +4,7 @@
             <h4>Stargazers</h4>
             <div class="col-md-2" repeat.for="stargazer of structure.stargazers">
                 <div class="stargazer-profile">
-                    <img class="stargazer-avatar" src="https://crafatar.com/avatars/${stargazer.id}?size=80" alt="" />
+                    <img class="stargazer-avatar" src="https://visage.surgeplay.com/head/80/${stargazer.id}" alt="" />
                     <a route-href="route: profile; params.bind: { playerID: stargazer.id }"><h4 class="pull-right">${stargazer.name}</h4></a>
                 </div>
             </div>
