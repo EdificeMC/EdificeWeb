@@ -48,7 +48,8 @@
     "font-awesome": "^4.5.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.3",
-    "slick-carousel": "^1.5.9"
+    "slick-carousel": "^1.5.9",
+    "toastr": "^2.1.2"
   },
   "devDependencies": {
     "aurelia-tools": "^0.1.18",
