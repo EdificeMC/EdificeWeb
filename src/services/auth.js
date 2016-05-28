@@ -52,6 +52,10 @@ export class AuthService {
         return !!this._accessToken;
     }
     
+    get accessToken() {
+        return this._accessToken;
+    }
+    
     get profile() {
         return this._profile;
     }

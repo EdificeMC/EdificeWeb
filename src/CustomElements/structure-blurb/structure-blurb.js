@@ -17,6 +17,10 @@ export class StructureBlurbCustomElement {
         this.router = router;
     }
     
+    attached() {
+        this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.id);
+    }
+    
     star() {
         if (!this.auth.isAuthenticated) {
             this.notify.error('You must log in first.', {
@@ -27,5 +31,21 @@ export class StructureBlurbCustomElement {
             });
             return;
         }
+        return this.http.createRequest('/star')
+            .asPost()
+            .withContent({
+                structureId: this.structure._id
+            })
+            .withHeader('Authorization', 'Bearer ' + this.auth.accessToken)
+            .send()
+            .then(res => {
+                if(this.structureIsStarred) {
+                    this.structure.stargazers.splice(this.structure.stargazers.indexOf(this.auth.profile.id), 1);
+                    this.structureIsStarred = false;
+                } else {
+                    this.structure.stargazers.push(this.auth.profile.id);
+                    this.structureIsStarred = true;
+                }
+            });
     }
 }
