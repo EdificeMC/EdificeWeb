@@ -40,9 +40,13 @@ export class App {
             name: 'profile',
             moduleId: 'profile/profile'
         }, {
-            route: 'structures/:id',
+            route: 'structure/:id',
             name: 'structure-view',
             moduleId: 'structure-view/structure-view'
+        }, {
+            route: 'structure/:id/stars',
+            name: 'structure-stars',
+            moduleId: 'structure-stars/structure-stars'
         }, {
             route: 'create/:id',
             name: 'create',

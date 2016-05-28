@@ -39,6 +39,7 @@ export class StructureBlurbCustomElement {
             .withHeader('Authorization', 'Bearer ' + this.auth.accessToken)
             .send()
             .then(res => {
+                // Rather than doing another request to get the number of stars, we'll manually increment/decrement it
                 if(this.structureIsStarred) {
                     this.structure.stargazers.splice(this.structure.stargazers.indexOf(this.auth.profile.id), 1);
                     this.structureIsStarred = false;

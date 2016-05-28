@@ -3,7 +3,11 @@
     <div class="thumbnail structure-blurb">
         <img src="${structure.images[0].url}" class="img-rounded">
         <div class="caption">
-            <button click.delegate="star()" class="btn btn-default pull-right star ${structureIsStarred ? 'active' : ''}">${structure.stargazers.length} <i class="fa fa-star"></i></button>
+            <div class="btn-group pull-right">
+                <button click.delegate="star()" class="btn btn-default star-btn ${structureIsStarred ? 'active' : ''}"><i class="fa fa-star"></i></button>
+                <a show.bind="structure.stargazers.length === 0" class="btn btn-default star-btn">${structure.stargazers.length}</a>
+                <a show.bind="structure.stargazers.length !== 0" route-href="route: structure-stars; params.bind: { id: structure._id }" class="btn btn-default star-btn">${structure.stargazers.length}</a>
+            </div>
             <a route-href="route: structure-view; params.bind: { id: structure._id }"><h3 class="name">${structure.name}</h3></a>
             <a route-href="route: profile; params.bind: { playerID: structure.creatorUUID }"><h5>${structure.creatorName}</h5></a>
             <button id="buildStructureBtn" class="btn btn-primary ${structure._id == copiedStructureId ? 'disabled' : 'active'}" bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice." data-clipboard-text="${createStructureCmdPrefix + structure._id}">
