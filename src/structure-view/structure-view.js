@@ -31,6 +31,9 @@ export class StructureView {
         let starsHistoryProm = this.http.get('/stars-history/' + this.params.id)
             .then(response => {
                 this.starHistory = response.content;
+            }).catch(err => {
+                // This project has never been starred before
+                this.starHistory = null;
             });
             
         return Promise.all([structureProm, starsHistoryProm]);
@@ -67,43 +70,45 @@ export class StructureView {
         //         }
         //     }
         // }
-        let labels = [];
-        let data = [];
-        for(let year in this.starHistory.values) {
-            for(let month in this.starHistory.values[year]) {
-                for(let day in this.starHistory.values[year][month]) {
-                    let date = new Date(parseInt(year), parseInt(month), parseInt(day));
-                    date = moment(date);
-                    labels.push(date);
-                    data.push(this.starHistory.values[year][month][day]);
+        if(this.starHistory) {
+            let labels = [];
+            let data = [];
+            for(let year in this.starHistory.values) {
+                for(let month in this.starHistory.values[year]) {
+                    for(let day in this.starHistory.values[year][month]) {
+                        let date = new Date(parseInt(year), parseInt(month), parseInt(day));
+                        date = moment(date);
+                        labels.push(date);
+                        data.push(this.starHistory.values[year][month][day]);
+                    }
                 }
             }
-        }
-        let element = $('#structure-stats');
-        let chart = new Chart(element, {
-            type: 'line',
-            data: {
-                labels,
-                datasets: [{
-                    label: "Stars",
-                    data,
-                    backgroundColor: '#0000FF'
-                }]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        type: "time",
-                        stacked: true
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
+            let element = $('#structure-stats');
+            let chart = new Chart(element, {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: "Stars",
+                        data,
+                        backgroundColor: '#0000FF'
                     }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: "time",
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
 }
