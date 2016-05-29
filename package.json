@@ -44,10 +44,12 @@
     "aurelia-templating-router": "^1.0.0-beta.1.1.1",
     "bluebird": "^3.3.4",
     "bootstrap": "^3.3.6",
+    "chart.js": "^2.1.4",
     "clipboard": "^1.5.10",
     "font-awesome": "^4.5.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.3",
+    "moment": "^2.13.0",
     "slick-carousel": "^1.5.9",
     "toastr": "^2.1.2"
   },

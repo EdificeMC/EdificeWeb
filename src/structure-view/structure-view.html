@@ -1,7 +1,7 @@
-<template>
+np<template>
     <require from="../CustomAttributes/bootstrap-tooltip"></require>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="pull-right structure-info">
                 <h3>${structure.name}</h3>
                 <a route-href="route: profile; params.bind: { playerID: structure.creatorUUID }"><h5>${structure.creatorName}</h5></a>
@@ -19,6 +19,11 @@
                     <img style="display:block; margin:auto;" class="img-rounded" src="${image.url}" alt="" />
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row" show.bind="starHistory">
+        <div class="col-md-12">
+            <canvas id="structure-stats" width="100%" height="25%"></canvas>
         </div>
     </div>
 </template>
