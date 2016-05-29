@@ -91,7 +91,7 @@ export class StructureView {
                     datasets: [{
                         label: "Stars",
                         data,
-                        backgroundColor: '#0000FF'
+                        backgroundColor: '#D4AF37'
                     }]
                 },
                 options: {
