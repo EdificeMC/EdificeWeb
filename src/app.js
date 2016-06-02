@@ -36,6 +36,10 @@ export class App {
             name: 'login',
             moduleId: 'login/login'
         }, {
+            route: 'signup',
+            name: 'signup',
+            moduleId: 'signup/signup'
+        }, {
             route: 'profile/:playerID',
             name: 'profile',
             moduleId: 'profile/profile'

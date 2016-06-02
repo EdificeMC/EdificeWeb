@@ -11,11 +11,11 @@ bootstrap(function(aurelia) {
     aurelia.use
         .standardConfiguration()
         .developmentLogging()
-        .plugin('aurelia-auth', (baseConfig) => {
-            baseConfig.configure({
-                loginUrl: 'http://' + urlBase + '/api/auth',
-                responseTokenProp: 'accessToken'
-            });
-        });
+        // .plugin('aurelia-auth', (baseConfig) => {
+        //     baseConfig.configure({
+        //         loginUrl: 'http://' + urlBase + '/api/auth',
+        //         responseTokenProp: 'accessToken'
+        //     });
+        // });
     aurelia.start().then(() => aurelia.setRoot('app', document.body));
 });

@@ -13,6 +13,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li show.bind="showLogin"><a route-href="route: login">Login</a></li>
+                <li show.bind="showLogin"><a route-href="route: signup">Sign Up</a></li>
                 <li class="dropdown" show.bind="auth.isAuthenticated">
                     <a href class="dropdown-toggle profile-image" data-toggle="dropdown">
                         <img class="img-circle" src="${auth.profile.headImageURL}"/>
