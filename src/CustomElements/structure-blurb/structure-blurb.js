@@ -1,19 +1,18 @@
 'use strict';
 
-import { NotifyService } from '../../services/notify';
 import { AuthService } from '../../services/auth';
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
 import { bindable } from 'aurelia-framework';
+import toastr from 'toastr';
 
 export class StructureBlurbCustomElement {
     @bindable structure;
     
-    static inject = [HttpClient, AuthService, NotifyService, Router];
+    static inject = [HttpClient, AuthService, Router];
     constructor(http, auth, notify, router) {
         this.http = http;
         this.auth = auth;
-        this.notify = notify;
         this.router = router;
     }
     
@@ -23,7 +22,7 @@ export class StructureBlurbCustomElement {
     
     star() {
         if (!this.auth.isAuthenticated) {
-            this.notify.error('You must log in first.', {
+            toastr.error('You must log in first.', null, {
                 progressBar: true,
                 onclick: () => {
                     this.router.navigate('login');

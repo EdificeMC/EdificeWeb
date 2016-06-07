@@ -4,6 +4,8 @@ import './styles.scss';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/scss/font-awesome.scss';
+import 'toastr/build/toastr.min.css';
+import 'sweetalert/dist/sweetalert.css';
 import { HttpClient } from 'aurelia-http-client';
 
 export class App {
@@ -31,10 +33,6 @@ export class App {
             name: 'home',
             moduleId: 'home/home',
             nav: true
-        }, {
-            route: 'login',
-            name: 'login',
-            moduleId: 'login/login'
         }, {
             route: 'signup',
             name: 'signup',

@@ -1,10 +1,12 @@
 <template>
+    <require from='../ValueConverters/date-format.js'></require>
     <require from="../CustomElements/structure-blurb/structure-blurb"></require>
     <div class="row">
         <div class="col-md-2 col-md-offset-1">
             <div class="player-details">
                 <img src="https://visage.surgeplay.com/full/320/${playerProfile.id}" alt="" />
                 <h2>${playerProfile.name}</h2>
+                <h4><i class="fa fa-clock-o"></i> Joined on ${playerProfile.joined | dateFormat}</h4>
             </div>
         </div>
         <div class="col-md-8">

@@ -1,12 +1,14 @@
 'use strict';
 
 import { AuthService } from '../services/auth';
-import { email } from 'aurelia-validatejs';
-import { ValidationEngine } from 'aurelia-validatejs';
+import toastr from 'toastr';
+import swal from 'sweetalert';
+// import { email } from 'aurelia-validatejs';
+// import { ValidationEngine } from 'aurelia-validatejs';
 
-export class SignupModel {
-    @email email = '';
-}
+// export class SignupModel {
+//     @email email = '';
+// }
 
 export class Signup {
     
@@ -15,12 +17,12 @@ export class Signup {
     static inject = [AuthService]
     constructor(auth) {
         this.auth = auth;
-        this.model = new SignupModel();
-        this.reporter = ValidationEngine.getValidationReporter(this.model);
-        this.subscriber = this.reporter.subscribe(result => {
-            console.log(result);
-            this.renderErrors(result);
-        });
+        // this.model = new SignupModel();
+        // this.reporter = ValidationEngine.getValidationReporter(this.model);
+        // this.subscriber = this.reporter.subscribe(result => {
+        //     console.log(result);
+        //     this.renderErrors(result);
+        // });
     }
 
     renderErrors(result) {
@@ -32,9 +34,21 @@ export class Signup {
     
     signup() {
         return this.auth.signup({
-            email: this.model.email,
-            password: this.model.password,
-            verificationCode: this.model.verificationCode
-        });
+            email: this.email,
+            password: this.password,
+            verificationCode: this.verificationCode
+        }).then((res) => {
+            swal({
+                title: "Welcome!",
+                text: `Please confirm your account with the email sent to ${credentials.email}`,
+                type: 'success'
+            }, () => {
+                this.router.navigate('/');
+            });
+        }).catch(err => {
+            toastr.error(err.content.message, null, {
+                progressBar: true
+            });
+        });;
     }
 }

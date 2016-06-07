@@ -12,14 +12,14 @@
                 <a class="navbar-brand" route-href="route: home">Edifice</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li show.bind="showLogin"><a route-href="route: login">Login</a></li>
+                <li show.bind="showLogin"><a click.delegate="auth.login()" style="cursor: pointer">Login</a></li>
                 <li show.bind="showLogin"><a route-href="route: signup">Sign Up</a></li>
                 <li class="dropdown" show.bind="auth.isAuthenticated">
                     <a href class="dropdown-toggle profile-image" data-toggle="dropdown">
-                        <img class="img-circle" src="${auth.profile.headImageURL}"/>
+                        <img class="img-circle" width="32" height="32" src="${auth.profile.picture}"/>
                     </a>
 					<ul class="dropdown-menu">
-                        <li><a route-href="route: profile; params.bind: { playerId: auth.profile.uuid }" style="cursor: pointer"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a route-href="route: profile; params.bind: { playerId: auth.profile.user_metadata.mcuuid }" style="cursor: pointer"><i class="fa fa-user"></i> Profile</a></li>
 						<li class="divider"></li>
 						<li><a click.delegate="auth.logout()" style="cursor: pointer"><i class="fa fa-sign-out"></i> Log Out</a></li>
 					</ul>
