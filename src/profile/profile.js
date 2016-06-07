@@ -12,12 +12,12 @@ export class Profile {
     activate(params) {
         this.params = params;
         
-        let profileProm = this.http.get('/playercache/' + this.params.playerID)
+        let profileProm = this.http.get('/playercache/' + this.params.playerId)
             .then(response => response.content)
             .then((playerProfile) => {
                 this.playerProfile = playerProfile;
             });
-        let structuresProm = this.http.get('/structures?creatorUUID=' + this.params.playerID)
+        let structuresProm = this.http.get('/structures?creatorUUID=' + this.params.playerId)
             .then(response => response.content)
             .then(structures => {
                 this.structures = structures;

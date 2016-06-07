@@ -11,41 +11,44 @@ export class AuthService {
         this.eventAggregator = eventAggregator;
         
         this._profile = window.localStorage.profile ? JSON.parse(window.localStorage.profile) : null;
-        this._clientToken = window.localStorage.clientToken;
         this._accessToken = window.localStorage.accessToken;
     }
     
-    login(username, password) {
-        return this.http.post('/auth/login', {username, password})
+    signup(credentials) {
+        return this.http.post('/auth/signup', credentials)
             .then(res => res.content)
             .then(res => {
-                this._profile = res.selectedProfile;
-                this._profile.headImageURL = 'https://crafatar.com/avatars/' + this._profile.id + '?size=32';
+                this._profile = res.profile;
+                this._profile.headImageURL = 'https://crafatar.com/avatars/' + this._profile.uuid + '?size=32';
                 window.localStorage.setItem('profile', JSON.stringify(this._profile));
                 this._accessToken = res.accessToken;
                 window.localStorage.setItem('accessToken', this._accessToken);
-                this._clientToken = res.clientToken;
-                window.localStorage.setItem('clientToken', this._clientToken);
+                
+                this.eventAggregator.publish('auth:login', res);
+            })
+    }
+    
+    login(email, password) {
+        return this.http.post('/auth/login', {email, password})
+            .then(res => res.content)
+            .then(res => {
+                this._profile = res.profile;
+                this._profile.headImageURL = 'https://crafatar.com/avatars/' + this._profile.uuid + '?size=32';
+                window.localStorage.setItem('profile', JSON.stringify(this._profile));
+                this._accessToken = res.accessToken;
+                window.localStorage.setItem('accessToken', this._accessToken);
                 
                 this.eventAggregator.publish('auth:login', res);
             })
     }
     
     logout() {
+        this._profile = null;
+        this._accessToken = null;
         window.localStorage.removeItem('profile');
         window.localStorage.removeItem('accessToken');
-        window.localStorage.removeItem('clientToken');
         
-        return this.http.post('/auth/logout', {
-            clientToken: this._clientToken,
-            accessToken: this._accessToken
-        }).then(res => {
-            this._profile = null;
-            this._accessToken = null;
-            this._clientToken = null;
-            
-            this.eventAggregator.publish('auth:logout');
-        });
+        this.eventAggregator.publish('auth:logout');
     }
     
     get isAuthenticated() {

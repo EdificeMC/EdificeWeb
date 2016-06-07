@@ -40,7 +40,7 @@ export class App {
             name: 'signup',
             moduleId: 'signup/signup'
         }, {
-            route: 'profile/:playerID',
+            route: 'profile/:playerId',
             name: 'profile',
             moduleId: 'profile/profile'
         }, {

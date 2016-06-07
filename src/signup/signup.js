@@ -1,21 +1,40 @@
 'use strict';
 
-import { Validation } from 'aurelia-validation';
+import { AuthService } from '../services/auth';
+import { email } from 'aurelia-validatejs';
+import { ValidationEngine } from 'aurelia-validatejs';
+
+export class SignupModel {
+    @email email = '';
+}
 
 export class Signup {
+    
+    errors = [];
 
-    static inject = [Validation];
-    constructor(validation) {
-        // this.validation = validation.on(this)
-        //     .ensure('email').isNotEmpty().isEmail()
+    static inject = [AuthService]
+    constructor(auth) {
+        this.auth = auth;
+        this.model = new SignupModel();
+        this.reporter = ValidationEngine.getValidationReporter(this.model);
+        this.subscriber = this.reporter.subscribe(result => {
+            console.log(result);
+            this.renderErrors(result);
+        });
     }
 
-    activate(params) {
-        this.params = params;
+    renderErrors(result) {
+        this.errors.splice(0, this.errors.length);
+        result.forEach(error => {
+            this.errors.push(error)
+        });
     }
-
-    attached() {
-        this.verificationCode = this.params.verificationCode;
+    
+    signup() {
+        return this.auth.signup({
+            email: this.model.email,
+            password: this.model.password,
+            verificationCode: this.model.verificationCode
+        });
     }
-
 }
