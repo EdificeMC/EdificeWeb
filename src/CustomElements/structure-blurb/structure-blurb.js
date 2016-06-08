@@ -2,22 +2,26 @@
 
 import { AuthService } from '../../services/auth';
 import { HttpClient } from 'aurelia-http-client';
-import { Router } from 'aurelia-router';
+import { EventAggregator } from 'aurelia-event-aggregator';
 import { bindable } from 'aurelia-framework';
 import toastr from 'toastr';
 
 export class StructureBlurbCustomElement {
     @bindable structure;
     
-    static inject = [HttpClient, AuthService, Router];
-    constructor(http, auth, router) {
+    static inject = [HttpClient, AuthService, EventAggregator];
+    constructor(http, auth, eventAggregator) {
         this.http = http;
         this.auth = auth;
-        this.router = router;
+        this.eventAggregator = eventAggregator;
     }
     
     attached() {
         this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.app_metadata.mcuuid);
+        // Reevaluate if the structure is starred upon login
+        this.eventAggregator.subscribe('auth:login', event => {
+            this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.app_metadata.mcuuid);
+        });
     }
     
     star() {
@@ -25,7 +29,7 @@ export class StructureBlurbCustomElement {
             toastr.error('You must log in first.', null, {
                 progressBar: true,
                 onclick: () => {
-                    this.router.navigate('login');
+                    this.auth.login();
                 }
             });
             return;
