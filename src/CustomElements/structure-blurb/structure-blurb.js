@@ -10,14 +10,16 @@ export class StructureBlurbCustomElement {
     @bindable structure;
     
     static inject = [HttpClient, AuthService, Router];
-    constructor(http, auth, notify, router) {
+    constructor(http, auth, router) {
         this.http = http;
         this.auth = auth;
         this.router = router;
     }
     
     attached() {
-        this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.id);
+        console.log(this.auth.profile.app_metadata.mcuuid);
+        console.log(this.structure.stargazers);
+        this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.app_metadata.mcuuid);
     }
     
     star() {
@@ -40,10 +42,10 @@ export class StructureBlurbCustomElement {
             .then(res => {
                 // Rather than doing another request to get the number of stars, we'll manually increment/decrement it
                 if(this.structureIsStarred) {
-                    this.structure.stargazers.splice(this.structure.stargazers.indexOf(this.auth.profile.id), 1);
+                    this.structure.stargazers.splice(this.structure.stargazers.indexOf(this.auth.profile.app_metadata.mcuuid), 1);
                     this.structureIsStarred = false;
                 } else {
-                    this.structure.stargazers.push(this.auth.profile.id);
+                    this.structure.stargazers.push(this.auth.profile.app_metadata.mcuuid);
                     this.structureIsStarred = true;
                 }
             });
