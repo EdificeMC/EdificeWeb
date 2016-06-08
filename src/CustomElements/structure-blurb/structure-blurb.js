@@ -17,8 +17,6 @@ export class StructureBlurbCustomElement {
     }
     
     attached() {
-        console.log(this.auth.profile.app_metadata.mcuuid);
-        console.log(this.structure.stargazers);
         this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.app_metadata.mcuuid);
     }
     
