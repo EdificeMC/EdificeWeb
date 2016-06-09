@@ -6,7 +6,7 @@
             <div class="player-details">
                 <img src="https://visage.surgeplay.com/full/320/${playerProfile.id}" alt="" />
                 <h2>${playerProfile.name}</h2>
-                <h4><i class="fa fa-clock-o"></i> Joined on ${playerProfile.joined | dateFormat}</h4>
+                <h4 show.bind="playerProfile.joined"><i class="fa fa-clock-o"></i> Joined on ${playerProfile.joined | dateFormat}</h4>
             </div>
         </div>
         <div class="col-md-8">
