@@ -4,10 +4,8 @@ import { HttpClient } from 'aurelia-http-client';
 import Chart from 'chart.js';
 import moment from 'moment';
 import Clipboard from 'clipboard';
-import 'slick-carousel';
-import 'slick-carousel/slick/slick-theme.css';
-import 'slick-carousel/slick/slick.css';
 import $ from 'jquery';
+import sv from 'edifice-structure-viewer';
 
 export class StructureView {
 
@@ -40,12 +38,15 @@ export class StructureView {
     }
 
     attached() {
+        let canvas = $('#structure-model');
+        const aspectRatio = canvas.width() / canvas.height();
+        canvas.get(0).width = canvas.parent().width();
+        canvas.get(0).height = canvas.width() / aspectRatio;
+        sv(canvas.get(0), this.structure, 'node_modules/edifice-structure-viewer/');
         // Initialize the clipboard
         new Clipboard('#buildStructureBtn').on('success', (e) => {
             this.copiedStructureCmd = true;
         });
-        // Initialize the image carousel
-        $('#image-carousel').slick();
 
         // SAMPLE DATA
         // this.starHistory = {

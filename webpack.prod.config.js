@@ -42,7 +42,7 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             loader: 'babel',
-            exclude: /node_modules/,
+            exclude: /node_modules\/(?!edifice-structure-viewer)/,
             query: {
                 presets: ['es2015-loose', 'stage-1'],
                 plugins: ['transform-decorators-legacy']

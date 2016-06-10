@@ -1,14 +1,12 @@
 <template>
     <require from="../CustomElements/structure-blurb/structure-blurb"></require>
-    <div class="jumbotron">
-        <div class="container">
+    <div class="container">
+        <div class="jumbotron">
             <h1>Edifice</h1>
             <p>
                 Edifice is a service for sharing your Minecraft structures with the community. It allows you to browse popular structures and easily build them in your survival Minecraft server. It's like Pastebin for Minecraft!
             </p>
         </div>
-    </div>
-    <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <h2>Easy Installation</h2>
@@ -23,14 +21,11 @@
                 <p>All of the code for the <a href="https://github.com/EdificeMC/Edifice">plugin</a>, <a href="https://github.com/EdificeMC/EdificeREST">API</a>, and <a href="https://github.com/EdificeMC/EdificeWeb">website</a> is available on GitHub.</p>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="container">
+        <hr>
         <div class="row">
             <div class="col-sm-6 col-md-4" repeat.for="structure of structures">
                 <structure-blurb structure.bind="structure"></structure-blurb>
             </div>
         </div>
-
     </div>
 </template>
