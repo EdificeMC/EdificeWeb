@@ -42,7 +42,7 @@ export class StructureView {
         const aspectRatio = canvas.width() / canvas.height();
         canvas.get(0).width = canvas.parent().width();
         canvas.get(0).height = canvas.width() / aspectRatio;
-        sv(canvas.get(0), this.structure, 'node_modules/edifice-structure-viewer/');
+        sv(canvas.get(0), this.structure);
         // Initialize the clipboard
         new Clipboard('#buildStructureBtn').on('success', (e) => {
             this.copiedStructureCmd = true;
