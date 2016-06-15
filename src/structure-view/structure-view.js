@@ -26,7 +26,7 @@ export class StructureView {
             }).then(playerProfileRes => {
                 this.structure.creatorName = playerProfileRes.content.name;
             });
-        let starsHistoryProm = this.http.get('/stars-history/' + this.params.id)
+        let starsHistoryProm = this.http.get('/stats/' + this.params.id)
             .then(response => {
                 this.starHistory = response.content;
             }).catch(err => {
@@ -50,66 +50,79 @@ export class StructureView {
 
         // SAMPLE DATA
         // this.starHistory = {
-        //     structureId: this.structure._id,
-        //     month: '5/2016',
-        //     values: {
-        //         '2016': {
-        //             '4': {
-        //                 '1': 25,
-        //                 '2': 15,
-        //                 '3': 37,
-        //                 '4': 48,
-        //                 '5': 2,
-        //                 '6': 25,
-        //                 '7': 36,
-        //                 '8': 34,
-        //                 '9': 15,
-        //                 '10': 12,
-        //                 '11': 47,
-        //                 '12': 112
+        //     _id : "5760cee643cf78b00e557cb3",
+        //     structureId : "572df96ff989ea7e559c217d",
+        //     values : {
+        //         "2016" : {
+        //             "5" : {
+        //                 "14" : {
+        //                     "views" : 5
+        //                 },
+        //                 "15" : {
+        //                     "views" : 6,
+        //                     "stars" : 1
+        //                 },
+        //                 "16": {
+        //                     "stars": 5,
+        //                     "views": 10
+        //                 }
         //             }
         //         }
         //     }
         // }
-        if(this.starHistory) {
-            let labels = [];
-            let data = [];
-            for(let year in this.starHistory.values) {
-                for(let month in this.starHistory.values[year]) {
-                    for(let day in this.starHistory.values[year][month]) {
-                        let date = new Date(parseInt(year), parseInt(month), parseInt(day));
-                        date = moment(date);
-                        labels.push(date);
-                        data.push(this.starHistory.values[year][month][day]);
+        if(!this.starHistory) {
+            // Never been starred or viewed before, although that shouldn't be possible since the client just viewed this page...
+            return;
+        }
+        
+        let labels = []; // List of dates
+        let data = {
+            stars: [],
+            views: []
+        };
+        for(let year in this.starHistory.values) {
+            for(let month in this.starHistory.values[year]) {
+                for(let day in this.starHistory.values[year][month]) {
+                    let date = new Date(parseInt(year), parseInt(month), parseInt(day));
+                    date = moment(date);
+                    labels.push(date);
+                    for(let dataset of Object.keys(data)) {
+                        // It doesn't matter whether the value exists or not because there needs to be at least
+                        // the placeholder undefined for the chart to stay aligned
+                        data[dataset].push(this.starHistory.values[year][month][day][dataset]);
                     }
                 }
             }
-            let element = $('#structure-stats');
-            let chart = new Chart(element, {
-                type: 'line',
-                data: {
-                    labels,
-                    datasets: [{
-                        label: "Stars",
-                        data,
-                        backgroundColor: '#D4AF37'
-                    }]
-                },
-                options: {
-                    scales: {
-                        xAxes: [{
-                            type: "time",
-                            stacked: true
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
         }
+        let element = $('#structure-stats');
+        let chart = new Chart(element, {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Stars',
+                    data: data.stars,
+                    backgroundColor: '#D4AF37'
+                }, {
+                    label: 'Views',
+                    data: data.views,
+                    backgroundColor: 'rgba(75,192,192,0.4)'
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        type: "time",
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
     }
 
 }
