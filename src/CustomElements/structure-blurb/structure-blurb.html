@@ -1,7 +1,7 @@
 <template>
     <require from="../../CustomAttributes/bootstrap-tooltip"></require>
     <div class="thumbnail structure-blurb">
-        <img src="${structure.images[0].url}" class="img-rounded">
+        <img src="${structure.screenshot.url}" class="img-rounded">
         <div class="caption">
             <div class="btn-group pull-right">
                 <button click.delegate="star()" class="btn btn-default star-btn ${structureIsStarred && auth.isAuthenticated ? 'active' : ''}"><i class="fa fa-star ${structureIsStarred && auth.isAuthenticated ? 'starred' : ''}"></i></button>

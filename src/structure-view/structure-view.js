@@ -19,7 +19,7 @@ export class StructureView {
 
     activate(params) {
         this.params = params;
-        let structureProm = this.http.get('/structures/' + this.params.id)
+        let structureProm = this.http.get(`/structures/${this.params.id}?agent=EdificeWeb`)
             .then(response => {
                 this.structure = response.content;
                 return this.http.get('/playercache/' + this.structure.creatorUUID);
@@ -42,7 +42,7 @@ export class StructureView {
         const aspectRatio = canvas.width() / canvas.height();
         canvas.get(0).width = canvas.parent().width();
         canvas.get(0).height = canvas.width() / aspectRatio;
-        sv(canvas.get(0), this.structure);
+        sv(canvas.get(0), this.structure, true);
         // Initialize the clipboard
         new Clipboard('#buildStructureBtn').on('success', (e) => {
             this.copiedStructureCmd = true;

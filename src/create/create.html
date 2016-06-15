@@ -1,29 +1,30 @@
 <template>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <form>
-                <fieldset class="form-group">
-                    <label>Structure name</label>
-                    <input type="text" class="form-control" placeholder="Beachside Mansion" value.bind="structureName">
-                </fieldset>
-                <fieldset class="form-group">
-                    <label>Creator</label>
-                    <p class="form-control-static">${creatorName}</p>
-                </fieldset>
-                <fieldset class="form-group">
-                    <label>Upload Photos</label>
-                    <input type="file" class="form-control-file" accept="image/*" multiple files.bind="imageList">
-                    <small class="text-muted">Your images will be uploaded anonymously to Imgur.</small>
-                </fieldset>
-                <button type="submit" class="btn btn-primary" click.delegate="submitStructure()">Submit</button>
-                <i show.bind="message.status === 'loading'" class="fa fa-lg fa-refresh fa-spin"></i>
-                <i show.bind="message.status === 'success'" class="fa fa-lg fa-check"></i>
-                <i show.bind="message.status === 'danger'" class="fa fa-lg fa-exclamation-triangle"></i>
-                <hr>
-                <div show.bind="message.text && message.text !== ''" class="alert alert-${message.status}">
-                  ${message.text}
-                </div>
-            </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <form>
+                    <fieldset class="form-group">
+                        <label>Structure Name</label>
+                        <input type="text" class="form-control" placeholder="Beachside Mansion" value.bind="structure.name">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label>Creator</label>
+                        <p class="form-control-static">${creatorName}</p>
+                    </fieldset>
+                    <button type="submit" class="btn btn-primary" click.delegate="submitStructure()">Submit</button>
+                    <i show.bind="message.status === 'loading'" class="fa fa-lg fa-refresh fa-spin"></i>
+                    <i show.bind="message.status === 'success'" class="fa fa-lg fa-check"></i>
+                    <i show.bind="message.status === 'danger'" class="fa fa-lg fa-exclamation-triangle"></i>
+                    <hr>
+                    <div show.bind="message.text && message.text !== ''" class="alert alert-${message.status}">
+                        ${message.text}
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8">
+                <canvas id="structure-model"></canvas>
+                <h4>Position the structure model above to how you would like it to be seen on the front page.</h5>
+            </div>
         </div>
     </div>
 </template>

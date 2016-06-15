@@ -2,6 +2,8 @@
 
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
+import sv from 'edifice-structure-viewer';
+import $ from 'jquery';
 
 export class Create {
 
@@ -24,78 +26,42 @@ export class Create {
                     // TODO navigate to the structure's page
                     this.router.navigate('/');
                 }
-                this.structureName = structure.name;
+                this.structure = structure;
                 return this.http.get('/playercache/' + structure.creatorUUID);
             }).then(response => response.content)
             .then((playerProfile) => {
                 this.creatorName = playerProfile.name;
             });
     }
+    
+    attached() {
+        this.canvas = $('#structure-model');
+        const aspectRatio = this.canvas.width() / this.canvas.height();
+        this.canvas.get(0).width = this.canvas.parent().width();
+        this.canvas.get(0).height = this.canvas.width() / aspectRatio;
+        sv(this.canvas.get(0), this.structure, false);
+    }
 
     submitStructure() {
-        if (!this.imageList) {
-            this.message.status = 'warning';
-            this.message.text = 'You must select at least one photo';
-            return;
-        }
-
         // Spinning loading animation...
         this.message.status = 'loading';
         this.message.text = '';
-
-        let images = [];
-        for (var i = 0; i < this.imageList.length; i++) {
-            images.push(this.imageList.item(i));
-        }
-
-        let imageUploadProm = (imageFile) => {
-            return new Promise((resolve, reject) => {
-                try {
-                    let img = new Image();
-                    img.onload = function onload() {
-                        let canvas = document.createElement('CANVAS');
-                        let ctx = canvas.getContext('2d');
-                        canvas.height = this.height;
-                        canvas.width = this.width;
-                        ctx.drawImage(this, 0, 0);
-                        let imgBase64 = canvas.toDataURL();
-                        canvas = null;
-                        resolve(imgBase64);
-                    }
-                    img.src = URL.createObjectURL(imageFile);
-                } catch (err) {
-                    console.error('Failed to convert image file', err);
-                    reject(err);
-                }
-            }).then((imgBase64) => {
-                const imgDataPrefix = 'data:image/png;base64,';
-                return this.http.post('/imgur', {
-                    image: imgBase64.substring(imgDataPrefix.length), // Strip away prefixed information for the Imgur API
-                    type: 'base64'
-                });
-            }).catch((err) => {
-                this.message.status = 'danger';
-                this.message.text = err.statusText;
-                return Promise.reject(err);
-            })
-        };
-
-        // Replace each image with a Promise of it being converted and uploaded
-        images = images.map(imageUploadProm);
-
-        Promise.all(images).then((results) => {
-            let structureImages = [];
-            for (let response of results) {
-                structureImages.push({
-                    url: response.content.link,
-                    deletehash: response.content.deletehash
-                });
+        
+        const imgBase64 = this.canvas.get(0).toDataURL();
+        const imgDataPrefix = 'data:image/png;base64,';
+        this.http.post('/imgur', {
+            image: imgBase64.substring(imgDataPrefix.length), // Strip away prefixed information for the Imgur API
+            type: 'base64'
+        }).then(res => res.content)
+        .then(res => {
+            this.structure.screenshot = {
+                url: res.link,
+                deletehash: res.deletehash
             }
-            return structureImages;
-        }).then((structureImages) => {
+        }).then(() => {
             return this.http.put('/structures/' + this.params.id, {
-                name: this.structureName,
-                images: structureImages
+                name: this.structure.name,
+                screenshot: this.structure.screenshot
             })
         }).then((response) => {
             this.message.status = 'success';
