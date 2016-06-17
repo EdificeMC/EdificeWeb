@@ -1,28 +1,34 @@
 'use strict';
 
+import { NewInstance } from 'aurelia-dependency-injection'; 
+import { ValidationController } from 'aurelia-validation';
+import { required, email, equality, length } from 'aurelia-validatejs'
 import { AuthService } from '../services/auth';
 import toastr from 'toastr';
 import swal from 'sweetalert';
-// import { email } from 'aurelia-validatejs';
-// import { ValidationEngine } from 'aurelia-validatejs';
-
-// export class SignupModel {
-//     @email email = '';
-// }
 
 export class Signup {
     
-    errors = [];
-
-    static inject = [AuthService]
-    constructor(auth) {
+    @required
+    @email
+    email = '';
+    
+    @required
+    @length({minimum: 6})
+    password = '';
+    
+    @required
+    @equality('password')
+    confirmPassword = '';
+    
+    @required
+    @length({is: 6})
+    verificationCode = '';
+    
+    static inject = [AuthService, NewInstance.of(ValidationController)]
+    constructor(auth, validationController) {
         this.auth = auth;
-        // this.model = new SignupModel();
-        // this.reporter = ValidationEngine.getValidationReporter(this.model);
-        // this.subscriber = this.reporter.subscribe(result => {
-        //     console.log(result);
-        //     this.renderErrors(result);
-        // });
+        this.validationController = validationController;
     }
 
     renderErrors(result) {
@@ -33,6 +39,11 @@ export class Signup {
     }
     
     signup() {
+        const errors = this.validationController.validate();
+        if(errors.length !== 0) {
+            return;
+        }
+        
         return this.auth.signup({
             email: this.email,
             password: this.password,

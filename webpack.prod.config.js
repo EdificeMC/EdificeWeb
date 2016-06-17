@@ -20,7 +20,12 @@ module.exports = {
         chunkFilename: '[id]' + outputFileTemplateSuffix + '.js'
     },
     plugins: [
-        new AureliaWebpackPlugin(),
+        new AureliaWebpackPlugin({
+            includeSubModules: [
+                {moduleId: 'aurelia-validatejs'},
+                {moduleId: 'aurelia-validation'}
+            ]
+        }),
         new HtmlWebpackPlugin({
             title: 'Edifice - ' + pkg.version,
             template: 'index.prod.html',

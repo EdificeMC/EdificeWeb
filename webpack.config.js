@@ -23,9 +23,10 @@ module.exports = {
     },
     plugins: [
         new AureliaWebpackPlugin({
-            includeSubModules: [{
-                moduleId: "aurelia-auth"
-            }]
+            includeSubModules: [
+                {moduleId: 'aurelia-validatejs'},
+                {moduleId: 'aurelia-validation'}
+            ]
         }),
         new ProvidePlugin({
             Promise: 'bluebird',
