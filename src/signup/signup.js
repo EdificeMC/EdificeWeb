@@ -30,13 +30,6 @@ export class Signup {
         this.auth = auth;
         this.validationController = validationController;
     }
-
-    renderErrors(result) {
-        this.errors.splice(0, this.errors.length);
-        result.forEach(error => {
-            this.errors.push(error)
-        });
-    }
     
     signup() {
         const errors = this.validationController.validate();
