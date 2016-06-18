@@ -4,6 +4,7 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var AureliaWebpackPlugin = require('aurelia-webpack-plugin');
 var ProvidePlugin = require('webpack/lib/ProvidePlugin');
+var DefinePlugin = require('webpack/lib/DefinePlugin');
 var pkg = require('./package.json');
 
 var outputFileTemplateSuffix = '-' + pkg.version;
@@ -20,6 +21,9 @@ module.exports = {
         chunkFilename: '[id]' + outputFileTemplateSuffix + '.js'
     },
     plugins: [
+        new DefinePlugin({
+            'API_URL': "'http://edificemc.com/api/'",
+        }),
         new AureliaWebpackPlugin({
             includeSubModules: [
                 {moduleId: 'aurelia-validatejs'},

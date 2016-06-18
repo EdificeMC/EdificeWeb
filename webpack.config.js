@@ -3,6 +3,7 @@
 var path = require('path');
 var AureliaWebpackPlugin = require('aurelia-webpack-plugin');
 var ProvidePlugin = require('webpack/lib/ProvidePlugin');
+var DefinePlugin = require('webpack/lib/DefinePlugin');
 
 module.exports = {
     devServer: {
@@ -22,6 +23,9 @@ module.exports = {
         filename: 'bundle.js'
     },
     plugins: [
+        new DefinePlugin({
+            'API_URL': "'http://localhost:3000/api/'",
+        }),
         new AureliaWebpackPlugin({
             includeSubModules: [
                 {moduleId: 'aurelia-validatejs'},
