@@ -22,7 +22,7 @@ module.exports = {
     },
     plugins: [
         new DefinePlugin({
-            'API_URL': "'http://edificemc.com/api/'",
+            'API_URL': "'https://api.edificemc.com/'",
         }),
         new AureliaWebpackPlugin({
             includeSubModules: [
