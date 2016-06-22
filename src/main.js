@@ -5,12 +5,18 @@ bootstrap(function(aurelia) {
     if (window.location.hostname === 'localhost') {
         urlBase = 'localhost:3000';
     }
-    aurelia.use
-        .standardConfiguration()
-        .developmentLogging()
+
+    let app = aurelia.use;
+
+    if (ENV === 'development') {
+        // Enable Aurelia development debug logs
+        app = app.developmentLogging();
+    }
+
+    app.standardConfiguration()
         .plugin('aurelia-validation')
         .plugin('aurelia-validatejs')
         .feature('ValidationRenderers/bootstrap-validation');
-        
+
     aurelia.start().then(() => aurelia.setRoot('app', document.body));
 });

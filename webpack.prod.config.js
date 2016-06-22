@@ -22,6 +22,7 @@ module.exports = {
     },
     plugins: [
         new DefinePlugin({
+            'ENV': "'production'";
             'API_URL': "'https://api.edificemc.com/'",
         }),
         new AureliaWebpackPlugin({
