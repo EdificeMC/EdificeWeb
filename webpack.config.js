@@ -25,7 +25,7 @@ module.exports = {
     plugins: [
         new DefinePlugin({
             'ENV': "'development'",
-            'API_URL': "'http://localhost:3000/api/'"
+            'API_URL': "'http://localhost:3000/'"
         }),
         new AureliaWebpackPlugin({
             includeSubModules: [
