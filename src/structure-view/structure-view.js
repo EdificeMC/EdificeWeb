@@ -4,6 +4,7 @@ import { HttpClient } from 'aurelia-http-client';
 import Chart from 'chart.js';
 import moment from 'moment';
 import Clipboard from 'clipboard';
+import toastr from 'toastr';
 import $ from 'jquery';
 import sv from 'edifice-structure-viewer';
 
@@ -33,16 +34,26 @@ export class StructureView {
                 // This project has never been starred before
                 this.starHistory = null;
             });
-            
+
         return Promise.all([structureProm, starsHistoryProm]);
     }
 
     attached() {
-        let canvas = $('#structure-model');
-        const aspectRatio = canvas.width() / canvas.height();
-        canvas.get(0).width = canvas.parent().width();
-        canvas.get(0).height = canvas.width() / aspectRatio;
-        sv(canvas.get(0), this.structure, true);
+        try {
+            let canvas = $('#structure-model');
+            const aspectRatio = canvas.width() / canvas.height();
+            canvas.get(0).width = canvas.parent().width();
+            canvas.get(0).height = canvas.width() / aspectRatio;
+            sv(canvas.get(0), this.structure, true);
+        } catch(e) {
+            toastr.error('This page requires WebGL. Click here to find out more.', 'WebGL', {
+                timeOut: -1,
+                extendedTimeOut: -1,
+                onclick: function() {
+                    window.location.href = 'https://get.webgl.org/';
+                }
+            });
+        }
         // Initialize the clipboard
         new Clipboard('#buildStructureBtn').on('success', (e) => {
             this.copiedStructureCmd = true;
@@ -74,7 +85,7 @@ export class StructureView {
             // Never been starred or viewed before, although that shouldn't be possible since the client just viewed this page...
             return;
         }
-        
+
         let labels = []; // List of dates
         let data = {
             stars: [],

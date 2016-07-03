@@ -7,11 +7,17 @@ import 'font-awesome/scss/font-awesome.scss';
 import 'toastr/build/toastr.min.css';
 import 'sweetalert/dist/sweetalert.css';
 import { HttpClient } from 'aurelia-http-client';
+import { EventAggregator } from 'aurelia-event-aggregator';
+import toastr from 'toastr';
 
 export class App {
-    static inject = [HttpClient];
-    constructor(http) {
+    static inject = [HttpClient, EventAggregator];
+    constructor(http, eventAggregator) {
         this.http = http;
+        eventAggregator.subscribe('router:navigation:processing', function(event) {
+            // Clean up any old toasts from the previous page
+            toastr.clear();
+        })
     }
 
     activate() {

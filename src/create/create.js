@@ -3,6 +3,7 @@
 import { HttpClient } from 'aurelia-http-client';
 import { Router } from 'aurelia-router';
 import sv from 'edifice-structure-viewer';
+import toastr from 'toastr';
 import $ from 'jquery';
 
 export class Create {
@@ -33,20 +34,30 @@ export class Create {
                 this.creatorName = playerProfile.name;
             });
     }
-    
+
     attached() {
-        this.canvas = $('#structure-model');
-        const aspectRatio = this.canvas.width() / this.canvas.height();
-        this.canvas.get(0).width = this.canvas.parent().width();
-        this.canvas.get(0).height = this.canvas.width() / aspectRatio;
-        sv(this.canvas.get(0), this.structure, false);
+        try {
+            this.canvas = $('#structure-model');
+            const aspectRatio = this.canvas.width() / this.canvas.height();
+            this.canvas.get(0).width = this.canvas.parent().width();
+            this.canvas.get(0).height = this.canvas.width() / aspectRatio;
+            sv(this.canvas.get(0), this.structure, false);
+        } catch(e) {
+            toastr.error('This page requires WebGL. Click here to find out more.', 'WebGL', {
+                timeOut: -1,
+                extendedTimeOut: -1,
+                onclick: function() {
+                    window.location.href = 'https://get.webgl.org/';
+                }
+            });
+        }
     }
 
     submitStructure() {
         // Spinning loading animation...
         this.message.status = 'loading';
         this.message.text = '';
-        
+
         const imgBase64 = this.canvas.get(0).toDataURL();
         const imgDataPrefix = 'data:image/png;base64,';
         this.http.post('/imgur', {
