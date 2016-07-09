@@ -4,10 +4,12 @@ import { AuthService } from '../../services/auth';
 import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { bindable } from 'aurelia-framework';
+import Clipboard from 'clipboard';
 import toastr from 'toastr';
 
 export class StructureBlurbCustomElement {
     @bindable structure;
+    createStructureCmdPrefix = '/edifice create ';
     
     static inject = [HttpClient, AuthService, EventAggregator];
     constructor(http, auth, eventAggregator) {
@@ -17,6 +19,8 @@ export class StructureBlurbCustomElement {
     }
     
     attached() {
+        new Clipboard('#buildStructureBtn');
+        
         this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.app_metadata.mcuuid);
         // Reevaluate if the structure is starred upon login
         this.eventAggregator.subscribe('auth:login', event => {

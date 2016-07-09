@@ -1,5 +1,5 @@
 <template>
-    <require from="../../CustomAttributes/bootstrap-tooltip"></require>
+    <require from="../../CustomAttributes/tooltip"></require>
     <require from="../../ValueConverters/imgur-force-https"></require>
     <div class="thumbnail structure-blurb">
         <img src="${structure.screenshot.url | imgurForceHttps}" class="img-rounded">
@@ -11,9 +11,10 @@
             </div>
             <a route-href="route: structure-view; params.bind: { id: structure._id }"><h3 class="name">${structure.name}</h3></a>
             <a route-href="route: profile; params.bind: { playerId: structure.creatorUUID }"><h5>${structure.creatorName}</h5></a>
-            <button id="buildStructureBtn" class="btn btn-primary ${structure._id == copiedStructureId ? 'disabled' : 'active'}" bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice." data-clipboard-text="${createStructureCmdPrefix + structure._id}">
-                <i class="glyphicon glyphicon-copy"></i> ${structure._id == copiedStructureId ? 'Copied!' : 'Build this structure'}
+            <button id="buildStructureBtn" class="btn btn-primary" tooltip="trigger.bind: 'click'; title.bind: 'Copied!'" data-clipboard-text="${createStructureCmdPrefix + structure._id}">
+                <i class="glyphicon glyphicon-copy"></i> Build this structure
             </button>
+            <i style="margin-left: 5px" tooltip="trigger.bind: 'hover'; title.bind: 'Click to copy the command, then paste in Minecraft chat on a server with Edifice.'" class="fa fa-lg fa-question-circle"></i>
         </div>
     </div>
 </template>

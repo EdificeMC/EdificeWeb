@@ -1,12 +1,9 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
-import Clipboard from 'clipboard';
 
 export class Home {
 
-    createStructureCmdPrefix = '/edifice create ';
-    copiedStructureId = '';
     structures = [];
 
     static inject = [HttpClient];
@@ -26,13 +23,6 @@ export class Home {
                 }
                 return Promise.all(playerCacheProms);
             });
-    }
-
-    attached() {
-        // Initialize the clipboard
-        new Clipboard('#buildStructureBtn').on('success', (e) => {
-            this.copiedStructureId = e.text.substring(this.createStructureCmdPrefix.length, e.text.length);
-        });
     }
 
 }
