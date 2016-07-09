@@ -1,17 +1,18 @@
 <template>
-    <require from="../CustomAttributes/bootstrap-tooltip"></require>
+    <require from="../CustomAttributes/tooltip"></require>
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="pull-right structure-info">
                     <h3>${structure.name}</h3>
                     <a route-href="route: profile; params.bind: { playerId: structure.creatorUUID }"><h5>${structure.creatorName}</h5></a>
-                    <button id="buildStructureBtn" class="btn btn-primary ${copiedStructureCmd ? 'disabled' : 'active'}" bootstrap-tooltip data-toggle="tooltip" title="Click to copy the command, then paste in Minecraft chat on a server with Edifice." data-clipboard-text="${createStructureCmdPrefix + structure._id}">
-                        <i class="glyphicon glyphicon-copy"></i> ${copiedStructureCmd ? 'Copied!' : 'Build this structure'}
+                    <button id="buildStructureBtn" class="btn btn-primary" tooltip="trigger.bind: 'click'; title.bind: 'Copied!'" data-clipboard-text="${createStructureCmdPrefix + structure._id}">
+                        <i class="glyphicon glyphicon-copy"></i> Build this structure
                     </button>
+                    <i style="margin-left: 5px" tooltip="trigger.bind: 'hover'; title.bind: 'Click to copy the command, then paste in Minecraft chat on a server with Edifice.'" class="fa fa-lg fa-question-circle"></i>
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <canvas id="structure-model"></canvas>
             </div>
         </div>
