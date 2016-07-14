@@ -23,8 +23,10 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-sm-6 col-md-4" repeat.for="structure of structures">
-                <structure-blurb structure.bind="structure"></structure-blurb>
+            <div class="grid">
+                <div class="grid-item" repeat.for="structure of structures">
+                    <structure-blurb structure.bind="structure"></structure-blurb>
+                </div>
             </div>
         </div>
     </div>

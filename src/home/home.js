@@ -1,6 +1,8 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
+import Masonry from 'masonry-layout';
+import $ from 'jquery';
 
 export class Home {
 
@@ -23,6 +25,16 @@ export class Home {
                 }
                 return Promise.all(playerCacheProms);
             });
+    }
+
+    attached() {
+        $(window).on('load', () => {
+            // Have to wait until all the images are loaded
+            this.masonry = new Masonry('.grid', {
+                itemSelector: '.grid-item',
+                columnWidth: 340 // 320 px for medium Imgur thumbnail + 10 padding + 10 to look better
+            });
+        })
     }
 
 }
