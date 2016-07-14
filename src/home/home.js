@@ -28,7 +28,17 @@ export class Home {
     }
 
     attached() {
-        $(window).on('load', () => {
+        let images = document.getElementsByClassName("img-rounded");
+        let imageLoadPromises = [];
+        for(let image of images) {
+            imageLoadPromises.push(new Promise(function(resolve, reject) {
+                image.onload = function() {
+                    return resolve();
+                }
+            }));
+        }
+
+        return Promise.all(imageLoadPromises).then(() => {
             // Have to wait until all the images are loaded
             this.masonry = new Masonry('.grid', {
                 itemSelector: '.grid-item',
