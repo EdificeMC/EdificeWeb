@@ -6,7 +6,7 @@
                 <div class="pull-right structure-info">
                     <h3>${structure.name}</h3>
                     <a route-href="route: profile; params.bind: { playerId: structure.creatorUUID }"><h5>${structure.creatorName}</h5></a>
-                    <button id="buildStructureBtn" class="btn btn-primary" tooltip="trigger.bind: 'click'; title.bind: 'Copied!'" data-clipboard-text="${createStructureCmdPrefix + structure._id}">
+                    <button id="buildStructureBtn" class="btn btn-primary" tooltip="trigger.bind: 'click'; title.bind: 'Copied!'" data-clipboard-text="${createStructureCmdPrefix + structure.id}">
                         <i class="glyphicon glyphicon-copy"></i> Build this structure
                     </button>
                     <i style="margin-left: 5px" tooltip="trigger.bind: 'hover'; title.bind: 'Click to copy the command, then paste in Minecraft chat on a server with Edifice.'" class="fa fa-lg fa-question-circle"></i>
@@ -16,10 +16,10 @@
                 <canvas id="structure-model"></canvas>
             </div>
         </div>
-        <div class="row" show.bind="starHistory">
+        <!-- <div class="row" show.bind="starHistory">
             <div class="col-md-12">
                 <canvas id="structure-stats" width="75%" height="25%"></canvas>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
