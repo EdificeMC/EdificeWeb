@@ -1,8 +1,9 @@
 <template>
     <require from="../CustomAttributes/tooltip"></require>
-    <div class="note-top">
+    <div show.bind="auth.isAuthenticated && auth.profile.app_metadata.mcuuid === structure.creatorUUID" class="note-top mb20">
         <a route-href="route: edit; params.bind: { id: structure.id }"><i class="fa fa-pencil"></i> Edit Structure.</a>
     </div>
+    <div show.bind="!(auth.isAuthenticated && auth.profile.app_metadata.mcuuid === structure.creatorUUID)" class="mb20"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-3">
