@@ -50,10 +50,10 @@ export class App {
             name: 'structure-stars',
             moduleId: 'structure-stars/structure-stars'
         }, {
-            route: 'create/:id',
-            name: 'create',
-            moduleId: 'create/create',
-            title: 'Create Structure'
+            route: 'edit/:id',
+            name: 'edit',
+            moduleId: 'edit/edit',
+            title: 'Edit Structure'
         }]);
         this.router = router;
     }

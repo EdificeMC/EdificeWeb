@@ -1,6 +1,7 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
+import { AuthService } from '../services/auth';
 import Chart from 'chart.js';
 import moment from 'moment';
 import Clipboard from 'clipboard';
@@ -13,9 +14,10 @@ export class StructureView {
     copiedStructureCmd = false;
     createStructureCmdPrefix = '/edifice create ';
 
-    static inject = [HttpClient];
-    constructor(http) {
+    static inject = [HttpClient, AuthService];
+    constructor(http, auth) {
         this.http = http;
+        this.auth = auth;
     }
 
     activate(params) {
@@ -23,6 +25,7 @@ export class StructureView {
         return this.http.get(`/structures/${this.params.id}`)
             .then(response => {
                 this.structure = response.content;
+                console.log(this.structure);
                 return this.http.get('/playercache/' + this.structure.creatorUUID);
             }).then(playerProfileRes => {
                 this.structure.creatorName = playerProfileRes.content.name;

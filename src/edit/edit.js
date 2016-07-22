@@ -1,20 +1,22 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
+import { AuthService } from '../services/auth';
 import { Router } from 'aurelia-router';
 import sv from 'edifice-structure-viewer';
 import toastr from 'toastr';
 import $ from 'jquery';
 
-export class Create {
+export class Edit {
 
     message = {};
     imageList;
 
-    static inject = [HttpClient, Router];
-    constructor(http, router) {
+    static inject = [HttpClient, Router, AuthService];
+    constructor(http, router, auth) {
         this.http = http;
         this.router = router;
+        this.auth = auth;
     }
 
     activate(params) {
@@ -22,9 +24,11 @@ export class Create {
         return this.http.get('/structures/' + this.params.id)
             .then(response => response.content)
             .then((structure) => {
-                // Check if the structure is already finalized, and if so, redirect to home
-                if (structure.finalized) {
+                // Check if the structure is already finalized and if the user owns the structure they are trying to edit
+                const userAuthorizedToEdit = this.auth.isAuthenticated && this.auth.profile.app_metadata.mcuuid === structure.creatorUUID;
+                if (structure.finalized && !userAuthorizedToEdit) {
                     // TODO navigate to the structure's page
+                    // TODO Make a toastr saying not authorized to edit
                     this.router.navigate('/');
                 }
                 this.structure = structure;
@@ -70,12 +74,21 @@ export class Create {
                 deletehash: res.deletehash
             }
         }).then(() => {
-            return this.http.put('/structures/' + this.params.id, {
-                name: this.structure.name,
-                screenshot: this.structure.screenshot
-            })
+            let request = this.http.createRequest('/structures/' + this.params.id)
+                .asPut()
+                .withContent({
+                    name: this.structure.name,
+                    screenshot: this.structure.screenshot
+                });
+            if(this.auth.isAuthenticated) {
+                request = request.withHeader('Authorization', 'Bearer ' + this.auth.accessToken);
+            }
+            return request.send();
         }).then((response) => {
             this.message.status = 'success';
+        }).catch(err => {
+            this.message.status = 'danger';
+            // TODO Give the user some indication of what went wrong
         });
 
     }
