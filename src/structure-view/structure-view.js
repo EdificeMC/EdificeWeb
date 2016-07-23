@@ -25,7 +25,8 @@ export class StructureView {
         return this.http.get(`/structures/${this.params.id}`)
             .then(response => {
                 this.structure = response.content;
-                console.log(this.structure);
+                // Logged in and either owns the structure or is admin
+                this.authorizedToEdit = this.auth.isAuthenticated && (this.auth.profile.app_metadata.mcuuid === this.structure.creatorUUID || this.auth.profile.app_metadata.roles.includes('admin'));
                 return this.http.get('/playercache/' + this.structure.creatorUUID);
             }).then(playerProfileRes => {
                 this.structure.creatorName = playerProfileRes.content.name;

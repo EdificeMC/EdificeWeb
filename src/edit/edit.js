@@ -24,14 +24,14 @@ export class Edit {
         return this.http.get('/structures/' + this.params.id)
             .then(response => response.content)
             .then((structure) => {
-                // Check if the structure is already finalized and if the user owns the structure they are trying to edit
-                const userAuthorizedToEdit = this.auth.isAuthenticated && this.auth.profile.app_metadata.mcuuid === structure.creatorUUID;
+                this.structure = structure;
+                // Logged in and either owns the structure or is admin
+                const userAuthorizedToEdit = this.auth.isAuthenticated && (this.auth.profile.app_metadata.mcuuid === this.structure.creatorUUID || this.auth.profile.app_metadata.roles.includes('admin'));
                 if (structure.finalized && !userAuthorizedToEdit) {
                     // TODO navigate to the structure's page
                     // TODO Make a toastr saying not authorized to edit
                     this.router.navigate('/');
                 }
-                this.structure = structure;
                 return this.http.get('/playercache/' + structure.creatorUUID);
             }).then(response => response.content)
             .then((playerProfile) => {
