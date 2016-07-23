@@ -3,7 +3,7 @@
 import { HttpClient } from 'aurelia-http-client';
 import { AuthService } from '../services/auth';
 import { Router } from 'aurelia-router';
-import sv from 'edifice-structure-viewer';
+import sv, { exportRenderVariables } from 'edifice-structure-viewer';
 import toastr from 'toastr';
 import $ from 'jquery';
 
@@ -61,6 +61,7 @@ export class Edit {
         // Spinning loading animation...
         this.message.status = 'loading';
         this.message.text = '';
+        const renderingDetails = exportRenderVariables();
         const imgDataPrefix = 'data:image/png;base64,';
 
         cropImage(this.jQCanvas.get(0))
@@ -78,7 +79,8 @@ export class Edit {
                     .asPut()
                     .withContent({
                         name: this.structure.name,
-                        screenshot: this.structure.screenshot
+                        screenshot: this.structure.screenshot,
+                        modelRendering: renderingDetails
                     });
                 if(this.auth.isAuthenticated) {
                     request = request.withHeader('Authorization', 'Bearer ' + this.auth.accessToken);
