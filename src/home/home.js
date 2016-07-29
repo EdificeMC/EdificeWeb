@@ -30,9 +30,9 @@ export class Home {
     attached() {
         let images = document.getElementsByClassName("img-rounded");
         let imageLoadPromises = [];
-        for(let image of images) {
+        for(let i = 0; i < images.length; i++) { // for ... of doesn't work for some reason...
             imageLoadPromises.push(new Promise(function(resolve, reject) {
-                image.onload = function() {
+                images[i].onload = function() {
                     return resolve();
                 }
             }));
