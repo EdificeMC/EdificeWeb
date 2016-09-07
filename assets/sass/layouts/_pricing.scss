@@ -1,0 +1,130 @@
+/*
+=================================================
+Pricing Section
+=================================================
+*/
+
+#pricing {
+	background-color: $white-color-deep;
+
+	.pricing-card {
+		display: table;
+		margin: 0 auto;
+
+	}
+
+	.plan-features {
+		width: 350px;
+		float: left;
+		margin-top: 20px;
+		@include padding-left-right(40px, 40px);
+		@extend %box-shadow-primary;
+		@extend %white-bg-color;
+
+		&:first-child {
+			border-top-left-radius: 15px;
+			border-bottom-left-radius: 15px;
+		}
+		&:last-child {
+			border-top-right-radius: 15px;
+			border-bottom-right-radius: 15px;
+		}
+
+		.plan-name {
+			font-size: $default-font-size + 4;
+			text-transform: uppercase;
+			border-bottom: 1px solid #bebebe;
+			@include padding-top-bottom(40px, 25px);
+			@extend %primary-color;
+			@extend %title-font;
+		}
+
+		.plan-price {
+			padding-bottom: 38px;
+			margin-top: 38px;
+			margin-bottom: 30px;
+			border-bottom: 1px solid #bebebe;
+
+			.plan-currency {
+				vertical-align: super;
+				font-size: $default-font-size + 2;
+				font-weight: 600;
+				@extend %secondary-font;
+			}
+
+			.plan-value {
+				font-size: 40px;
+				font-weight: 800;
+				@extend %secondary-font;
+			}
+
+			.plan-duration {
+				vertical-align: 3px;
+				font-size: $default-font-size - 2;
+				font-style: italic;
+				@extend %secondary-font;
+			}
+
+		}
+
+		li {
+			font-size: $default-font-size;
+			font-weight: 400;
+			@include margin-top-bottom(30px, 30px);
+			@extend %secondary-font;
+
+			&:nth-child(3) {
+				margin-top: 55px;
+			}
+		}
+
+		.plan-signup .btn-signup {
+			font-size: $default-font-size;
+			border-width: 2px;
+			border-style: solid;
+			border-radius: 20px;
+			text-transform: uppercase;
+			@include margin-top-bottom(25px, 10px);
+			@include padding(12px, 55px, 12px, 55px);
+			@extend %welcome-title-font2;
+			@extend %primary-border-color;
+			@extend %transition;
+
+			&:hover {
+				@extend %white-color;
+				@extend %primary-bg-color;
+			}
+		}
+
+		@include MQ(375px) {
+			width: 280px;
+		}
+
+		@include MQ(991px) {
+			float: none;
+		}
+
+		@include MQM(992px, 1199px) {
+			width: 310px;
+		}
+	}
+
+	.plan-features.plan-standard {
+		width: 370px;
+		margin-top: 0;
+		border-radius: 15px;
+		position: relative;
+		@extend %box-shadow-secondary;
+		@include padding-left-right(50px, 50px);
+		@include padding-top-bottom(20px, 20px);
+		@extend %overflow;
+
+		@include MQ(375px) {
+			width: 280px;
+		}
+
+		@include MQM(992px, 1199px) {
+			width: 310px;
+		}
+	}
+}

@@ -1,0 +1,51 @@
+/*
+=================================================
+Contact Section
+=================================================
+*/
+
+#contact {
+	@extend %white-bg-color-deep;
+
+	#contact-form {
+		.btn-contact {
+			border-width: 1px;
+			border-style: solid;
+			border-radius: 30px;
+			display: table;
+			font-size: $default-font-size;
+			margin: 50px auto 0;
+			text-transform: uppercase;
+			@include padding(16px, 66px, 16px, 66px);
+			@extend %primary-border-color;
+			@extend %welcome-title-font2;
+			@extend %primary-bg-color;
+			@extend %white-color;
+			@extend %transition;
+
+			&:hover {
+				background-color: transparent;
+				@extend %primary-color;
+			}
+		}
+	}
+}
+
+
+.form-group {
+	label {
+		display: none;
+	}
+}
+
+.form-control {
+	border: medium none;
+	background-color: transparent;
+	border-bottom: 1px solid $border-color;
+	box-shadow: none;
+}
+
+textarea.form-control {
+	height: 190px;
+	margin-top: 45px;
+}

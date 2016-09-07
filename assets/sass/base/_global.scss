@@ -1,0 +1,230 @@
+/*
+-----------------------------------------------
+	Global Style
+-----------------------------------------------
+ */
+//@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,300italic,400italic,600italic,700italic|Roboto:400,500,700,300);
+body {
+	color: $default-color;
+    font-family: $primary-font;
+    font-size: $default-font-size;
+    font-weight: $default-font-weight;
+    line-height: $default-line-height;
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+header,
+section,
+footer {
+	overflow: hidden;
+}
+
+section {
+	@include padding-top-bottom(100px, 100px);
+
+	@include MQ(991px) {
+		@include padding-top-bottom(50px, 80px);
+	}
+	@include MQ(400px) {
+		@include padding-top-bottom(50px, 50px);
+	}
+}
+
+.section-padding {
+	@include padding-top-bottom(80px, 50px);
+}
+
+%section-title-divider {
+
+}
+
+.title-divider {
+	position: relative;
+	margin-top: 30px;
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 40px;
+		height: 2px;
+		@extend %primary-bg-color;
+	}
+	&::before {
+		left: 44.5%;
+	}
+	&::after {
+		right: 44.5%;
+	}
+
+	.divider-shape {
+		width: 0;
+		height: 0;
+		position: relative;
+		display: table;
+		margin: 0 auto;
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: -8px;
+			top: -16px;
+			width: 0;
+			height: 0;
+			border: 8px solid transparent;
+			border-top-color: $primary-color;
+			transform: rotate(180deg);
+		}
+		&::after {
+			content: '';
+			position: absolute;
+			left: -8px;
+			top: 0;
+			width: 0;
+			height: 0;
+			border: 8px solid transparent;
+			border-top-color: $primary-color;
+		}
+	}
+}
+
+
+.section-header {
+
+	padding-bottom: 80px;
+
+	> h2 {
+		@extend %section-title;
+
+		@include MQ(767px) {
+			font-size: 24px;
+			line-height: 30px;
+		}
+	}
+
+	> h2::after {
+		@include horcenter();
+		@include margin-top-bottom(25px, 38px);
+
+	}
+
+	p {
+		margin-top: 25px;
+	}
+
+	@include MQ(400px) {
+		padding-bottom: 50px;
+	}
+
+}
+
+.padding-zero {
+	@include padding-left-right(0, 0);
+}
+
+/*
+	Scroll to Top
+ */
+
+#toTop {
+    background-color: $default-color;
+    border: 1px solid $default-color;
+    border-radius: 50%;
+    bottom: 5%;
+    color: $white-color;
+    display: none;
+    height: 32px;
+    line-height: 28px;
+    margin-right: -45% !important;
+    position: fixed;
+    right: 50%;
+    text-align: center;
+    width: 32px;
+    z-index: 999;
+
+    &:hover {
+	    background-color: $white-color;
+	    color: $default-color;
+	}
+}
+
+.vercenter {
+	height: 610px;
+	display: table;
+}
+
+.vercenter-inner {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+
+//=========================================
+//	Extend Sass
+//=========================================
+
+%text-decoration {
+	text-decoration: none;
+}
+
+%overflow {
+	overflow: hidden;
+}
+
+%transition {
+    transition: all 0.3s linear 0s;
+}
+
+%box-shadow-dark {
+	box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
+}
+
+%box-shadow-normal {
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.3);
+}
+
+%box-shadow-primary {
+	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+}
+
+%box-shadow-secondary {
+	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+%background-attr {
+	background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+%translate-center {
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+%translate-vcenter {
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+%translate-hcenter {
+	left: 50%;
+	transform: translateX(-50%);
+	top: 50%;
+}
+

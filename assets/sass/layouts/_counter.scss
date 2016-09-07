@@ -1,0 +1,50 @@
+/*
+=================================================
+Counter Section
+=================================================
+*/
+
+#counter {
+
+	background-color: $white-color-deep;
+	@include padding-top-bottom(25px, 50px);
+
+	.counter-box {
+		.fa {
+			font-size: 45px;
+			@extend %primary-color;
+		}
+
+		.counting {
+			font-size: 40px;
+			font-weight: 800;
+			line-height: 24px;
+			word-spacing: 25px;
+			@include margin-top-bottom(30px, 15px);
+			@extend %secondary-font;
+		}
+
+		.counter-cat {
+			font-size: $default-font-size + 3;
+			line-height: 24px;
+			text-transform: uppercase;
+			@extend %title-font;
+		}
+	}
+}
+
+.box {
+	@include MQM(768px, 991px) {
+		&:first-child,
+		&:nth-child(2) {
+			margin-bottom: 30px;
+		}
+	}
+	@include MQ(767px) {
+		margin-bottom: 50px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

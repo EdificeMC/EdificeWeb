@@ -1,0 +1,42 @@
+/*
+  Template Name: Blu App
+  Author: ShapeSquare
+  Description: Bootstrap App Landing Page.
+  Version: 1.0.0
+*/
+
+/*
+============================================================================
+[ Table of Contents ]
+============================================================================
+
+# Global Style
+# Navbar Style
+# Header Section
+# Features Section
+# ScreenShot Section
+# Counter Section
+# Team Section
+# Testimonial Section
+# Pricing Section
+# Download Section
+# Contact Section
+# Footer
+
+============================================================================
+*/
+
+@import "base/variable";
+@import "base/mixins";
+@import "base/global";
+@import "modules/nav";
+@import "layouts/header";
+@import "layouts/features";
+@import "layouts/screenshot";
+@import "layouts/counter";
+@import "layouts/team";
+@import "layouts/testimonial";
+@import "layouts/pricing";
+@import "layouts/download";
+@import "layouts/contact";
+@import "layouts/footer";

@@ -1,0 +1,127 @@
+/*
+-----------------------------------------------
+	Navbar Style
+-----------------------------------------------
+ */
+.navbar-default {
+	background-color: transparent;
+	border: 0;
+	padding-bottom: 15px;
+	@extend %transition;
+
+	.navbar-brand {
+		margin-top: 30px;
+
+		@include MQ(767px) {
+			margin-top: 0 !important;
+		}
+
+		img {
+			@include MQ(767px) {
+				width: auto;
+				height: 40px;
+			}
+		}
+	}
+
+	.nav.navbar-nav {
+		margin-top: 52px;
+
+		li {
+			a {
+				@extend %white-color;
+				overflow: hidden;
+				@include MQ(767px) {
+					display: table;
+				}
+
+				&::before,
+				&::after {
+					content: "";
+					position: absolute;
+					height: 2px;
+					width: 30%;
+					@extend %white-bg-color;
+					@extend %transition;
+				}
+				&::before {
+					left: -50%;
+					top: 8px;
+
+					@include MQ(767px) {
+						top: 0;
+					}
+				}
+				&::after {
+					right: -50%;
+					bottom: 8px;
+				}
+
+				&:hover::before {
+					left: 15px;
+				}
+				&:hover::after {
+					right: 15px;
+					@include MQ(767px) {
+						display: none;
+					}
+				}
+
+			}
+			
+		}
+
+		.active a {
+			background-color: transparent;
+
+			&::before {
+				content: "";
+				position: absolute;
+				height: 2px;
+				width: 30%;
+				top: 8px;
+				left: 15px;
+				@extend %white-bg-color;
+				@extend %transition;
+
+				@include MQ(767px) {
+					top: 0;
+				}
+			}
+
+			&:hover {
+				@extend %white-color;
+			}
+		}
+	}
+
+	.navbar-brand,
+	.nav.navbar-nav {
+		@extend %transition;
+	}
+
+	.navbar-collapse {
+		border: 0;
+
+		&.in {
+			background-color: $primary-color;
+		}
+	}
+
+	.navbar-toggle {
+		margin-top: 15px;
+
+		.icon-bar {
+			background-color: $white-color;
+		}
+		&:hover,
+		&:focus {
+			background-color: $white-color;
+
+			.icon-bar {
+				background-color: $primary-color;
+			}
+		}
+	}
+
+}
