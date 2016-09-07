@@ -1,19 +1,17 @@
 'use strict';
 
+//
+// JS
+//
 import 'bootstrap';
-// Anchor Link Smooth Scroll js
-import smoothScroll from '../assets/js/smooth-scroll.js';
-// Counter Up js
-import '../assets/js/jquery.counterup.min.js';
-// Owl Carousel js
-// import '../assets/js/owl.carousel.min.js';
+import smoothScroll from 'smooth-scroll';
 import 'slick-carousel/slick/slick.min.js';
-import '../assets/js/waypoints.min.js';
-// Scroll to Top JS
-import '../assets/js/jquery.ui.totop.js';
-// Easing JS
-import '../assets/js/jquery.easing.1.3.js';
-import wow from 'wowjs'; // Wow JS - scrolling animations
+import wow from 'wowjs'; // scrolling animations
+
+//
+// CSS
+//
+import '../assets/css/preloader.css';
 import '../assets/sass/style.scss';
 // import './styles.scss';
 import 'slick-carousel/slick/slick.scss';
@@ -69,7 +67,6 @@ export class App {
             callbackAfter: function(toggle, anchor) {}
         });
 
-
         /*=======================================================
             // App Screen Slider Initialization
         ======================================================*/
@@ -111,27 +108,6 @@ export class App {
             ]
         });
 
-
-        /*=======================================================
-            // Counter Up Initialization
-        ======================================================*/
-        $('.counting').counterUp({
-            delay: 5,
-            time: 1000
-        });
-
-
-        /*=======================================================
-            Testimonial Slider
-        ======================================================*/
-        // var owl = $('#owl-tm');
-        // owl.owlCarousel({
-        //     items: 1,
-        //     autoPlay: 5000,
-        //     stopOnHover: true
-        // });
-
-
         if (navigator.userAgent.match(/Trident\/7\./)) {
             $('body').on('mousewheel', function() {
                 event.preventDefault();
@@ -140,8 +116,8 @@ export class App {
                 window.scrollTo(0, csp - wd);
             });
         }
-
-        $(window).on('scroll', function() {
+        
+        function adjustNavbarCSS() {
             if ($(window).scrollTop() > 80) {
                 $(".navbar-brand").css({
                     'margin-top': '0',
@@ -168,7 +144,10 @@ export class App {
                     'border': '0px solid #ddd'
                 });
             }
-        });
+        }
+
+        adjustNavbarCSS();
+        $(window).on('scroll', adjustNavbarCSS);
     }
 
     configureRouter(config, router) {
