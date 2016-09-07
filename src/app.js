@@ -1,35 +1,29 @@
 'use strict';
 
-// Bootstrap js
-import "../assets/js/vendor/bootstrap.min.js";
+import 'bootstrap';
 // Anchor Link Smooth Scroll js
-import "../assets/js/smooth-scroll.js";
+import smoothScroll from '../assets/js/smooth-scroll.js';
 // Counter Up js
-import "../assets/js/jquery.counterup.min.js";
+import '../assets/js/jquery.counterup.min.js';
 // Owl Carousel js
-// import "../assets/js/owl.carousel.min.js";
-import "../assets/js/slick.min.js";
-// Waypoints JS
-import "../assets/js/waypoints.min.js";
-// Contact Form Js
-import "../assets/js/form-contact.js";
+// import '../assets/js/owl.carousel.min.js';
+import 'slick-carousel/slick/slick.min.js';
+import '../assets/js/waypoints.min.js';
 // Scroll to Top JS
-import "../assets/js/jquery.ui.totop.js";
+import '../assets/js/jquery.ui.totop.js';
 // Easing JS
-import "../assets/js/jquery.easing.1.3.js";
-// Retina JS
-import "../assets/js/retina.min.js";
-// Wow JS
-// import "../assets/js/wow.min.js";
-import 'wowjs';
-// Main initialization js
-import "../assets/js/main.js";
+import '../assets/js/jquery.easing.1.3.js';
+import wow from 'wowjs'; // Wow JS - scrolling animations
+import '../assets/sass/style.scss';
 // import './styles.scss';
-// import 'bootstrap';
-// import 'bootstrap/dist/css/bootstrap.css';
-// import 'font-awesome/scss/font-awesome.scss';
+import 'slick-carousel/slick/slick.scss';
+import 'slick-carousel/slick/slick-theme.scss';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/scss/font-awesome.scss';
+import 'animate.css/animate.min.css';
 import 'toastr/build/toastr.min.css';
 import 'sweetalert/dist/sweetalert.css';
+
 import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import toastr from 'toastr';
@@ -52,6 +46,128 @@ export class App {
         this.http.configure(x => {
             x.withHeader('Accept', 'application/json');
             x.withBaseUrl(API_URL);
+        });
+    }
+
+    attached() {
+        $('.preloader').delay(2000).fadeOut('slow');
+
+        new wow.WOW({
+            offset: 100, // distance to the element when triggering the animation (default is 0)
+            mobile: false // trigger animations on mobile devices (default is true)
+        }).init();
+
+        /*=======================================================
+            // SmoothScroll Initialization
+        ======================================================*/
+        smoothScroll.init({
+            speed: 1000,
+            easing: 'easeInOutCubic',
+            offset: 0,
+            updateURL: true,
+            callbackBefore: function(toggle, anchor) {},
+            callbackAfter: function(toggle, anchor) {}
+        });
+
+
+        /*=======================================================
+            // App Screen Slider Initialization
+        ======================================================*/
+        $('#for-app-screen').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '#blue-app-screen'
+        });
+
+        $('#blue-app-screen').slick({
+            centerMode: true,
+            dots: true,
+            arrows: false,
+            centerPadding: '60px',
+            slidesToShow: 3,
+            asNavFor: '#for-app-screen',
+            focusOnSelect: true,
+            responsive: [
+                {
+                  breakpoint: 768,
+                  settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 3
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                  }
+                }
+            ]
+        });
+
+
+        /*=======================================================
+            // Counter Up Initialization
+        ======================================================*/
+        $('.counting').counterUp({
+            delay: 5,
+            time: 1000
+        });
+
+
+        /*=======================================================
+            Testimonial Slider
+        ======================================================*/
+        // var owl = $('#owl-tm');
+        // owl.owlCarousel({
+        //     items: 1,
+        //     autoPlay: 5000,
+        //     stopOnHover: true
+        // });
+
+
+        if (navigator.userAgent.match(/Trident\/7\./)) {
+            $('body').on('mousewheel', function() {
+                event.preventDefault();
+                var wd = event.wheelDelta;
+                var csp = window.pageYOffset;
+                window.scrollTo(0, csp - wd);
+            });
+        }
+
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() > 80) {
+                $(".navbar-brand").css({
+                    'margin-top': '0',
+                });
+                $(".nav.navbar-nav").css({
+                    'margin-top': '22px'
+                });
+                $(".navbar-default").css({
+                    'background-color': 'rgba(24, 121, 253, 1)',
+                    'transition': 'all 0.3s linear 0s'
+                });
+                $(".navbar-default").css({
+                    'margin-top': '0px'
+                });
+            } else {
+                $(".navbar-brand").css({
+                    'margin-top': '30px'
+                });
+                $(".nav.navbar-nav").css({
+                    'margin-top': '52px'
+                });
+                $(".navbar-default").css({
+                    'background-color': 'transparent',
+                    'border': '0px solid #ddd'
+                });
+            }
         });
     }
 
