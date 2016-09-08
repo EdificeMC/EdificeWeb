@@ -61,6 +61,20 @@ export class StructureView {
             this.copiedStructureCmd = true;
         });
 
+        $(".navbar-brand").css({
+            'margin-top': '0',
+        });
+        $(".nav.navbar-nav").css({
+            'margin-top': '22px'
+        });
+        $(".navbar-default").css({
+            'background-color': 'rgba(24, 121, 253, 1)',
+            'transition': 'all 0.3s linear 0s'
+        });
+        $(".navbar-default").css({
+            'margin-top': '0px'
+        });
+
         // SAMPLE DATA
         // this.starHistory = {
         //     id : "5760cee643cf78b00e557cb3",

@@ -64,34 +64,34 @@ export class Edit {
         const renderingDetails = exportRenderVariables();
         const imgDataPrefix = 'data:image/png;base64,';
 
-        cropImage(this.jQCanvas.get(0))
-            .then(imgBase64 => this.http.post('/imgur', {
-                    image: imgBase64.substring(imgDataPrefix.length), // Strip away prefixed information for the Imgur API
-                    type: 'base64'
-            })).then(res => res.content)
-            .then(res => {
-                this.structure.screenshot = {
-                    url: res.link,
-                    deletehash: res.deletehash
-                }
-            }).then(() => {
-                let request = this.http.createRequest('/structures/' + this.params.id)
-                    .asPut()
-                    .withContent({
-                        name: this.structure.name,
-                        screenshot: this.structure.screenshot,
-                        modelRendering: renderingDetails
-                    });
-                if(this.auth.isAuthenticated) {
-                    request = request.withHeader('Authorization', 'Bearer ' + this.auth.accessToken);
-                }
-                return request.send();
-            }).then((response) => {
-                this.message.status = 'success';
-            }).catch(err => {
-                this.message.status = 'danger';
-                // TODO Give the user some indication of what went wrong
-            });
+        this.http.post('/imgur', {
+                image: this.jQCanvas.get(0).toDataURL().substring(imgDataPrefix.length), // Strip away prefixed information for the Imgur API
+                type: 'base64'
+        }).then(res => res.content)
+        .then(res => {
+            this.structure.screenshot = {
+                url: res.link,
+                deletehash: res.deletehash
+            }
+        }).then(() => {
+            let request = this.http.createRequest('/structures/' + this.params.id)
+                .asPut()
+                .withContent({
+                    name: this.structure.name,
+                    screenshot: this.structure.screenshot,
+                    modelRendering: renderingDetails
+                });
+            if(this.auth.isAuthenticated) {
+                request = request.withHeader('Authorization', 'Bearer ' + this.auth.accessToken);
+            }
+            return request.send();
+        }).then((response) => {
+            console.log(response);
+            this.message.status = 'success';
+        }).catch(err => {
+            this.message.status = 'danger';
+            // TODO Give the user some indication of what went wrong
+        });
 
     }
 

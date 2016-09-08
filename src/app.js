@@ -31,9 +31,6 @@ export class App {
             // Clean up any old toasts from the previous page
             toastr.clear();
         });
-        eventAggregator.subscribe('router:navigation:success', () => {
-            this.isLoading = false;
-        })
     }
 
     activate() {
@@ -71,7 +68,7 @@ export class App {
                 window.scrollTo(0, csp - wd);
             });
         }
-        
+
     }
 
     configureRouter(config, router) {
