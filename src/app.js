@@ -5,7 +5,6 @@
 //
 import 'bootstrap';
 import smoothScroll from 'smooth-scroll';
-import 'slick-carousel/slick/slick.min.js';
 import wow from 'wowjs'; // scrolling animations
 
 //
@@ -14,8 +13,6 @@ import wow from 'wowjs'; // scrolling animations
 import '../assets/css/preloader.css';
 import '../assets/sass/style.scss';
 // import './styles.scss';
-import 'slick-carousel/slick/slick.scss';
-import 'slick-carousel/slick/slick-theme.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/scss/font-awesome.scss';
 import 'animate.css/animate.min.css';
@@ -65,47 +62,6 @@ export class App {
             updateURL: true,
             callbackBefore: function(toggle, anchor) {},
             callbackAfter: function(toggle, anchor) {}
-        });
-
-        /*=======================================================
-            // App Screen Slider Initialization
-        ======================================================*/
-        $('#for-app-screen').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: true,
-            asNavFor: '#blue-app-screen'
-        });
-
-        $('#blue-app-screen').slick({
-            centerMode: true,
-            dots: true,
-            arrows: false,
-            centerPadding: '60px',
-            slidesToShow: 3,
-            asNavFor: '#for-app-screen',
-            focusOnSelect: true,
-            responsive: [
-                {
-                  breakpoint: 768,
-                  settings: {
-                    arrows: false,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 3
-                  }
-                },
-                {
-                  breakpoint: 480,
-                  settings: {
-                    arrows: false,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 1
-                  }
-                }
-            ]
         });
 
         if (navigator.userAgent.match(/Trident\/7\./)) {

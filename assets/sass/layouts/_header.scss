@@ -8,6 +8,8 @@
 	background-image: url("../img/header-bg.jpg");
 	@extend %background-attr;
 	position: relative;
+	padding-top: 0; // Override section padding
+	padding-bottom: 0; // Override section padding
 }
 
 .welcome-inner {
