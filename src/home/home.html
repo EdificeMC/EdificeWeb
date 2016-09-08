@@ -18,7 +18,7 @@
                         <div class="vercenter-inner">
                             <h1 class="welcome-title wow fadeInDown" data-wow-delay="0.5s" data-wow-duration="1.0s">Welcome to </h1>
                             <h1 class="highlight-title wow fadeInDown" data-wow-delay="0.75s" data-wow-duration="1.0s">Edifice!</h1>
-                            <p class="welcome-text wow fadeInUp" data-wow-delay="1.0s" data-wow-duration="1.0s">Edifice is a service for sharing your Minecraft structures with the community. It allows you to browse popular structures and easily build them in your survival Minecraft server. It's like Pastebin for Minecraft!</p>
+                            <p class="welcome-text wow fadeInUp" data-wow-delay="1.0s" data-wow-duration="1.0s">Edifice is a service for sharing your Minecraft structures with the community. It's like Pastebin for Minecraft!</p>
                         </div>
                     </div>
                 </div>
@@ -81,29 +81,8 @@
                 <div class="col-md-8 col-md-offset-2 col-sm-12">
                     <!-- App screen slider Caption -->
                     <div id="for-app-screen" class="app-screen-caption text-center">
-                        <div class="screen-caption">
-                            <h3>UI Screen 1</h3>
-                            <p>Do eiusmod tempor inct ut labore et dolore agna aliqua enim ad minim ullamco</p>
-                        </div>
-                        <div class="screen-caption">
-                            <h3>UI Screen 2</h3>
-                            <p>Do eiusmod tempor inct ut labore et dolore agna aliqua enim ad minim ullamco</p>
-                        </div>
-                        <div class="screen-caption">
-                            <h3>UI Screen 3</h3>
-                            <p>Do eiusmod tempor inct ut labore et dolore agna aliqua enim ad minim ullamco</p>
-                        </div>
-                        <div class="screen-caption">
-                            <h3>UI Screen 4</h3>
-                            <p>Do eiusmod tempor inct ut labore et dolore agna aliqua enim ad minim ullamco</p>
-                        </div>
-                        <div class="screen-caption">
-                            <h3>UI Screen 5</h3>
-                            <p>Do eiusmod tempor inct ut labore et dolore agna aliqua enim ad minim ullamco</p>
-                        </div>
-                        <div class="screen-caption">
-                            <h3>UI Screen 6</h3>
-                            <p>Do eiusmod tempor inct ut labore et dolore agna aliqua enim ad minim ullamco</p>
+                        <div repeat.for="structure of structures" class="screen-caption">
+                            <a route-href="route: structure-view; params.bind: { id: structure.id }"><h3>${structure.name}</h3></a> by <a route-href="route: profile; params.bind: { playerId: structure.creatorUUID }"><h5>${structure.creatorName}</h5></a>
                         </div>
                     </div>
                     <!-- / App screen slider END -->

@@ -27,7 +27,6 @@ export class App {
     static inject = [HttpClient, EventAggregator];
     constructor(http, eventAggregator) {
         this.http = http;
-        this.isLoading = true;
         eventAggregator.subscribe('router:navigation:processing', function(event) {
             // Clean up any old toasts from the previous page
             toastr.clear();
@@ -73,37 +72,6 @@ export class App {
             });
         }
         
-        function adjustNavbarCSS() {
-            if ($(window).scrollTop() > 80) {
-                $(".navbar-brand").css({
-                    'margin-top': '0',
-                });
-                $(".nav.navbar-nav").css({
-                    'margin-top': '22px'
-                });
-                $(".navbar-default").css({
-                    'background-color': 'rgba(24, 121, 253, 1)',
-                    'transition': 'all 0.3s linear 0s'
-                });
-                $(".navbar-default").css({
-                    'margin-top': '0px'
-                });
-            } else {
-                $(".navbar-brand").css({
-                    'margin-top': '30px'
-                });
-                $(".nav.navbar-nav").css({
-                    'margin-top': '52px'
-                });
-                $(".navbar-default").css({
-                    'background-color': 'transparent',
-                    'border': '0px solid #ddd'
-                });
-            }
-        }
-
-        adjustNavbarCSS();
-        $(window).on('scroll', adjustNavbarCSS);
     }
 
     configureRouter(config, router) {

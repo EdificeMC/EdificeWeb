@@ -31,24 +31,56 @@ export class Home {
     }
 
     attached() {
-    //     let images = document.getElementsByClassName("img-rounded");
-    //     let imageLoadPromises = [];
-    //     for(let image of images) {
-    //         imageLoadPromises.push(new Promise(function(resolve, reject) {
-    //             image.onload = function() {
-    //                 return resolve();
-    //             }
-    //         }));
-    //     }
-    // 
-    //     return Promise.all(imageLoadPromises).then(() => {
-    //         // Have to wait until all the images are loaded
-    //         this.masonry = new Masonry('.grid', {
-    //             itemSelector: '.grid-item',
-    //             columnWidth: 340 // 320 px for medium Imgur thumbnail + 10 padding + 10 to look better
-    //         });
-    //     })
-    
+        //     let images = document.getElementsByClassName("img-rounded");
+        //     let imageLoadPromises = [];
+        //     for(let image of images) {
+        //         imageLoadPromises.push(new Promise(function(resolve, reject) {
+        //             image.onload = function() {
+        //                 return resolve();
+        //             }
+        //         }));
+        //     }
+        // 
+        //     return Promise.all(imageLoadPromises).then(() => {
+        //         // Have to wait until all the images are loaded
+        //         this.masonry = new Masonry('.grid', {
+        //             itemSelector: '.grid-item',
+        //             columnWidth: 340 // 320 px for medium Imgur thumbnail + 10 padding + 10 to look better
+        //         });
+        //     })
+
+        function adjustNavbarCSS() {
+            if ($(window).scrollTop() > 80) {
+                $(".navbar-brand").css({
+                    'margin-top': '0',
+                });
+                $(".nav.navbar-nav").css({
+                    'margin-top': '22px'
+                });
+                $(".navbar-default").css({
+                    'background-color': 'rgba(24, 121, 253, 1)',
+                    'transition': 'all 0.3s linear 0s'
+                });
+                $(".navbar-default").css({
+                    'margin-top': '0px'
+                });
+            } else {
+                $(".navbar-brand").css({
+                    'margin-top': '30px'
+                });
+                $(".nav.navbar-nav").css({
+                    'margin-top': '52px'
+                });
+                $(".navbar-default").css({
+                    'background-color': 'transparent',
+                    'border': '0px solid #ddd'
+                });
+            }
+        }
+
+        adjustNavbarCSS();
+        $(window).on('scroll', adjustNavbarCSS);
+
         $('#for-app-screen').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -66,26 +98,23 @@ export class Home {
             slidesToShow: 3,
             asNavFor: '#for-app-screen',
             focusOnSelect: true,
-            responsive: [
-                {
-                  breakpoint: 768,
-                  settings: {
+            responsive: [{
+                breakpoint: 768,
+                settings: {
                     arrows: false,
                     centerMode: true,
                     centerPadding: '40px',
                     slidesToShow: 3
-                  }
-                },
-                {
-                  breakpoint: 480,
-                  settings: {
+                }
+            }, {
+                breakpoint: 480,
+                settings: {
                     arrows: false,
                     centerMode: true,
                     centerPadding: '40px',
                     slidesToShow: 1
-                  }
                 }
-            ]
+            }]
         });
     }
 
