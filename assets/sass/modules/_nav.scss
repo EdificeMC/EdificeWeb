@@ -9,13 +9,21 @@ a.dropdown-toggle.profile-image {
 	border-top-left-radius: 10px;
 }
 
-ul.nav > li.dropdown > ul.account-dropdown  {
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-
-	& > li > a {
-		color: $primary-color;
+ul.nav > li.dropdown {
+	
+	// Hide white lines in account dropdown
+	a::before, a::after {
+		visibility: hidden;
+	}
+	
+	& > ul.account-dropdown {
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		
+		& > li > a {
+			color: $primary-color;
+		}
 	}
 }
 
