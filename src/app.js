@@ -21,12 +21,16 @@ import 'sweetalert/dist/sweetalert.css';
 
 import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import { AuthService } from './services/auth';
 import toastr from 'toastr';
 
 export class App {
-    static inject = [HttpClient, EventAggregator];
-    constructor(http, eventAggregator) {
+    static inject = [HttpClient, EventAggregator, AuthService];
+    constructor(http, eventAggregator, auth) {
         this.http = http;
+        this.eventAggregator = eventAggregator;
+        this.auth = auth;
+        
         eventAggregator.subscribe('router:navigation:processing', function(event) {
             // Clean up any old toasts from the previous page
             toastr.clear();
@@ -41,6 +45,22 @@ export class App {
     }
 
     attached() {
+        // Restore the profile from storage
+        // showLogin value for initial load
+        this.showLogin = this._shouldShowLogin();
+        // Recompute showLogin when changing pages (don't show it on the login page)
+        this.eventAggregator.subscribe('router:navigation:success', event => {
+            this.showLogin = this._shouldShowLogin();
+        });
+        // Make showLogin false when logged in
+        this.eventAggregator.subscribe('auth:login', event => {
+            this.showLogin = false;
+        });
+        
+        this.eventAggregator.subscribe('auth:logout', () => {
+            this.showLogin = this._shouldShowLogin();
+        });
+        
         $('.preloader').delay(2000).fadeOut('slow');
 
         new wow.WOW({
@@ -69,6 +89,11 @@ export class App {
             });
         }
 
+    }
+    
+    // Show the login button if the user is not already logged in and is not currently on the login page
+    _shouldShowLogin() {
+        return !this.auth.isAuthenticated && this.router.currentInstruction.config.route !== 'login';
     }
 
     configureRouter(config, router) {
