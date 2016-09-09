@@ -3,6 +3,12 @@
 	Navbar Style
 -----------------------------------------------
  */
+
+a.dropdown-toggle.profile-image {
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
 .navbar-default {
 	background-color: transparent;
 	border: 0;
