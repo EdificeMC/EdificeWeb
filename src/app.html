@@ -32,9 +32,18 @@
                         <!-- Menu List -->
                         <div class="collapse navbar-collapse" id="top-navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a data-scroll href="#featured">Featured</a></li>
-                                <li><a data-scroll href="#team">Explore</a></li>
-                                <li><a data-scroll href="#download">Download</a></li>
+                                <li>
+                                    <a show.bind="router.currentInstruction.config.route === 'home'" click.delegate="scrollTo('featured')" style="cursor: pointer">Featured</a>
+                                    <a show.bind="router.currentInstruction.config.route !== 'home'" route-href="route: home; params.bind: { section: 'featured'}">Featured</a>
+                                </li>
+                                <li>
+                                    <a show.bind="router.currentInstruction.config.route === 'home'" click.delegate="scrollTo('team')" style="cursor: pointer">Explore</a>
+                                    <a show.bind="router.currentInstruction.config.route !== 'home'" route-href="route: home; params.bind: { section: 'team'}">Explore</a>
+                                </li>
+                                <li>
+                                    <a show.bind="router.currentInstruction.config.route === 'home'" click.delegate="scrollTo('download')" style="cursor: pointer">Download</a>
+                                    <a show.bind="router.currentInstruction.config.route !== 'home'" route-href="route: home; params.bind: { section: 'download'}">Download</a>
+                                </li>
                                 <li show.bind="showLogin"><a click.delegate="auth.login()" style="cursor: pointer">Login</a></li>
                                 <li show.bind="showLogin"><a route-href="route: signup">Sign Up</a></li>
                                 <li class="dropdown" show.bind="auth.isAuthenticated">

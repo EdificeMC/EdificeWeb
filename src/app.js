@@ -68,18 +68,6 @@ export class App {
             mobile: false // trigger animations on mobile devices (default is true)
         }).init();
 
-        /*=======================================================
-            // SmoothScroll Initialization
-        ======================================================*/
-        smoothScroll.init({
-            speed: 1000,
-            easing: 'easeInOutCubic',
-            offset: 0,
-            updateURL: true,
-            callbackBefore: function(toggle, anchor) {},
-            callbackAfter: function(toggle, anchor) {}
-        });
-
         if (navigator.userAgent.match(/Trident\/7\./)) {
             $('body').on('mousewheel', function() {
                 event.preventDefault();
@@ -89,6 +77,14 @@ export class App {
             });
         }
 
+    }
+    
+    // HACK: Only for use on the home page (this really shouldn't be in the App class)
+    scrollTo(sectionId) {
+        smoothScroll.animateScroll(document.querySelector('#' + sectionId), null, {
+            speed: 1000,
+            easing: 'easeInOutCubic'
+        });
     }
     
     // Show the login button if the user is not already logged in and is not currently on the login page

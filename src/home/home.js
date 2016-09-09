@@ -1,8 +1,10 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
-import Masonry from 'masonry-layout';
+import { EventAggregator } from 'aurelia-event-aggregator';
+import { Router } from 'aurelia-router';
 import $ from 'jquery';
+import smoothScroll from 'smooth-scroll';
 import 'slick-carousel/slick/slick.scss';
 import 'slick-carousel/slick/slick-theme.scss';
 import 'slick-carousel/slick/slick.js';
@@ -11,12 +13,16 @@ export class Home {
 
     structures = [];
 
-    static inject = [HttpClient];
-    constructor(http) {
+    static inject = [HttpClient, EventAggregator, Router];
+    constructor(http, eventAggregator, router) {
         this.http = http;
+        this.eventAggregator = eventAggregator;
+        this.router = router;
     }
 
-    activate() {
+    activate(params) {
+        this.params = params;
+        
         return this.http.get('/structures')
             .then((structureRes) => {
                 this.structures = structureRes.content;
@@ -31,6 +37,18 @@ export class Home {
     }
 
     attached() {
+        if(this.router.currentInstruction.config.route === 'home') {
+           if(this.params.section) {
+               // HACK: Without a timeout, the 'team' section goes automatically to download for some reason
+               setTimeout(() => {
+                   smoothScroll.animateScroll(document.querySelector('#' + this.params.section), null, {
+                       speed: 1000,
+                       easing: 'easeInOutCubic'
+                   }); 
+               }, 250);
+           }
+       }
+       
         //     let images = document.getElementsByClassName("img-rounded");
         //     let imageLoadPromises = [];
         //     for(let image of images) {
@@ -117,5 +135,4 @@ export class Home {
             }]
         });
     }
-
 }
