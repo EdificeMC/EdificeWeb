@@ -7,7 +7,7 @@ var DefinePlugin = require('webpack/lib/DefinePlugin');
 
 module.exports = {
     devServer: {
-        host: 'localhost',
+        host: '0.0.0.0',
         port: 4000,
         headers: {
             "Access-Control-Allow-Origin": "*"
