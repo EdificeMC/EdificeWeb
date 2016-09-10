@@ -2,10 +2,9 @@
     <require from="../CustomAttributes/tooltip"></require>
     <section>
         <div class="container">
-            <div show.bind="authorizedToEdit" class="note-top mb20">
-                <a route-href="route: edit; params.bind: { id: structure.id }"><i class="fa fa-pencil"></i> Edit Structure.</a>
+            <div class="note-top mb20">
+                <a show.bind="authorizedToEdit" route-href="route: edit; params.bind: { id: structure.id }"><i class="fa fa-pencil"></i> Edit Structure.</a>
             </div>
-            <div show.bind="!authorizedToEdit" class="mb20"></div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
