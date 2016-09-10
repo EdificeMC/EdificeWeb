@@ -1,6 +1,7 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
+import { AuthService } from '../services/auth';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { Router } from 'aurelia-router';
 import $ from 'jquery';
@@ -13,11 +14,12 @@ export class Home {
 
     structures = [];
 
-    static inject = [HttpClient, EventAggregator, Router];
-    constructor(http, eventAggregator, router) {
+    static inject = [HttpClient, EventAggregator, Router, AuthService];
+    constructor(http, eventAggregator, router, auth) {
         this.http = http;
         this.eventAggregator = eventAggregator;
         this.router = router;
+        this.auth = auth;
     }
 
     activate(params) {
