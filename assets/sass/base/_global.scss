@@ -31,7 +31,7 @@ footer {
 }
 
 section {
-	@include padding-top-bottom(100px, 100px);
+	@include padding-top-bottom(100px, 0px); // @include padding-top-bottom(100px, 100px);
 
 	@include MQ(991px) {
 		@include padding-top-bottom(50px, 80px);
@@ -227,4 +227,3 @@ section {
 	transform: translateX(-50%);
 	top: 50%;
 }
-
