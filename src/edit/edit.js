@@ -46,7 +46,7 @@ export class Edit {
             this.jQCanvas.get(0).width = this.jQCanvas.parent().width();
             this.jQCanvas.get(0).height = this.jQCanvas.width() / aspectRatio;
             sv(this.jQCanvas.get(0), this.structure, false);
-        } catch(e) {
+        } catch (e) {
             toastr.error('This page requires WebGL. Click here to find out more.', 'WebGL', {
                 timeOut: -1,
                 extendedTimeOut: -1,
@@ -65,33 +65,32 @@ export class Edit {
         const imgDataPrefix = 'data:image/png;base64,';
 
         this.http.post('/imgur', {
-                image: this.jQCanvas.get(0).toDataURL().substring(imgDataPrefix.length), // Strip away prefixed information for the Imgur API
-                type: 'base64'
+            image: this.jQCanvas.get(0).toDataURL().substring(imgDataPrefix.length), // Strip away prefixed information for the Imgur API
+            type: 'base64'
         }).then(res => res.content)
-        .then(res => {
-            this.structure.screenshot = {
-                url: res.link,
-                deletehash: res.deletehash
-            }
-        }).then(() => {
-            let request = this.http.createRequest('/structures/' + this.params.id)
-                .asPut()
-                .withContent({
-                    name: this.structure.name,
-                    screenshot: this.structure.screenshot,
-                    modelRendering: renderingDetails
-                });
-            if(this.auth.isAuthenticated) {
-                request = request.withHeader('Authorization', 'Bearer ' + this.auth.accessToken);
-            }
-            return request.send();
-        }).then((response) => {
-            console.log(response);
-            this.message.status = 'success';
-        }).catch(err => {
-            this.message.status = 'danger';
-            // TODO Give the user some indication of what went wrong
-        });
+            .then(res => {
+                this.structure.screenshot = {
+                    url: res.link,
+                    deletehash: res.deletehash
+                };
+            }).then(() => {
+                let request = this.http.createRequest('/structures/' + this.params.id)
+                    .asPut()
+                    .withContent({
+                        name: this.structure.name,
+                        screenshot: this.structure.screenshot,
+                        modelRendering: renderingDetails
+                    });
+                if (this.auth.isAuthenticated) {
+                    request = request.withHeader('Authorization', 'Bearer ' + this.auth.accessToken);
+                }
+                return request.send();
+            }).then(() => {
+                this.message.status = 'success';
+            }).catch(() => {
+                this.message.status = 'danger';
+                // TODO Give the user some indication of what went wrong
+            });
 
     }
 

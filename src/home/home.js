@@ -38,16 +38,16 @@ export class Home {
 
     attached() {
         if(this.router.currentInstruction.config.route === 'home') {
-           if(this.params.section) {
-               // HACK: Without a timeout, the 'team' section goes automatically to download for some reason
-               setTimeout(() => {
-                   smoothScroll.animateScroll(document.querySelector('#' + this.params.section), null, {
-                       speed: 1000,
-                       easing: 'easeInOutCubic'
-                   }); 
-               }, 250);
-           }
-       }
+            if(this.params.section) {
+                // HACK: Without a timeout, the 'team' section goes automatically to download for some reason
+                setTimeout(() => {
+                    smoothScroll.animateScroll(document.querySelector('#' + this.params.section), null, {
+                        speed: 1000,
+                        easing: 'easeInOutCubic'
+                    }); 
+                }, 250);
+            }
+        }
        
         //     let images = document.getElementsByClassName("img-rounded");
         //     let imageLoadPromises = [];

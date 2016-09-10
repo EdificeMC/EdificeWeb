@@ -23,7 +23,7 @@ export class StructureBlurbCustomElement {
 
         this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.app_metadata.mcuuid);
         // Reevaluate if the structure is starred upon login
-        this.eventAggregator.subscribe('auth:login', event => {
+        this.eventAggregator.subscribe('auth:login', () => {
             this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.app_metadata.mcuuid);
         });
     }

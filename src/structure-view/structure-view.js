@@ -2,8 +2,6 @@
 
 import { HttpClient } from 'aurelia-http-client';
 import { AuthService } from '../services/auth';
-import Chart from 'chart.js';
-import moment from 'moment';
 import Clipboard from 'clipboard';
 import toastr from 'toastr';
 import $ from 'jquery';
@@ -57,7 +55,7 @@ export class StructureView {
             });
         }
         // Initialize the clipboard
-        new Clipboard('#buildStructureBtn').on('success', (e) => {
+        new Clipboard('#buildStructureBtn').on('success', () => {
             this.copiedStructureCmd = true;
         });
 

@@ -1,11 +1,6 @@
 import {bootstrap} from 'aurelia-bootstrapper-webpack';
 
 bootstrap(function(aurelia) {
-    let urlBase = window.location.hostname;
-    if (window.location.hostname === 'localhost') {
-        urlBase = 'localhost:3000';
-    }
-
     let app = aurelia.use;
 
     if (ENV === 'development') {

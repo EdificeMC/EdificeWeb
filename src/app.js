@@ -6,6 +6,7 @@
 import 'bootstrap';
 import smoothScroll from 'smooth-scroll';
 import wow from 'wowjs'; // scrolling animations
+import $ from 'jquery';
 
 //
 // CSS
@@ -31,7 +32,7 @@ export class App {
         this.eventAggregator = eventAggregator;
         this.auth = auth;
         
-        eventAggregator.subscribe('router:navigation:processing', function(event) {
+        eventAggregator.subscribe('router:navigation:processing', function() {
             // Clean up any old toasts from the previous page
             toastr.clear();
         });
@@ -49,11 +50,11 @@ export class App {
         // showLogin value for initial load
         this.showLogin = this._shouldShowLogin();
         // Recompute showLogin when changing pages (don't show it on the login page)
-        this.eventAggregator.subscribe('router:navigation:success', event => {
+        this.eventAggregator.subscribe('router:navigation:success', () => {
             this.showLogin = this._shouldShowLogin();
         });
         // Make showLogin false when logged in
-        this.eventAggregator.subscribe('auth:login', event => {
+        this.eventAggregator.subscribe('auth:login', () => {
             this.showLogin = false;
         });
         

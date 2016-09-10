@@ -2,7 +2,7 @@
 
 import { NewInstance } from 'aurelia-dependency-injection'; 
 import { ValidationController } from 'aurelia-validation';
-import { required, email, equality, length } from 'aurelia-validatejs'
+import { required, email, equality, length } from 'aurelia-validatejs';
 import { AuthService } from '../services/auth';
 import toastr from 'toastr';
 import swal from 'sweetalert';
@@ -41,10 +41,10 @@ export class Signup {
             email: this.email,
             password: this.password,
             verificationCode: this.verificationCode
-        }).then((res) => {
+        }).then(() => {
             swal({
-                title: "Welcome!",
-                text: `Please confirm your account with the email sent to ${credentials.email}`,
+                title: 'Welcome!',
+                text: `Please confirm your account with the email sent to ${this.email}`,
                 type: 'success'
             }, () => {
                 this.router.navigate('/');
@@ -53,6 +53,6 @@ export class Signup {
             toastr.error(err.content.message, null, {
                 progressBar: true
             });
-        });;
+        });
     }
 }
