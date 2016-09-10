@@ -1,4 +1,5 @@
 <template>
+    <require from="../CustomElements/structure-blurb/structure-blurb"></require>
     <section id="welcome">
         <div class="container welcome-inner">
             <div class="row">
@@ -93,114 +94,20 @@
     </section>
     <!-- / Screensot END -->
     <!-- Meet The Team START -->
-    <section id="team">
+    <section id="explore">
         <div class="container">
             <!-- Team Header START -->
             <header class="section-header text-center">
-                <h2 class="wow fadeInDown">Meet The Team</h2>
+                <h2 class="wow fadeInDown">Explore</h2>
                 <div class="title-divider">
                     <div class="divider-shape"></div>
                 </div>
-                <p class="wow fadeInUp">Sed do eiusmod tempor inct ut labore et dolore magna aliqua enim ad minim ullamco
-                    <br /> laboris nisi ut aliquip labore et dolore</p>
+                <p class="wow fadeInUp">See the latest and most popular structures in the Minecraft community!</p>
             </header>
             <!-- / Team Header END -->
             <div class="row">
-                <div class="col-md-3 col-sm-6 box">
-                    <!-- Team Member 1 STRAT -->
-                    <div class="member wow flipInY">
-                        <div class="member-thumb">
-                            <!-- Member Image -->
-                            <img src="http://placehold.it/270x290" alt="memeber" />
-                            <div class="overlay"></div>
-                            <!-- Member Social Link -->
-                            <div class="member-social">
-                                <a href="#"><i class="fa fa-behance"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-google-plus"></i></a>
-                            </div>
-                        </div>
-                        <!-- Member Name and Position -->
-                        <div class="member-info">
-                            <h3>Nafseen al shoaib</h3>
-                            <p>Creative Head</p>
-                        </div>
-                    </div>
-                    <!-- / Team Member 1 END -->
-                </div>
-                <div class="col-md-3 col-sm-6 box">
-                    <!-- Team Member 1 STRAT -->
-                    <div class="member wow flipInY">
-                        <div class="member-thumb">
-                            <!-- Member Image -->
-                            <img src="http://placehold.it/270x290" alt="memeber" />
-                            <div class="overlay"></div>
-                            <!-- Member Social Link -->
-                            <div class="member-social">
-                                <a href="#"><i class="fa fa-behance"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-google-plus"></i></a>
-                            </div>
-                        </div>
-                        <!-- Member Name and Position -->
-                        <div class="member-info">
-                            <h3>Sanha Munira</h3>
-                            <p>Designer</p>
-                        </div>
-                    </div>
-                    <!-- / Team Member 1 END -->
-                </div>
-                <div class="col-md-3 col-sm-6 box">
-                    <!-- Team Member 1 STRAT -->
-                    <div class="member wow flipInY">
-                        <div class="member-thumb">
-                            <!-- Member Image -->
-                            <img src="http://placehold.it/270x290" alt="memeber" />
-                            <div class="overlay"></div>
-                            <!-- Member Social Link -->
-                            <div class="member-social">
-                                <a href="#"><i class="fa fa-behance"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-google-plus"></i></a>
-                            </div>
-                        </div>
-                        <!-- Member Name and Position -->
-                        <div class="member-info">
-                            <h3>Kazi Shimanto</h3>
-                            <p>Designer</p>
-                        </div>
-                    </div>
-                    <!-- / Team Member 1 END -->
-                </div>
-                <div class="col-md-3 col-sm-6 box">
-                    <!-- Team Member 1 STRAT -->
-                    <div class="member wow flipInY">
-                        <div class="member-thumb">
-                            <!-- Member Image -->
-                            <img src="http://placehold.it/270x290" alt="memeber" />
-                            <div class="overlay"></div>
-                            <!-- Member Social Link -->
-                            <div class="member-social">
-                                <a href="#"><i class="fa fa-behance"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-google-plus"></i></a>
-                            </div>
-                        </div>
-                        <!-- Member Name and Position -->
-                        <div class="member-info">
-                            <h3>Foysal Shawon</h3>
-                            <p>Awesome Dev</p>
-                        </div>
-                    </div>
-                    <!-- / Team Member 1 END -->
+                <div class="col-md-3 col-sm-6 box" repeat.for="structure of structures">
+                    <structure-blurb structure.bind="structure"></structure-blurb>
                 </div>
             </div>
         </div>

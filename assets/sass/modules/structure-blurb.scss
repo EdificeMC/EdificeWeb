@@ -1,9 +1,91 @@
 .structure-blurb {
-    .name, .star-btn {
-        margin-top: 10px;
-    }
-    
-    .starred {
-        color: #D4AF37;
-    }
+	@include MQ(991px) {
+		display: table;
+		margin: 0 auto;
+	}
+	.structure-thumb {
+		position: relative;
+		overflow: hidden;
+
+		img {
+			max-width: 100%;
+		}
+
+		.overlay {
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255, 255, 255, 0.7);
+			opacity: 0;
+			@extend %transition;
+		}
+
+		.structure-actions {
+			position: absolute;
+			bottom: -20px;
+			left: 35%;
+			transform: translateX(-21%);
+			opacity: 0;
+			@extend %transition;
+            
+            .fa.fa-star.starred {    
+                border-color: #D4AF37;
+                color: #D4AF37;
+            }
+
+			.fa {
+				border-radius: 50%;
+				border: 2px solid $default-color;
+				width: 34px;
+				height: 34px;
+				line-height: 34px;
+				font-size: 13px;
+				text-align: center;
+				@extend %default-color;
+				@extend %transition;
+
+				&:hover {
+					border-color: $primary-color;
+					@extend %primary-color;
+				}
+			}
+		}
+	}
+
+	&:hover {
+		.structure-thumb {
+			.overlay {
+				opacity: 1;
+				left: 0;
+			}
+			.structure-actions {
+				opacity: 1;
+				bottom: 20px;
+			}
+		}
+	}
+
+	.structure-info {
+        text-align: left; // Not sure why, but it is text-align:right otherwise
+        
+		h3 {
+			font-size: $default-font-size + 1;
+			text-transform: uppercase;
+			margin-bottom: 0;
+			@extend %title-font;
+		}
+
+		p {
+			font-size: $default-font-size;
+			font-style: italic;
+			@extend %secondary-font;
+		}
+
+		h3,
+		p {
+			line-height: 22px;
+		}
+	}
 }

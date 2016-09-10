@@ -37,8 +37,8 @@
                                     <a show.bind="router.currentInstruction.config.route !== 'home'" route-href="route: home; params.bind: { section: 'featured'}">Featured</a>
                                 </li>
                                 <li>
-                                    <a show.bind="router.currentInstruction.config.route === 'home'" click.delegate="scrollTo('team')" style="cursor: pointer">Explore</a>
-                                    <a show.bind="router.currentInstruction.config.route !== 'home'" route-href="route: home; params.bind: { section: 'team'}">Explore</a>
+                                    <a show.bind="router.currentInstruction.config.route === 'home'" click.delegate="scrollTo('explore')" style="cursor: pointer">Explore</a>
+                                    <a show.bind="router.currentInstruction.config.route !== 'home'" route-href="route: home; params.bind: { section: 'explore'}">Explore</a>
                                 </li>
                                 <li>
                                     <a show.bind="router.currentInstruction.config.route === 'home'" click.delegate="scrollTo('download')" style="cursor: pointer">Download</a>

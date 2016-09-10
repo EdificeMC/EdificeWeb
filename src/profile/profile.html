@@ -1,19 +1,30 @@
 <template>
     <require from='../ValueConverters/date-format.js'></require>
     <require from="../CustomElements/structure-blurb/structure-blurb"></require>
-    <section>
-        <div class="row">
-            <div class="col-md-2 col-md-offset-1">
-                <div class="player-details">
-                    <img src="https://visage.surgeplay.com/full/320/${playerProfile.id}" alt="" />
-                    <h2>${playerProfile.name}</h2>
-                    <h4 show.bind="playerProfile.joined"><i class="fa fa-clock-o"></i> Joined on ${playerProfile.joined | dateFormat}</h4>
+    <section style="margin-top: 100px; margin-bottom: 200px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="player-details">
+                        <img src="https://visage.surgeplay.com/full/320/${playerProfile.id}" alt="" />
+                        <h2>${playerProfile.name}</h2>
+                        <h4 show.bind="playerProfile.joined"><i class="fa fa-clock-o"></i> Joined on ${playerProfile.joined | dateFormat}</h4>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <h3>Popular Structures</h3>
-                <div class="col-md-4" repeat.for="structure of structures">
-                    <structure-blurb structure.bind="structure"></structure-blurb>
+                <div class="col-md-9">
+                    <div class="row">
+                        <header class="section-header text-center">
+                            <h2 class="wow fadeInDown">${playerProfile.name}'s Structures</h2>
+                            <div class="title-divider">
+                                <div class="divider-shape"></div>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 box" repeat.for="structure of structures">
+                            <structure-blurb structure.bind="structure"></structure-blurb>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
