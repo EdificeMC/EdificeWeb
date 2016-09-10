@@ -78,14 +78,6 @@ export class Home {
         adjustNavbarCSS();
         $(window).on('scroll', adjustNavbarCSS);
 
-        $('#for-app-screen').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: true,
-            asNavFor: '#featured-structures-slider'
-        });
-
         $('#featured-structures-slider').slick({
             autoplay: true,
             centerMode: true,
@@ -93,7 +85,6 @@ export class Home {
             arrows: false,
             centerPadding: '60px',
             slidesToShow: 3,
-            asNavFor: '#for-app-screen',
             focusOnSelect: true,
             responsive: [{
                 breakpoint: 768,
