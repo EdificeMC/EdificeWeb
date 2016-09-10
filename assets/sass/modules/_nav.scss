@@ -27,15 +27,28 @@ ul.nav > li.dropdown {
 	}
 }
 
-.navbar-default {
+.navbar.navbar-default.navbar-transparent {
 	background-color: transparent;
+	border: 0px solid #ddd;
+	
+	.container {
+		.navbar-header > .navbar-brand {
+			margin-top: 30px;
+		}
+		
+		.navbar-collapse > .nav.navbar-nav {
+			margin-top: 52px;
+		}
+	}
+} 
+
+.navbar.navbar-default {
+	background-color: $primary-color;
 	border: 0;
 	padding-bottom: 15px;
 	@extend %transition;
 
 	.navbar-brand {
-		margin-top: 30px;
-
 		@include MQ(767px) {
 			margin-top: 0 !important;
 		}
@@ -49,7 +62,7 @@ ul.nav > li.dropdown {
 	}
 
 	.nav.navbar-nav {
-		margin-top: 52px;
+		margin-top: 22px;
 
 		li {
 			a {

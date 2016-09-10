@@ -69,30 +69,9 @@ export class Home {
 
         function adjustNavbarCSS() {
             if ($(window).scrollTop() > 80) {
-                $(".navbar-brand").css({
-                    'margin-top': '0',
-                });
-                $(".nav.navbar-nav").css({
-                    'margin-top': '22px'
-                });
-                $(".navbar-default").css({
-                    'background-color': 'rgba(24, 121, 253, 1)',
-                    'transition': 'all 0.3s linear 0s'
-                });
-                $(".navbar-default").css({
-                    'margin-top': '0px'
-                });
+                $('.navbar-default').removeClass('navbar-transparent');
             } else {
-                $(".navbar-brand").css({
-                    'margin-top': '30px'
-                });
-                $(".nav.navbar-nav").css({
-                    'margin-top': '52px'
-                });
-                $(".navbar-default").css({
-                    'background-color': 'transparent',
-                    'border': '0px solid #ddd'
-                });
+                $('.navbar-default').addClass('navbar-transparent');
             }
         }
 
@@ -134,5 +113,12 @@ export class Home {
                 }
             }]
         });
+    }
+    
+    detached() {
+        // Stop listening for scrolling - only for the home page
+        $(window).off('scroll');
+        // Remove the transparent navbar class
+        $('.navbar-default').removeClass('navbar-transparent');
     }
 }
