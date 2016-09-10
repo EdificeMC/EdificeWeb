@@ -1,38 +1,47 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4" style="text-align: center">
-                <h3>Sign Up</h3>
-                <form validation-renderer="bootstrap-form">
-                    <fieldset class="form-group">
-                        <input type="text" class="form-control" placeholder="Email Address" value.bind="email & validate">
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" value.bind="password & validate">
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <input type="password" class="form-control" placeholder="Confirm Password" value.bind="confirmPassword & validate">
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <input type="text" class="form-control" placeholder="Verification Code" value.bind="verificationCode & validate">
-                    </fieldset>
-                    <button type="submit" class="btn btn-primary" click.delegate="signup()">Submit</button>
-                </form>
+    <section id="contact" style="padding-top: 200px">
+        <div class="container">
+            <header class="section-header text-center">
+                <h2 class="wow fadeInDown">Sign Up</h2>
+                <div class="title-divider">
+                    <div class="divider-shape"></div>
+                </div>
+                <!-- <p class="wow fadeInUp">Sed do eiusmod tempor inct ut labore et dolore magna aliqua enim ad minim ullamco
+                <br /> laboris nisi ut aliquip labore et dolore</p> -->
+            </header>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4" style="text-align: center">
+                    <form id="contact-form" validation-renderer="bootstrap-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email Address" value.bind="email & validate">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" value.bind="password & validate">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Confirm Password" value.bind="confirmPassword & validate">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Verification Code" value.bind="verificationCode & validate">
+                        </div>
+                        <button type="submit" class="btn btn-contact" click.delegate="signup()">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2><i class="fa fa-cubes"></i> Minecraft</h2>
+                    <p>Join <code>auth.edificemc.com</code> on your Minecraft client. You will be given a link back to this page with a unique verification code.</p>
+                </div>
+                <div class="col-md-4">
+                    <h2><i class="fa fa-lock"></i> Enter Account Details</h2>
+                    <p>Enter your email address and choose a password.</p>
+                </div>
+                <div class="col-md-4">
+                    <h2><i class="fa fa-envelope"></i> Confirm Email Address</h2>
+                    <p>After signing up, a confirmation email will be sent to your email address. Follow the link in the email to confirm your account.</p>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <h2><i class="fa fa-cubes"></i> Minecraft</h2>
-                <p>Join <code>auth.edificemc.com</code> on your Minecraft client. You will be given a link back to this page with a unique verification code.</p>
-            </div>
-            <div class="col-md-4">
-                <h2><i class="fa fa-lock"></i> Enter Account Details</h2>
-                <p>Enter your email address and choose a password.</p>
-            </div>
-            <div class="col-md-4">
-                <h2><i class="fa fa-envelope"></i> Confirm Email Address</h2>
-                <p>After signing up, a confirmation email will be sent to your email address. Follow the link in the email to confirm your account.</p>
-            </div>
-        </div>
-    </div>
+    </section>
 </template>
