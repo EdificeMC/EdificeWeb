@@ -74,7 +74,7 @@
                     <!-- App Screen Slider Image -->
                     <div id="featured-structures-slider" class="img-carousel">
                         <div repeat.for="structure of structures" class="single-item">
-                            <img src="${structure.screenshot.url}" />
+                            <structure-blurb structure.bind="structure"></structure-blurb>
                         </div>
                     </div>
                     <!-- App Screen Slider Image -->
