@@ -9,7 +9,6 @@ import toastr from 'toastr';
 
 export class StructureBlurbCustomElement {
     @bindable structure;
-    createStructureCmdPrefix = '/edifice create ';
 
     static inject = [HttpClient, AuthService, EventAggregator];
     constructor(http, auth, eventAggregator) {
