@@ -50,24 +50,6 @@ export class Home {
                 }, 250);
             }
         }
-       
-        //     let images = document.getElementsByClassName("img-rounded");
-        //     let imageLoadPromises = [];
-        //     for(let image of images) {
-        //         imageLoadPromises.push(new Promise(function(resolve, reject) {
-        //             image.onload = function() {
-        //                 return resolve();
-        //             }
-        //         }));
-        //     }
-        // 
-        //     return Promise.all(imageLoadPromises).then(() => {
-        //         // Have to wait until all the images are loaded
-        //         this.masonry = new Masonry('.grid', {
-        //             itemSelector: '.grid-item',
-        //             columnWidth: 340 // 320 px for medium Imgur thumbnail + 10 padding + 10 to look better
-        //         });
-        //     })
 
         function adjustNavbarCSS() {
             if ($(window).scrollTop() > 80) {
