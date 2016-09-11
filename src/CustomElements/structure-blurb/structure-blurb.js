@@ -9,21 +9,28 @@ import toastr from 'toastr';
 
 export class StructureBlurbCustomElement {
     @bindable structure;
-    createStructureCmdPrefix = '/edifice create ';
 
     static inject = [HttpClient, AuthService, EventAggregator];
     constructor(http, auth, eventAggregator) {
         this.http = http;
         this.auth = auth;
         this.eventAggregator = eventAggregator;
+        
+        // Unique ID for the copy button since multiple of this element can exist at the same time
+        this.id = Math.floor(Math.random() * 999999999);
     }
 
     attached() {
-        new Clipboard('#buildStructureBtn');
+        const clipboard = new Clipboard('#build-structure-btn-' + this.id);
+        clipboard.on('success', function() {
+            toastr.success('Command copied. Paste in Minecraft chat to start building!', null, {
+                progressBar: true
+            });
+        });
 
         this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.app_metadata.mcuuid);
         // Reevaluate if the structure is starred upon login
-        this.eventAggregator.subscribe('auth:login', event => {
+        this.eventAggregator.subscribe('auth:login', () => {
             this.structureIsStarred = this.auth.isAuthenticated && this.structure.stargazers.includes(this.auth.profile.app_metadata.mcuuid);
         });
     }

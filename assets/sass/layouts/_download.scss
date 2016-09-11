@@ -1,0 +1,86 @@
+/*
+=================================================
+Download Section
+=================================================
+*/
+
+#download {
+
+	.title-divider {
+
+		&::before {
+			left: 0;
+		}
+
+		&::after {
+			left: 80px;
+		}
+
+		.divider-shape {
+			margin: 0 60px 30px;
+		}
+	}
+
+	.dl-device {
+
+		.dl-device-img {
+			float: left;
+		}
+
+		.dl-device-right {
+			margin-left: -160px;
+
+			@include MQM(992px, 1199px) {
+				margin-left: -235px;
+			}
+		}
+
+	}
+
+	.download-header {
+		margin-bottom: 52px;
+		h2 {
+			font-size: 36px;
+			@extend %title-font;
+
+			@include MQ(455px) {
+				font-size: 24px;
+			}
+		}
+	}
+
+	.download-box {
+		display: block;
+		@extend %white-color;
+
+		.fa {
+			font-size: 36px;
+			padding-top: 20px;
+		}
+
+		p {
+			font-size: $default-font-size - 2;
+			font-weight: 700;
+			text-transform: uppercase;
+			@include padding-top-bottom(10px, 23px);
+			@extend %secondary-font;
+		}
+	}
+
+	.android {
+		background-color: $android-bg-color;
+	}
+	.apple {
+		background-color: $ios-bg-color;
+	}
+	.windows {
+		background-color: $win-bg-color;
+	}
+
+	.vercenter {
+		@include MQ(991px) {
+			height: auto;
+		}
+	}
+
+}

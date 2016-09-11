@@ -1,11 +1,92 @@
 <template>
-    <require from="header/header"></require>
-    <header></header>
-    <router-view></router-view>
-    <footer class="footer">
-      <div class="container text-center">
-        <p class="text-muted"><i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by <a href="https://github.com/robertherhold">Robert Herhold</a> on <a href="https://github.com/edificemc"><i class="fa fa-github"></i></a>.</p>
-        <p class="text-muted">Thanks to <a href="https://crafatar.com/">Crafatar</a> and <a href="https://visage.surgeplay.com/">Visage</a> for avatars.</p>
-      </div>
-    </footer>
+    <body data-target="#top-navbar-collapse">
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="cssload-preloader cssload-loading">
+                <span class="cssload-slice"></span>
+                <span class="cssload-slice"></span>
+                <span class="cssload-slice"></span>
+                <span class="cssload-slice"></span>
+                <span class="cssload-slice"></span>
+                <span class="cssload-slice"></span>
+            </div>
+        </div>
+        <!-- / END Preloader -->
+        <!-- Wrapper -->
+        <div class="wrapper">
+            <!-- Header START -->
+            <header class="parallax">
+                <!-- Navbar Markup -->
+                <div class="navbar navbar-default navbar-fixed-top">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" route-href="route: home"><img style="float:left" src="../assets/img/edifice_logo_66px.png" alt="site logo"/></a>
+                        </div>
+                        <!-- Menu List -->
+                        <div class="collapse navbar-collapse" id="top-navbar-collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a show.bind="router.currentInstruction.config.route === 'home'" click.delegate="scrollTo('featured')" style="cursor: pointer">Featured</a>
+                                    <a show.bind="router.currentInstruction.config.route !== 'home'" route-href="route: home; params.bind: { section: 'featured'}">Featured</a>
+                                </li>
+                                <li>
+                                    <a show.bind="router.currentInstruction.config.route === 'home'" click.delegate="scrollTo('explore')" style="cursor: pointer">Explore</a>
+                                    <a show.bind="router.currentInstruction.config.route !== 'home'" route-href="route: home; params.bind: { section: 'explore'}">Explore</a>
+                                </li>
+                                <li>
+                                    <a show.bind="router.currentInstruction.config.route === 'home'" click.delegate="scrollTo('download')" style="cursor: pointer">Download</a>
+                                    <a show.bind="router.currentInstruction.config.route !== 'home'" route-href="route: home; params.bind: { section: 'download'}">Download</a>
+                                </li>
+                                <li show.bind="showLogin"><a click.delegate="auth.login()" style="cursor: pointer">Login</a></li>
+                                <li show.bind="showLogin"><a route-href="route: signup">Sign Up</a></li>
+                                <li class="dropdown" show.bind="auth.isAuthenticated">
+                                    <a href class="dropdown-toggle profile-image" data-toggle="dropdown">
+                                        <img class="img-circle" width="32" height="32" src="${auth.profile.picture}"/>
+                                    </a>
+                					<ul class="dropdown-menu account-dropdown">
+                                        <li><a route-href="route: profile; params.bind: { playerId: auth.profile.app_metadata.mcuuid }" style="cursor: pointer"><i class="fa fa-user"></i> Profile</a></li>
+                						<li class="divider"></li>
+                						<li><a click.delegate="auth.logout()" style="cursor: pointer"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                					</ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- / Header END -->
+
+            <router-view></router-view>
+
+            <!-- Footer -->
+            <footer id="footer">
+                <div class="container section-padding">
+                    <div class="row text-center">
+                        <div class="col-sm-12">
+                            <!-- Social Follow Us Icon -->
+                            <div class="follow-us text-center">
+                                <a href="https://github.com/edificemc"><i class="fa fa-github github"></i></a>
+                            </div>
+                            <!-- / END Social Follow Us Icon -->
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="copyright">
+                                <!-- Copyright Text -->
+                                <p><i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by <a href="https://github.com/robertherhold">Robert Herhold</a> on <a href="https://github.com/edificemc"><i class="fa fa-github"></i></a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- / Footer END -->
+        </div>
+        <!-- / Wrapper END -->
+    </body>
 </template>

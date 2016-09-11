@@ -1,0 +1,223 @@
+// Typography
+
+$primary-font: 'Raleway', sans-serif;
+
+$secondary-font: 'Open Sans', sans-serif;
+
+$default-font-size: 14px;
+
+$default-line-height: 25px;
+
+$default-font-weight: 400;
+
+// Typegraphy Placeholder
+
+%primary-font {
+	font-family: $primary-font;
+}
+
+%secondary-font {
+	font-family: $secondary-font;
+}
+
+%section-title {
+	@extend %primary-font;
+	font-size: 36px;
+	line-height: 20px;
+	font-weight: 700;
+	margin-top: 10px;
+	@extend %title-color;
+}
+
+%title-font {
+	font-family: $primary-font;
+	font-weight: 700;
+}
+
+%welcome-title-font {
+	font-family: $primary-font;
+	font-weight: 300;
+}
+
+%welcome-title-font2 {
+	font-family: $primary-font;
+	font-weight: 800;
+}
+
+
+// Color
+
+$default-color: #6b6b6b;
+
+$white-color: #ffffff;
+
+$white-color-deep: #f1f1f1;
+
+$title-color: #555555;
+
+$primary-color: #1879fd; // rgba(24, 121, 253, 1);
+
+$border-color: #bebebe;
+
+$black-color-dark: #1e1e1e;
+
+$white-color-dark: #cacaca;
+
+%white-color-dark {
+	color: $white-color-dark;
+}
+
+$green-color: #9acf4f;
+
+$sky-color: #35c6ea;
+
+$dark-yellow-color: #ff7e30;
+
+$android-bg-color: #9acf4f;
+
+$ios-bg-color: #35c6ea;
+
+$win-bg-color: #ff7e30;
+
+$twitter-color: #40bff5;
+
+$behance-color: #1879fd;
+
+$fb-color: #5d82d1;
+
+$dribbble-color: #f7659c;
+
+$gplus-color: #eb5e4c;
+
+$instagram-color: #548bb6;
+
+$linkedin-color: #238cc8;
+
+$github-color: #222222;
+
+
+// Color Placeholder
+
+%default-color {
+	color: $default-color;
+}
+
+%white-color {
+	color: $white-color;
+}
+
+%white-color-deep {
+	color: $white-color-deep;
+}
+
+%title-color {
+	color: $title-color;
+}
+
+%primary-color {
+	color: $primary-color;
+}
+
+%green-color {
+	color: $green-color;
+}
+
+%sky-color {
+	color: $sky-color;
+}
+
+%dark-yellow-color {
+	color: $dark-yellow-color;
+}
+
+%twitter-color {
+	color: $twitter-color;
+}
+
+%behance-color {
+	color: $behance-color;
+}
+
+%fb-color {
+	color: $fb-color;
+}
+
+%dribbble-color {
+	color: $dribbble-color;
+}
+
+%gplus-color {
+	color: $gplus-color;
+}
+
+%instagram-color {
+	color: $instagram-color;
+}
+
+%linkedin-color {
+	color: $linkedin-color;
+}
+
+
+// Background-color Placeholder
+
+%default-bg-color {
+	background-color: $default-color;
+}
+
+%white-bg-color {
+	background-color: $white-color;
+}
+
+%white-bg-color-deep {
+	background-color: $white-color-deep;
+}
+
+%title-bg-color {
+	background-color: $title-color;
+}
+
+%primary-bg-color {
+	background-color: $primary-color;
+}
+
+%green-bg-color {
+	background-color: $green-color;
+}
+
+%sky-bg-color {
+	background-color: $sky-color;
+}
+
+// Border Color Placeholder
+
+
+%default-border-color {
+	border-color: $default-color;
+}
+
+%white-border-color {
+	border-color: $white-color;
+}
+
+%primary-border-color {
+	border-color: $primary-color;
+}
+
+
+
+// Breakpoints
+
+$minw: 'min-width';
+
+$maxw: 'max-width';
+
+$XS: 320px;
+
+$S:  480px;
+
+$T:  767px;
+
+$M:  991px;
+
+$L:  1199px;

@@ -23,7 +23,7 @@ export class TooltipCustomAttribute {
             $(this.element).on('shown.bs.tooltip', function(e) {
                 setTimeout(function() {
                     $(e.target).trigger('click'); // Have to do this hack since $(e.target).tooltip('toggle'); doesn't work for some reason
-                }, 1500)
+                }, 1500);
             });
         }
     }

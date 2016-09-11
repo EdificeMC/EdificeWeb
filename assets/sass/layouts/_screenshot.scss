@@ -1,0 +1,41 @@
+/*
+-----------------------------------------------
+	ScreenShot Section
+-----------------------------------------------
+ */
+#blue-app-screen .slick-track {
+	margin: 50px 0;
+}
+
+.single-item img {
+	width: 100%;
+	opacity: 0.8;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.3);
+}
+
+.single-item.slick-slide.slick-cloned.slick-active,
+.single-item.slick-slide.slick-active {
+	transform: scale(1);
+	transition: all 0.3s ease 0s;
+}
+
+.single-item.slick-slide.slick-current.slick-active.slick-center {
+	transform: scale(1.1);
+	transition: all 0.3s ease 0s;
+	position: relative;
+	z-index: 1;
+
+	img {
+		opacity: 1;
+	}
+}
+
+.single-item.slick-slide {
+	transform: scale(0.95);
+	transition: all 0.3s ease 0s;
+}
+
+.screen-caption h3 {
+	font-weight: 700;
+	font-size: $default-font-size + 4;
+}

@@ -31,7 +31,7 @@ export class AuthService {
             window.localStorage.setItem('accessToken', this._accessToken);
 
             this.eventAggregator.publish('auth:login', profile);
-        })
+        });
     }
 
     logout() {

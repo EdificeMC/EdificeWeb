@@ -1,36 +1,159 @@
 <template>
     <require from="../CustomElements/structure-blurb/structure-blurb"></require>
-    <div class="container">
-        <div class="jumbotron">
-            <h1>Edifice</h1>
-            <p>
-                Edifice is a service for sharing your Minecraft structures with the community. It allows you to browse popular structures and easily build them in your survival Minecraft server. It's like Pastebin for Minecraft!
-            </p>
-            <div style="text-align: center">
-                <a href="https://github.com/EdificeMC/Edifice/releases/latest" class="btn btn-primary"><i class="fa fa-download"></i> Get Edifice for Sponge</a>
+    <section id="welcome">
+        <div class="container welcome-inner">
+            <div class="row">
+                <div class="col-md-6 hidden-xs hidden-sm">
+                    <div class="promo-img vercenter">
+                        <!-- Intro Mockup -->
+                        <div class="dl-device vercenter-inner">
+                            <img class="dl-device-img dl-device-left wow fadeInLeft" src="https://visage.surgeplay.com/full/512/5d30e92c5ae24284a3ee74bc15077439" alt="testimonial image" />
+                            <img class="dl-device-img dl-device-right wow fadeInLeft" data-wow-delay=".5s" data-wow-duration="1.0s" src="${auth.isAuthenticated ? 'https://visage.surgeplay.com/full/512/' + auth.profile.app_metadata.mcuuid : 'https://visage.surgeplay.com/full/512/X-Steve'}" alt="testimonial image" />
+                        </div>
+                        <!-- / END Intro Mockup -->
+                    </div>
+                </div>
+                <!-- Welcome Text -->
+                <div class="col-md-6">
+                    <div class="welcome-heading vercenter">
+                        <div class="vercenter-inner">
+                            <h1 class="welcome-title wow fadeInDown" data-wow-delay="0.5s" data-wow-duration="1.0s">Welcome to </h1>
+                            <h1 class="highlight-title wow fadeInDown" data-wow-delay="0.75s" data-wow-duration="1.0s">Edifice!</h1>
+                            <p class="welcome-text wow fadeInUp" data-wow-delay="1.0s" data-wow-duration="1.0s">Edifice is a service for sharing your Minecraft structures with the community. It's like Pastebin for Minecraft!</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- / END Welcome Text -->
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Easy Installation</h2>
-                <p>Simply download the <a href="https://github.com/EdificeMC/Edifice/releases/latest">latest version of Edifice for Sponge</a>, and drop the file into the mods folder of your server.</p>
-            </div>
-            <div class="col-md-4">
-                <h2>Survival-Friendly</h2>
-                <p>This plugin won't allow players to build structures for free. They must gather the appropriate resources as usual, but construction is taken care of.</p>
-            </div>
-            <div class="col-md-4">
-                <h2>Open Source</h2>
-                <p>All of the code for the <a href="https://github.com/EdificeMC/Edifice">plugin</a>, <a href="https://github.com/EdificeMC/EdificeREST">API</a>, and <a href="https://github.com/EdificeMC/EdificeWeb">website</a> is available on GitHub.</p>
+    </section>
+    <!-- More Features START -->
+    <section id="more-features">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 col-sm-12 box">
+                    <div class="mf-box">
+                        <i class="fa fa-download"></i>
+                        <h3>Easy Installation</h3>
+                        <p>Simply download the <a href="https://github.com/EdificeMC/Edifice/releases/latest">latest version of Edifice for Sponge</a>, and drop the file into the mods folder of your server.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 box">
+                    <div class="mf-box">
+                        <i class="fa fa-cubes"></i>
+                        <h3>Survival-Friendly</h3>
+                        <p>This plugin won't allow players to build structures for free. They must gather the appropriate resources as usual, but construction is taken care of.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 box">
+                    <div class="mf-box">
+                        <i class="fa fa-code-fork"></i>
+                        <h3>Open Source</h3>
+                        <p>All of the code for the <a href="https://github.com/EdificeMC/Edifice">plugin</a>, <a href="https://github.com/EdificeMC/EdificeREST">API</a>, and <a href="https://github.com/EdificeMC/EdificeWeb">website</a> is available on GitHub.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <hr>
-        <div class="row">
-            <div class="grid">
-                <div class="grid-item" repeat.for="structure of structures">
+    </section>
+    <!-- / More Features END -->
+    <!-- Screensot START -->
+    <section id="featured">
+        <div class="container">
+            <!-- Screenshot Header START -->
+            <header class="section-header text-center">
+                <h2 class="wow fadeInDown">Featured Content</h2>
+                <div class="title-divider">
+                    <div class="divider-shape"></div>
+                </div>
+                <!-- <p class="wow fadeInUp">Sed do eiusmod tempor inct ut labore et dolore magna aliqua enim ad minim ullamco
+                    <br /> laboris nisi ut aliquip labore et dolore</p> -->
+            </header>
+            <!-- / Screenshot Header END -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- App Screen Slider Image -->
+                    <div id="featured-structures-slider" class="img-carousel">
+                        <div repeat.for="structure of structures" class="single-item">
+                            <structure-blurb structure.bind="structure"></structure-blurb>
+                        </div>
+                    </div>
+                    <!-- App Screen Slider Image -->
+                </div>
+            </div>
+            <!-- / Screenshot Header END -->
+        </div>
+    </section>
+    <!-- / Screensot END -->
+    <!-- Meet The Team START -->
+    <section id="explore">
+        <div class="container">
+            <!-- Team Header START -->
+            <header class="section-header text-center">
+                <h2 class="wow fadeInDown">Explore</h2>
+                <div class="title-divider">
+                    <div class="divider-shape"></div>
+                </div>
+                <p class="wow fadeInUp">See the latest and most popular structures in the Minecraft community!</p>
+            </header>
+            <!-- / Team Header END -->
+            <div class="row">
+                <div class="col-md-3 col-sm-6 box" repeat.for="structure of structures">
                     <structure-blurb structure.bind="structure"></structure-blurb>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <!-- / Meet The Team END -->
+    <!-- Download and Update START -->
+    <section id="download">
+        <div class="container">
+            <h2 class="hidden">Download</h2>
+            <div class="row">
+                <div class="col-md-5 col-sm-12 hidden-xs hidden-sm">
+                    <div class="vercenter">
+                        <div class="vercenter-inner">
+                            <div class="dl-device">
+                                <img class="dl-device-img wow fadeInLeft" src="https://docs.spongepowered.org/master/en/_images/logo-spongie.png" alt="testimonial image" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-12">
+                    <div class="vercenter">
+                        <div class="vercenter-inner">
+                            <header class="download-header text-left">
+                                <h2 class="wow fadeInDown">Download for Sponge</h2>
+                                <div class="title-divider">
+                                    <div class="divider-shape"></div>
+                                </div>
+                                <p class="wow fadeInUp">Edifice was designed on the <a href="https://www.spongepowered.org/">Sponge</a> ecosystem. <a href="https://github.com/EdificeMC/Edifice/releases/latest">Download it now</a> on Ore!</p>
+                            </header>
+                            <!-- Maybe use these buttons for a Spigot port? -->
+                            <!-- <div class="row text-center">
+                                <div class="col-sm-4 box">
+                                    <a href="#" class="download-box android">
+                                        <i class="fa fa-android"></i>
+                                        <p>2501 Downloads</p>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4 box">
+                                    <a href="#" class="download-box apple">
+                                        <i class="fa fa-apple"></i>
+                                        <p>1556 Downloads</p>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4 box">
+                                    <a href="#" class="download-box windows">
+                                        <i class="fa fa-windows"></i>
+                                        <p>1896 Downloads</p>
+                                    </a>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / Download and Update END -->
 </template>

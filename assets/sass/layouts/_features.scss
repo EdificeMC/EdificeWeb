@@ -1,0 +1,100 @@
+/*
+=================================================
+Features Section
+=================================================
+*/
+
+#features {
+
+	.dl-device {
+		position: relative;
+		.dl-device-img {
+			position: absolute;
+			top: 0;
+
+			@include MQM(992px, 1199px) {
+				width: 250px;
+				height: auto;
+				top: 20px;
+			}
+		}
+		.dl-device-left {
+			left: 0;
+		}
+		.dl-device-right {
+			//margin-left: -220px;
+			//margin-left: -58%;
+			left: 58%;
+			transform: translateX(-50%);
+		}
+	}
+
+	.single-feature  {
+
+		margin-bottom: 40px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		.fa {
+			font-size: 30px;
+			@extend %primary-color;
+		}
+
+		h3 {
+			@extend %title-font;
+			font-size: $default-font-size + 1;
+			line-height: 22px;
+			text-transform: uppercase;
+			margin-top: 10px;
+		}
+
+		p {
+			@extend %primary-font;
+			font-size: $default-font-size - 1;
+		}
+
+		@include MQ(991px) {
+			text-align: center;
+		}
+	}
+}
+
+
+
+
+/*
+=================================================
+More Features Section
+=================================================
+*/
+
+
+#more-features {
+
+	.mf-box {
+
+		.fa {
+			border-radius: 50%;
+			font-size: 36px;
+			height: 87px;
+			line-height: 87px;
+			width: 87px;
+			@extend %primary-bg-color;
+			@extend %white-color;
+			@extend %box-shadow-normal;
+		}
+
+		h3 {
+			font-size: $default-font-size + 1;
+			text-transform: uppercase;
+			@extend %title-font;
+		}
+
+		p {
+			@extend %secondary-font;
+			font-size: $default-font-size - 1;
+		}
+	}
+}

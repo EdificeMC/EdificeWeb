@@ -1,0 +1,83 @@
+/*
+=================================================
+Testimonial Section
+=================================================
+*/
+
+#testimonial {
+	background-color: $black-color-dark;
+
+
+	.tm-device {
+		position: relative;
+
+		.tm-device-left {
+			position: absolute;
+			left: 0;
+			top: 50px;
+			@extend %overflow;
+		}
+		.tm-device-right {
+			position: absolute;
+			left: 150px;
+			top: 0;
+		}
+	}
+
+	.testimonial-header {
+		margin-top: 30px;
+		h2 {
+			font-size: 36px;
+			@extend %title-font;
+			@extend %white-color;
+
+			@include MQ(374px) {
+				font-size: 24px;
+			}
+		}
+	}
+
+	.oc-item {
+
+		.client-comment {
+			border-left: 0;
+			padding-left: 0;
+			font-size: $default-font-size + 1;
+			line-height: 28px;
+			@extend %white-color-dark;
+		}
+
+		.client-info-parent {
+			position: relative;
+			padding: 0 0 30px 120px;
+
+			> img {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100px;
+				height: 100px;
+			}
+
+			.client-info-inner {
+
+				h3 {
+					padding-top: 15px;
+					@extend %white-color;
+
+					@include MQ(479px) {
+						font-size: 16px;
+					}
+				}
+
+				p {
+					@extend %white-color-dark;
+				}
+			}
+		}
+	}
+
+	.owl-dot.active span {
+		background-color: $primary-color;
+	}
+}

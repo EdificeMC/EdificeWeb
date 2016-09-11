@@ -1,0 +1,54 @@
+/*
+-----------------------------------------------
+	Header Section
+-----------------------------------------------
+ */
+
+#welcome {
+	background-image: url("../img/header-bg.jpg");
+	@extend %background-attr;
+	position: relative;
+	padding-top: 0; // Override section padding
+	padding-bottom: 0; // Override section padding
+}
+
+.welcome-inner {
+	.promo-img {
+		margin-top: 20px;
+	}
+	.vercenter {
+		@include MQ(992px, min-width) {
+			height: 1021px;
+		}
+		.dl-device {
+			.dl-device-right {
+				//margin-left: -220px;
+				margin-left: -18%;
+			}
+		}
+	}
+
+	.welcome-heading {
+
+		.highlight-title,
+		.welcome-title {
+			@extend %white-color;
+			font-size: 42px;
+			@extend %welcome-title-font;
+
+			@include MQ(599px) {
+				font-size: 24px;
+				line-height: 40px;
+			}
+		}
+
+		.highlight-title  {
+			@extend %welcome-title-font2;
+			margin-bottom: 40px;
+		}
+
+		.welcome-text {
+			@extend %white-color;
+		}
+	}
+}

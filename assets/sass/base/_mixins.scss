@@ -1,0 +1,135 @@
+//==============================================
+//	All common snippet (Mixins)
+//==============================================
+
+
+// Some Padding Mixins
+
+@mixin padding($top: 15px, $right: 15px, $bottom: 15px, $left: 15px) {
+	padding: $top $right $bottom $left;
+}
+
+@mixin padding-top-right($top: 15px, $right: 15px) {
+	padding-top: $right;
+	padding-right: $top;
+}
+
+@mixin padding-top-bottom($top: 50px, $bottom: 50px) {
+	padding-top: $top;
+	padding-bottom: $bottom;
+}
+
+@mixin padding-top-left($top: 15px, $left: 15px) {
+	padding-top: $top;
+	padding-left: $left;
+}
+
+@mixin padding-left-right($left: 15px, $right: 15px) {
+	padding-left: $left;
+	padding-right: $right;
+}
+
+@mixin padding-left-bottom($left: 15px, $bottom: 15px) {
+	padding-left: $left;
+	padding-bottom: $bottom;
+}
+
+@mixin padding-right-bottom($right: 15px, $bottom: 15px) {
+	padding-right: $right;
+	padding-bottom: $bottom;
+}
+
+
+// Some Margin Mixins
+
+@mixin margin($top: 15px, $right: 15px, $bottom: 15px, $left: 15px) {
+	margin: $top $right $bottom $left;
+}
+
+@mixin margin-top-right($top: 15px, $right: 15px) {
+	margin-top: $top;
+	margin-right: $right;
+}
+
+@mixin margin-top-bottom($top: 50px, $bottom: 50px) {
+	margin-top: $top;
+	margin-bottom: $bottom;
+}
+
+@mixin margin-top-left($top: 15px, $left: 15px) {
+	margin-top: $top;
+	margin-left: $left;
+}
+
+@mixin margin-left-right($left: 15px, $right: 15px) {
+	margin-left: $left;
+	margin-right: $right;
+}
+
+@mixin margin-left-bottom($left: 15px, $bottom: 15px) {
+	margin-left: $left;
+	margin-bottom: $bottom;
+}
+
+@mixin margin-right-bottom($right: 15px, $bottom: 15px) {
+	margin-right: $right;
+	margin-bottom: $bottom;
+}
+
+
+// Vertical and Horizontal Center
+@mixin vercenter($height: 300px) {
+	display: table;
+	height: $height;
+}
+
+@mixin vercenter-inner {
+	display: table-cell;
+    vertical-align: middle;
+}
+
+@mixin horcenter {
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@mixin center-position($position: fixed) {
+	position: $position;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+// Template Common Mixin
+
+
+// Media Queries
+
+// @mixin MQ($screen, $mw: 'min-width') {
+//   @if $screen == XS {
+//    @media only screen and ($mw: $XS) { @content; } 
+//   }
+//   @else if $screen == S {
+//    @media only screen and ($mw: $S) { @content; } 
+//   }
+//   @else if $screen == T {
+//    @media only screen and ($mw: $T) { @content; } 
+//   }
+//   @else if $screen == M {
+//    @media only screen and ($mw: $M) { @content; } 
+//   }
+//   @else if $screen == L {
+//    @media only screen and ($mw: $L) { @content; } 
+//   }
+// }
+
+@mixin MQ($width, $minmax: max-width) {
+	@media only screen and ($minmax: $width) { @content; }
+}
+
+// Media Query with both min and max width
+@mixin MQM($min, $max) {
+	@media only screen and (min-width: $min) and (max-width: $max) { @content; }
+}
