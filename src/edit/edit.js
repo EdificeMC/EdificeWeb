@@ -21,7 +21,7 @@ export class Edit {
 
     activate(params) {
         this.params = params;
-        return this.http.get('/structures/' + this.params.id)
+        return this.http.get('/structures/' + this.params.id + '?schematic=true')
             .then(response => response.content)
             .then((structure) => {
                 this.structure = structure;
@@ -32,10 +32,10 @@ export class Edit {
                     // TODO Make a toastr saying not authorized to edit
                     this.router.navigate('/');
                 }
-                return this.http.get('/playercache/' + structure.creatorUUID);
+                return this.http.get('/playercache/' + structure.author);
             }).then(response => response.content)
             .then((playerProfile) => {
-                this.creatorName = playerProfile.name;
+                this.authorName = playerProfile.name;
             });
     }
 
@@ -45,7 +45,7 @@ export class Edit {
             const aspectRatio = this.jQCanvas.width() / this.jQCanvas.height();
             this.jQCanvas.get(0).width = this.jQCanvas.parent().width();
             this.jQCanvas.get(0).height = this.jQCanvas.width() / aspectRatio;
-            sv(this.jQCanvas.get(0), this.structure, false);
+            sv(this.jQCanvas.get(0), this.structure.schematic, null, false);
         } catch (e) {
             toastr.error('This page requires WebGL. Click here to find out more.', 'WebGL', {
                 timeOut: -1,
