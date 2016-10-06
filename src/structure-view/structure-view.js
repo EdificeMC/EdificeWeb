@@ -20,14 +20,14 @@ export class StructureView {
 
     activate(params) {
         this.params = params;
-        return this.http.get(`/structures/${this.params.id}`)
+        return this.http.get(`/structures/${this.params.id}?schematic=true`)
             .then(response => {
                 this.structure = response.content;
                 // Logged in and either owns the structure or is admin
                 this.authorizedToEdit = this.auth.isAuthenticated && (this.auth.profile.app_metadata.mcuuid === this.structure.creatorUUID || this.auth.profile.app_metadata.roles.includes('admin'));
-                return this.http.get('/playercache/' + this.structure.creatorUUID);
+                return this.http.get('/playercache/' + this.structure.author);
             }).then(playerProfileRes => {
-                this.structure.creatorName = playerProfileRes.content.name;
+                this.structure.authorName = playerProfileRes.content.name;
             });
         // let starsHistoryProm = this.http.get('/stats/' + this.params.id)
         //     .then(response => {
@@ -44,7 +44,7 @@ export class StructureView {
             const aspectRatio = canvas.width() / canvas.height();
             canvas.get(0).width = canvas.parent().width();
             canvas.get(0).height = canvas.width() / aspectRatio;
-            sv(canvas.get(0), this.structure, true);
+            sv(canvas.get(0), this.structure.schematic, this.structure.modelRendering, true);
         } catch(e) {
             toastr.error('This page requires WebGL. Click here to find out more.', 'WebGL', {
                 timeOut: -1,

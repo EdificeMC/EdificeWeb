@@ -31,7 +31,7 @@ export class Home {
                 let playerCacheProms = [];
                 for (let structure of this.structures) {
                     playerCacheProms.push(this.http.get('/playercache/' + structure.author).then((playerProfileRes) => {
-                        structure.creatorName = playerProfileRes.content.name;
+                        structure.authorName = playerProfileRes.content.name;
                     }));
                 }
                 return Promise.all(playerCacheProms);

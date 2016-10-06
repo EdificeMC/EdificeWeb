@@ -11,7 +11,7 @@
         </div>
         <div class="structure-info">
             <a route-href="route: structure-view; params.bind: { id: structure.id }"><h3 class="name">${structure.name}</h3></a>
-            <a route-href="route: profile; params.bind: { playerId: structure.creatorUUID }">${structure.creatorName}</a>
+            <a route-href="route: profile; params.bind: { playerId: structure.author }">${structure.authorName}</a>
         </div>
     </div>
 </template>

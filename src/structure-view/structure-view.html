@@ -10,7 +10,7 @@
                     <div class="col-md-3">
                         <div class="pull-right structure-info">
                             <h3>${structure.name}</h3>
-                            <a route-href="route: profile; params.bind: { playerId: structure.creatorUUID }"><h5>${structure.creatorName}</h5></a>
+                            <a route-href="route: profile; params.bind: { playerId: structure.author }"><h5>${structure.authorName}</h5></a>
                             <button id="buildStructureBtn" class="btn btn-primary" tooltip="trigger.bind: 'click'; title.bind: 'Copied!'" data-clipboard-text="${createStructureCmdPrefix + structure.id}">
                                 <i class="glyphicon glyphicon-copy"></i> Build this structure
                             </button>
