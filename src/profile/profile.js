@@ -17,7 +17,7 @@ export class Profile {
             .then((playerProfile) => {
                 this.playerProfile = playerProfile;
             });
-        let structuresProm = this.http.get('/structures?creatorUUID=' + this.params.playerId)
+        let structuresProm = this.http.get('/structures?author=' + this.params.playerId)
             .then(response => response.content)
             .then(structures => {
                 this.structures = structures;

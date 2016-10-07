@@ -24,14 +24,14 @@ export class Home {
 
     activate(params) {
         this.params = params;
-        
+
         return this.http.get('/structures')
             .then((structureRes) => {
                 this.structures = structureRes.content;
                 let playerCacheProms = [];
                 for (let structure of this.structures) {
-                    playerCacheProms.push(this.http.get('/playercache/' + structure.creatorUUID).then((playerProfileRes) => {
-                        structure.creatorName = playerProfileRes.content.name;
+                    playerCacheProms.push(this.http.get('/playercache/' + structure.author).then((playerProfileRes) => {
+                        structure.authorName = playerProfileRes.content.name;
                     }));
                 }
                 return Promise.all(playerCacheProms);
@@ -46,7 +46,7 @@ export class Home {
                     smoothScroll.animateScroll(document.querySelector('#' + this.params.section), null, {
                         speed: 1000,
                         easing: 'easeInOutCubic'
-                    }); 
+                    });
                 }, 250);
             }
         }
@@ -89,7 +89,7 @@ export class Home {
             }]
         });
     }
-    
+
     detached() {
         // Stop listening for scrolling - only for the home page
         $(window).off('scroll');
