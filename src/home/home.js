@@ -3,6 +3,7 @@
 import { HttpClient } from 'aurelia-http-client';
 import { AuthService } from '../services/auth';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import { PlayerProfileService } from '../services/playerprofile.js';
 import { Router } from 'aurelia-router';
 import $ from 'jquery';
 import smoothScroll from 'smooth-scroll';
@@ -14,12 +15,13 @@ export class Home {
 
     structures = [];
 
-    static inject = [HttpClient, EventAggregator, Router, AuthService];
-    constructor(http, eventAggregator, router, auth) {
+    static inject = [HttpClient, EventAggregator, Router, AuthService, PlayerProfileService];
+    constructor(http, eventAggregator, router, auth, playerProfiles) {
         this.http = http;
         this.eventAggregator = eventAggregator;
         this.router = router;
         this.auth = auth;
+        this.playerProfiles = playerProfiles;
     }
 
     activate(params) {
@@ -30,9 +32,7 @@ export class Home {
                 this.structures = structureRes.content;
                 let playerCacheProms = [];
                 for (let structure of this.structures) {
-                    playerCacheProms.push(this.http.get('/playercache/' + structure.author).then((playerProfileRes) => {
-                        structure.authorName = playerProfileRes.content.name;
-                    }));
+                    playerCacheProms.push(this.playerProfiles.get(structure.author).then(profile => structure.authorName = profile.name));
                 }
                 return Promise.all(playerCacheProms);
             });
