@@ -1,20 +1,21 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
+import { PlayerProfileService } from '../services/playerprofile';
 
 export class Profile {
     
-    static inject = [HttpClient];
-    constructor(http) {
+    static inject = [HttpClient, PlayerProfileService];
+    constructor(http, playerProfiles) {
         this.http = http;
+        this.playerProfiles = playerProfiles;
     }
     
     activate(params) {
         this.params = params;
         
-        let profileProm = this.http.get('/playercache/' + this.params.playerId)
-            .then(response => response.content)
-            .then((playerProfile) => {
+        let profileProm = this.playerProfiles.get(this.params.playerId)
+            .then(playerProfile => {
                 this.playerProfile = playerProfile;
             });
         let structuresProm = this.http.get('/structures?author=' + this.params.playerId)
