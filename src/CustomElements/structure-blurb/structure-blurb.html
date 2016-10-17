@@ -3,7 +3,7 @@
     <require from="../../CustomAttributes/tooltip"></require>
     <div class="structure-blurb wow flipInY">
         <div class="structure-thumb">
-            <img src="${structure.screenshot.url | imgur}" alt="memeber" />
+            <img src="${structure.screenshot.url | imgur}" alt="screenshot" />
             <div class="structure-actions">
                 <a id="${'build-structure-btn-' + id}" tooltip="trigger.bind: 'click'; title.bind: 'Copied!'" data-clipboard-text="${'/edifice create ' + structure.id}" style="cursor:pointer"><i class="fa fa-cubes"></i></a>
                 <a click.delegate="star()" style="cursor:pointer"><i class="fa fa-star ${structureIsStarred && auth.isAuthenticated ? 'starred' : ''}"></i></a>
