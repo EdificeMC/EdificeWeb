@@ -31,7 +31,9 @@ export class Home {
         this.structurePaginator = new StructurePaginator(this.http, {
             limit: 5
         });
-        
+
+        const structurePaginatorProm = this.structurePaginator.contents().then(structures => this.updatePaginationContents(structures));
+
         const featuredStructuresProm = this.http.get('/structures')
             .then((structureRes) => {
                 this.structures = structureRes.content.structures;
@@ -41,27 +43,37 @@ export class Home {
                 }
                 return Promise.all(playerCacheProms);
             });
-            
-        return Promise.all([this.refreshPaginationContents(), featuredStructuresProm]);
+
+        return Promise.all([structurePaginatorProm, featuredStructuresProm]);
     }
-    
+
     previousPage() {
         this.structurePaginator.previousPage();
-        this.refreshPaginationContents();
+        const previousPageProm = this.structurePaginator.contents();
+
+        $('#explore-structures').animateCSS('flipOutX', () => {
+            previousPageProm
+                .then(structures => this.updatePaginationContents(structures));
+                // .then(() => $('#explore-structures').animateCSS('flipInX'));
+        });
     }
-    
+
     nextPage() {
         this.structurePaginator.nextPage();
-        this.refreshPaginationContents();
-    }
-    
-    refreshPaginationContents() {
-        return this.structurePaginator.contents().then(structures => {
-            this.currentPageStructures = structures;
-            this.hasPreviousPage = this.structurePaginator.hasPreviousPage();
-            this.currentPage = this.structurePaginator.pageNumber();
-            return this.structurePaginator.hasNextPage().then(nextPage => this.hasNextPage = nextPage);
+        const nextPageProm = this.structurePaginator.contents();
+
+        $('#explore-structures').animateCSS('flipOutX', () => {
+            nextPageProm
+                .then(structures => this.updatePaginationContents(structures));
+                // .then(() => $('#explore-structures').animateCSS('flipInX'));
         });
+    }
+
+    updatePaginationContents(structures) {
+        this.currentPageStructures = structures;
+        this.hasPreviousPage = this.structurePaginator.hasPreviousPage();
+        this.currentPage = this.structurePaginator.pageNumber();
+        return this.structurePaginator.hasNextPage().then(nextPage => this.hasNextPage = nextPage);
     }
 
     attached() {
