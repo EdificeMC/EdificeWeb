@@ -5,8 +5,9 @@ export class StructurePaginator {
     allPages = [];
     pageNum = 1;
 
-    constructor(http, options = {}) {
+    constructor(http, playerProfiles, options = {}) {
         this.http = http;
+        this.playerProfiles = playerProfiles;
         this.options = options;
     }
 
@@ -23,7 +24,12 @@ export class StructurePaginator {
             .then(res => res.content)
             .then(res => {
                 this.options.cursor = res.info.endCursor;
-                return res;
+                
+                let playerCacheProms = [];
+                for (let structure of res.structures) {
+                    playerCacheProms.push(this.playerProfiles.get(structure.author).then(profile => structure.authorName = profile.name));
+                }
+                return Promise.all(playerCacheProms).then(() => res);
             });
             
         return this.allPages[this.pageNum].then(data => data.structures);
