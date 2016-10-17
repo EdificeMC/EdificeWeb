@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { PlayerProfileService } from '../services/playerprofile.js';
 import { Router } from 'aurelia-router';
+import { StructurePaginator } from '../structure-paginator';
 import $ from 'jquery';
 import smoothScroll from 'smooth-scroll';
 import 'slick-carousel/slick/slick.scss';
@@ -27,15 +28,40 @@ export class Home {
     activate(params) {
         this.params = params;
 
-        return this.http.get('/structures')
+        this.structurePaginator = new StructurePaginator(this.http, {
+            limit: 5
+        });
+        
+        const featuredStructuresProm = this.http.get('/structures')
             .then((structureRes) => {
-                this.structures = structureRes.content;
+                this.structures = structureRes.content.structures;
                 let playerCacheProms = [];
                 for (let structure of this.structures) {
                     playerCacheProms.push(this.playerProfiles.get(structure.author).then(profile => structure.authorName = profile.name));
                 }
                 return Promise.all(playerCacheProms);
             });
+            
+        return Promise.all([this.refreshPaginationContents(), featuredStructuresProm]);
+    }
+    
+    previousPage() {
+        this.structurePaginator.previousPage();
+        this.refreshPaginationContents();
+    }
+    
+    nextPage() {
+        this.structurePaginator.nextPage();
+        this.refreshPaginationContents();
+    }
+    
+    refreshPaginationContents() {
+        return this.structurePaginator.contents().then(structures => {
+            this.currentPageStructures = structures;
+            this.hasPreviousPage = this.structurePaginator.hasPreviousPage();
+            this.currentPage = this.structurePaginator.pageNumber();
+            return this.structurePaginator.hasNextPage().then(nextPage => this.hasNextPage = nextPage);
+        });
     }
 
     attached() {
