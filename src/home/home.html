@@ -100,9 +100,9 @@
             <div class="row">
                 <div class="col-md-12" style="text-align: center">
                     <ul show.bind="hasPreviousPage || hasNextPage" class="pagination">
-                      <li show.bind="hasPreviousPage"><a click.delegate="previousPage()"><i class="fa fa-arrow-left"></i></a></li>
+                      <li show.bind="hasPreviousPage"><a click.delegate="previousPage()" style="cursor: pointer"><i class="fa fa-arrow-left"></i></a></li>
                       <li><a>${currentPage}</a></li>
-                      <li show.bind="hasNextPage"><a click.delegate="nextPage()"><i class="fa fa-arrow-right"></i></a></li>
+                      <li show.bind="hasNextPage"><a click.delegate="nextPage()" style="cursor: pointer"><i class="fa fa-arrow-right"></i></a></li>
                     </ul>
                 </div>
             </div>
