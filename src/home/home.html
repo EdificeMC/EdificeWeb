@@ -68,27 +68,22 @@
                 <!-- <p class="wow fadeInUp">Sed do eiusmod tempor inct ut labore et dolore magna aliqua enim ad minim ullamco
                     <br /> laboris nisi ut aliquip labore et dolore</p> -->
             </header>
-            <!-- / Screenshot Header END -->
             <div class="row">
                 <div class="col-sm-12">
-                    <!-- App Screen Slider Image -->
                     <div id="featured-structures-slider" class="img-carousel">
                         <div repeat.for="structure of structures" class="single-item">
                             <structure-blurb structure.bind="structure"></structure-blurb>
                             <br>
                         </div>
                     </div>
-                    <!-- App Screen Slider Image -->
                 </div>
             </div>
-            <!-- / Screenshot Header END -->
         </div>
     </section>
     <!-- / Screensot END -->
     <!-- Meet The Team START -->
     <section id="explore">
         <div class="container">
-            <!-- Team Header START -->
             <header class="section-header text-center">
                 <h2 class="wow fadeInDown">Explore</h2>
                 <div class="title-divider">
@@ -97,9 +92,18 @@
                 <p class="wow fadeInUp">See the latest and most popular structures in the Minecraft community!</p>
             </header>
             <!-- / Team Header END -->
-            <div class="row">
-                <div class="col-md-3 col-sm-6 box" repeat.for="structure of structures">
+            <div id="explore-structures" class="row">
+                <div class="col-md-3 col-sm-6 box" repeat.for="structure of currentPageStructures">
                     <structure-blurb structure.bind="structure"></structure-blurb>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center">
+                    <ul show.bind="hasPreviousPage || hasNextPage" class="pagination">
+                      <li show.bind="hasPreviousPage"><a click.delegate="previousPage()" style="cursor: pointer"><i class="fa fa-arrow-left"></i></a></li>
+                      <li><a>${currentPage}</a></li>
+                      <li show.bind="hasNextPage"><a click.delegate="nextPage()" style="cursor: pointer"><i class="fa fa-arrow-right"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -25,6 +25,20 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { AuthService } from './services/auth';
 import toastr from 'toastr';
 
+$.fn.extend({
+    animateCSS: function (animationName, callback) {
+        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        // using .on instead of .one because back to back animations don't seem to work otherwise
+        this.addClass('animated ' + animationName).on(animationEnd, function() {
+            $(this).removeClass('animated ' + animationName);
+
+            if(callback) {
+                callback();
+            }
+        });
+    }
+});
+
 export class App {
     static inject = [HttpClient, EventAggregator, AuthService];
     constructor(http, eventAggregator, auth) {
