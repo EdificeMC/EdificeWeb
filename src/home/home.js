@@ -28,8 +28,8 @@ export class Home {
     activate(params) {
         this.params = params;
 
-        this.structurePaginator = new StructurePaginator(this.http, {
-            limit: 5
+        this.structurePaginator = new StructurePaginator(this.http, this.playerProfiles, {
+            limit: 8
         });
 
         const structurePaginatorProm = this.structurePaginator.contents().then(structures => this.updatePaginationContents(structures));
@@ -53,8 +53,8 @@ export class Home {
 
         $('#explore-structures').animateCSS('flipOutX', () => {
             previousPageProm
-                .then(structures => this.updatePaginationContents(structures));
-                // .then(() => $('#explore-structures').animateCSS('flipInX'));
+                .then(structures => this.updatePaginationContents(structures))
+                .then(() => $('#explore-structures').animateCSS('flipInX'));
         });
     }
 
@@ -64,8 +64,8 @@ export class Home {
 
         $('#explore-structures').animateCSS('flipOutX', () => {
             nextPageProm
-                .then(structures => this.updatePaginationContents(structures));
-                // .then(() => $('#explore-structures').animateCSS('flipInX'));
+                .then(structures => this.updatePaginationContents(structures))
+                .then(() => $('#explore-structures').animateCSS('flipInX'));
         });
     }
 

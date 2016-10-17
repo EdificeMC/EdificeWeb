@@ -28,7 +28,8 @@ import toastr from 'toastr';
 $.fn.extend({
     animateCSS: function (animationName, callback) {
         var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-        this.addClass('animated ' + animationName).one(animationEnd, function() {
+        // using .on instead of .one because back to back animations don't seem to work otherwise
+        this.addClass('animated ' + animationName).on(animationEnd, function() {
             $(this).removeClass('animated ' + animationName);
 
             if(callback) {
