@@ -51,10 +51,10 @@ export class Home {
         this.structurePaginator.previousPage();
         const previousPageProm = this.structurePaginator.contents();
 
-        $('#explore-structures').animateCSS('flipOutX', () => {
+        $('#explore-structures').animateCSS('fadeOut', () => {
             previousPageProm
                 .then(structures => this.updatePaginationContents(structures))
-                .then(() => $('#explore-structures').animateCSS('flipInX'));
+                .then(() => $('#explore-structures').animateCSS('fadeIn'));
         });
     }
 
@@ -62,10 +62,10 @@ export class Home {
         this.structurePaginator.nextPage();
         const nextPageProm = this.structurePaginator.contents();
 
-        $('#explore-structures').animateCSS('flipOutX', () => {
+        $('#explore-structures').animateCSS('fadeOut', () => {
             nextPageProm
                 .then(structures => this.updatePaginationContents(structures))
-                .then(() => $('#explore-structures').animateCSS('flipInX'));
+                .then(() => $('#explore-structures').animateCSS('fadeIn'));
         });
     }
 
