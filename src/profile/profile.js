@@ -1,9 +1,12 @@
 'use strict';
 
 import { HttpClient } from 'aurelia-http-client';
+import { StructurePaginator } from '../structure-paginator';
 import { PlayerProfileService } from '../services/playerprofile';
 
 export class Profile {
+    
+    structures = [];
     
     static inject = [HttpClient, PlayerProfileService];
     constructor(http, playerProfiles) {
@@ -12,18 +15,17 @@ export class Profile {
     }
     
     activate(params) {
-        this.params = params;
+        this.structurePaginator = new StructurePaginator(this.http, this.playerProfiles, {
+            author: params.playerId,
+            limit: 9
+        });
         
-        let profileProm = this.playerProfiles.get(this.params.playerId)
+        let structuresProm = this.structurePaginator.contents().then(structures => this.structures = this.structures.concat(structures));
+        
+        let profileProm = this.playerProfiles.get(params.playerId)
             .then(playerProfile => {
                 this.playerProfile = playerProfile;
             });
-        let structuresProm = this.http.get('/structures?author=' + this.params.playerId)
-            .then(response => response.content)
-            .then(structures => {
-                this.structures = structures;
-            });
-        // I am deliberately not getting the names of the creators these structures since this is the profile page
             
         return Promise.all([profileProm, structuresProm]);
     }
