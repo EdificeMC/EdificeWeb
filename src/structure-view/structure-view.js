@@ -2,6 +2,7 @@
 
 import { HttpClient } from 'aurelia-http-client';
 import { AuthService } from '../services/auth';
+import { PlayerProfileService } from '../services/playerprofile';
 import Clipboard from 'clipboard';
 import toastr from 'toastr';
 import $ from 'jquery';
@@ -12,10 +13,11 @@ export class StructureView {
     copiedStructureCmd = false;
     createStructureCmdPrefix = '/edifice create ';
 
-    static inject = [HttpClient, AuthService];
-    constructor(http, auth) {
+    static inject = [HttpClient, AuthService, PlayerProfileService];
+    constructor(http, auth, playerProfiles) {
         this.http = http;
         this.auth = auth;
+        this.playerProfiles = playerProfiles;
     }
 
     activate(params) {
@@ -25,9 +27,9 @@ export class StructureView {
                 this.structure = response.content;
                 // Logged in and either owns the structure or is admin
                 this.authorizedToEdit = this.auth.isAuthenticated && (this.auth.profile.app_metadata.mcuuid === this.structure.creatorUUID || this.auth.profile.app_metadata.roles.includes('admin'));
-                return this.http.get('/playercache/' + this.structure.author);
+                return this.playerProfiles.get(this.structure.author);
             }).then(playerProfileRes => {
-                this.structure.authorName = playerProfileRes.content.name;
+                this.structure.authorName = playerProfileRes.name;
             });
         // let starsHistoryProm = this.http.get('/stats/' + this.params.id)
         //     .then(response => {

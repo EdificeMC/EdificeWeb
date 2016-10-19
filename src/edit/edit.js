@@ -2,6 +2,7 @@
 
 import { HttpClient } from 'aurelia-http-client';
 import { AuthService } from '../services/auth';
+import { PlayerProfileService } from '../services/playerprofile';
 import { Router } from 'aurelia-router';
 import sv, { exportRenderVariables } from 'edifice-structure-viewer';
 import toastr from 'toastr';
@@ -12,11 +13,12 @@ export class Edit {
     message = {};
     imageList;
 
-    static inject = [HttpClient, Router, AuthService];
-    constructor(http, router, auth) {
+    static inject = [HttpClient, Router, AuthService, PlayerProfileService];
+    constructor(http, router, auth, playerProfiles) {
         this.http = http;
         this.router = router;
         this.auth = auth;
+        this.playerProfiles = playerProfiles;
     }
 
     activate(params) {
@@ -32,9 +34,8 @@ export class Edit {
                     // TODO Make a toastr saying not authorized to edit
                     this.router.navigate('/');
                 }
-                return this.http.get('/playercache/' + structure.author);
-            }).then(response => response.content)
-            .then((playerProfile) => {
+                return this.playerProfiles.get(structure.author);
+            }).then((playerProfile) => {
                 this.authorName = playerProfile.name;
             });
     }
