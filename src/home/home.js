@@ -12,8 +12,11 @@ import 'slick-carousel/slick/slick.scss';
 import 'slick-carousel/slick/slick-theme.scss';
 import 'slick-carousel/slick/slick.js';
 
+const featuredStructureIds = ['ciu0k36g40008agl0a1oxwuna', 'ciu0k8ah00009agl02naz1euj', 'ciuen5ujk0001wxl03opjuw44', 'ciuen8hbw0002wxl0xwv6ank3', 'ciuenggm60004wxl0fjq7d7e5', 'ciuenjmn00005wxl03bcrdwcx', 'ciuhgfe7c0000oal0s4qn7d5u'];
+
 export class Home {
 
+    featuredStructures = [];
     structures = [];
 
     static inject = [HttpClient, EventAggregator, Router, AuthService, PlayerProfileService];
@@ -34,17 +37,15 @@ export class Home {
 
         const structurePaginatorProm = this.structurePaginator.contents().then(structures => this.updatePaginationContents(structures));
 
-        const featuredStructuresProm = this.http.get('/structures')
-            .then((structureRes) => {
-                this.structures = structureRes.content.structures;
-                let playerCacheProms = [];
-                for (let structure of this.structures) {
-                    playerCacheProms.push(this.playerProfiles.get(structure.author).then(profile => structure.authorName = profile.name));
-                }
-                return Promise.all(playerCacheProms);
-            });
-
-        return Promise.all([structurePaginatorProm, featuredStructuresProm]);
+        const featuredStructuresProm = featuredStructureIds.map(id =>
+            this.http.get(`/structures/${id}`)
+            .then(structureRes => {
+                const structure = structureRes.content;
+                this.featuredStructures.push(structure);
+                return this.playerProfiles.get(structure.author).then(profile => structure.authorName = profile.name);
+            }));
+            
+        return Promise.all([structurePaginatorProm, Promise.all(featuredStructuresProm)]);
     }
 
     previousPage() {
