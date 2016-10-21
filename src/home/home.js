@@ -32,7 +32,9 @@ export class Home {
         this.params = params;
 
         this.structurePaginator = new StructurePaginator(this.http, this.playerProfiles, {
-            limit: 8
+            limit: 8,
+            sort: 'created',
+            descending: true
         });
 
         const structurePaginatorProm = this.structurePaginator.contents().then(structures => this.updatePaginationContents(structures));
