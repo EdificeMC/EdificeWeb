@@ -11,9 +11,7 @@ import $ from 'jquery';
 //
 // CSS
 //
-import '../assets/css/preloader.css';
 import '../assets/sass/style.scss';
-// import './styles.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/scss/font-awesome.scss';
 import 'animate.css/animate.min.css';
@@ -76,8 +74,6 @@ export class App {
             this.showLogin = this._shouldShowLogin();
         });
         
-        $('.preloader').delay(2000).fadeOut('slow');
-
         new wow.WOW({
             offset: 100, // distance to the element when triggering the animation (default is 0)
             mobile: false // trigger animations on mobile devices (default is true)
