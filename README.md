@@ -6,5 +6,5 @@
 * `npm install`
 
 ## Running
-* `npm run dev`
+* `npm run dev-prod`
 * navigate to [http://localhost:4000](http://localhost:4000)
