@@ -8,7 +8,8 @@
                         <!-- Intro Mockup -->
                         <div class="dl-device vercenter-inner">
                             <img class="dl-device-img dl-device-left wow fadeInLeft" src="../../assets/img/zirconium.png" alt="Edifice creator image" />
-                            <img class="dl-device-img dl-device-right wow fadeInLeft" data-wow-delay=".5s" data-wow-duration="1.0s" src="${auth.isAuthenticated ? 'https://visage.surgeplay.com/full/512/' + auth.profile.app_metadata.mcuuid : '../../assets/img/steve.png'}" alt="Logged in user image" />
+                            <img show.bind="!auth.isAuthenticated" class="dl-device-img dl-device-right wow fadeInLeft" data-wow-delay=".5s" data-wow-duration="1.0s" src="../../assets/img/steve.png" alt="Steve">
+                            <img show.bind="auth.isAuthenticated" class="dl-device-img dl-device-right wow fadeInLeft" data-wow-delay=".5s" data-wow-duration="1.0s" src="${'https://visage.surgeplay.com/full/512/' + auth.profile.app_metadata.mcuuid}" alt="Logged in user image">
                         </div>
                         <!-- / END Intro Mockup -->
                     </div>
