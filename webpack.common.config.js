@@ -61,8 +61,8 @@ module.exports = function(definitions) {
                 loader: 'babel',
                 exclude: /node_modules\/(?!edifice-structure-viewer)/,
                 query: {
-                    presets: ['es2015-loose', 'stage-1'],
-                    plugins: ['transform-decorators-legacy']
+                    presets: ['es2016', 'stage-2'],
+                    plugins: ['transform-es2015-modules-commonjs', 'transform-decorators-legacy']
                 }
             }, {
                 test: /\.css?$/,

@@ -20,17 +20,15 @@ export class StructureView {
         this.playerProfiles = playerProfiles;
     }
 
-    activate(params) {
+    async activate(params) {
         this.params = params;
-        return this.http.get(`/structures/${this.params.id}?schematic=true`)
-            .then(response => {
-                this.structure = response.content;
-                // Logged in and either owns the structure or is admin
-                this.authorizedToEdit = this.auth.isAuthenticated && (this.auth.profile.app_metadata.mcuuid === this.structure.creatorUUID || this.auth.profile.app_metadata.roles.includes('admin'));
-                return this.playerProfiles.get(this.structure.author);
-            }).then(playerProfileRes => {
-                this.structure.authorName = playerProfileRes.name;
-            });
+
+        this.structure = (await this.http.get(`/structures/${this.params.id}?schematic=true`)).content;
+
+        // Logged in and either owns the structure or is admin
+        this.authorizedToEdit = this.auth.isAuthenticated && (this.auth.profile.app_metadata.mcuuid === this.structure.creatorUUID || this.auth.profile.app_metadata.roles.includes('admin'));
+
+        this.structure.authorName = (await this.playerProfiles.get(this.structure.author)).name;
         // let starsHistoryProm = this.http.get('/stats/' + this.params.id)
         //     .then(response => {
         //         this.starHistory = response.content;
